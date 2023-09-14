@@ -11,12 +11,12 @@ import os
 def products_filename_wrapper(instance, filename):
     
     ext = filename.split('.')[-1]
-    filename = "%s_%s.%s" % (instance.article, ext)
+    filename = '{}.{}'.format(instance.article, ext)
     
     # if Product.objects.get(image=f"images/products/{filename}"):
     #     Product.objects.get(image=f"images/products/{filename}").image.delete(save=True)
     
-    return os.path.join(f'products/products/{instance.article}/', filename)
+    return os.path.join(f'images/products/{instance.article}/', filename)
 
 
 # * -----CATEGORIES-----
@@ -105,6 +105,9 @@ class WheelSize(models.Model):
 class Characteristic(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
+    
+    def __str__(self):
+        return f'{self.name}'
 
 
 # * -----PRODUCTS-----
@@ -150,6 +153,9 @@ class Bicycle(Product):
     color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
     wheel = models.ForeignKey(WheelSize, on_delete=models.DO_NOTHING)
     frame = models.ForeignKey(FrameSize, on_delete=models.DO_NOTHING)
+    year = models.IntegerField(validators=[MinValueValidator(2000)], 
+                               blank=True, 
+                               null=True)
     
 
 class Helmet(Product):

@@ -9,6 +9,7 @@ admin.site.register(FrameSize)
 admin.site.register(WheelSize)
 admin.site.register(Characteristic)
 admin.site.register(Bicycle)
+admin.site.register(Manufacturer)
 
 
 
