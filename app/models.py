@@ -5,33 +5,25 @@ from django.utils.text import slugify
 import os
 
 
-# * -----WRAPPERS-----
+#* -----WRAPPERS-----
+
+#? it`s for rename image of product and create folder by articul 
 def products_filename_wrapper(instance, filename):
+    
     ext = filename.split('.')[-1]
     filename = "%s_%s.%s" % (instance.article, ext)
-
-    return os.path.join(f'products/{instance.article}/', filename)
-
-
-def size_filename_wrapper(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s_%s.%s" % (instance.size, ext)
     
-    return os.path.join(f'sizes/{instance.size}/', filename)
-
-
-def category_filename_wrapper(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s_%s.%s" % (instance.name, ext)
+    # if Product.objects.get(image=f"images/products/{filename}"):
+    #     Product.objects.get(image=f"images/products/{filename}").image.delete(save=True)
     
-    return os.path.join(f'category/{instance.name}/', filename)
+    return os.path.join(f'products/products/{instance.article}/', filename)
 
 
 # * -----CATEGORIES-----
 class Chapter(models.Model):
     name = models.CharField(max_length=20, 
                             unique=True)
-    image = models.FileField(upload_to=category_filename_wrapper)
+    image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
     slug = models.CharField(max_length=30, 
                             editable=False, 
@@ -47,7 +39,7 @@ class Chapter(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    image = models.FileField(upload_to=category_filename_wrapper)
+    image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     slug = models.CharField(max_length=30, 
@@ -63,6 +55,22 @@ class Category(models.Model):
 
 
 # * -----INCLUDES-----
+class Manufacturer(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    image = models.FileField(upload_to='images/categories/')
+    description = models.TextField(blank=True, null=True)
+    slug = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class Color(models.Model):
     name = models.CharField(max_length=20, unique=True)
     
@@ -76,7 +84,7 @@ class FrameSize(models.Model):
                                unique=True,
                                validators=[MinValueValidator(6), 
                                            MaxValueValidator(31)],)
-    image = models.FileField(upload_to=size_filename_wrapper)
+    image = models.FileField(upload_to='images/sizes/')
     
     def __str__(self):
         return f'{self.size}'
@@ -88,24 +96,29 @@ class WheelSize(models.Model):
                                unique=True,
                                validators=[MinValueValidator(6), 
                                            MaxValueValidator(31)],)
-    image = models.FileField(upload_to=size_filename_wrapper)
+    image = models.FileField(upload_to='images/sizes/')
 
     def __str__(self):
         return f'{self.size}'
 
 
-class Characteristics(models.Model):
+class Characteristic(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
 
 # * -----PRODUCTS-----
 class Product(models.Model):
+    manufacturer = models.ForeignKey(Manufacturer,
+                                     blank=True,
+                                     null=True, 
+                                     on_delete=models.DO_NOTHING)
     label = models.CharField(max_length=30)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     article = models.CharField(max_length=30, unique=True)
     image = models.FileField(upload_to=products_filename_wrapper)
-    characteristics = models.ManyToManyField(Characteristics, blank=True)
+    characteristics = models.ManyToManyField(Characteristic, blank=True)
     category = models.ForeignKey(Category, 
                                  on_delete=models.DO_NOTHING, 
                                  blank=True, 
@@ -134,8 +147,10 @@ class Product(models.Model):
 
 
 class Bicycle(Product):
-    pass
-
+    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
+    wheel = models.ForeignKey(WheelSize, on_delete=models.DO_NOTHING)
+    frame = models.ForeignKey(FrameSize, on_delete=models.DO_NOTHING)
+    
 
 class Helmet(Product):
     pass
