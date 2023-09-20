@@ -52,6 +52,23 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+    
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    image = models.FileField(upload_to='images/categories/')
+    description = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    slug = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 # * -----INCLUDES-----
@@ -123,6 +140,10 @@ class Product(models.Model):
     image = models.FileField(upload_to=products_filename_wrapper)
     characteristics = models.ManyToManyField(Characteristic, blank=True)
     category = models.ForeignKey(Category, 
+                                 on_delete=models.DO_NOTHING, 
+                                 blank=True, 
+                                 null=True)
+    subcategory = models.ForeignKey(SubCategory, 
                                  on_delete=models.DO_NOTHING, 
                                  blank=True, 
                                  null=True)

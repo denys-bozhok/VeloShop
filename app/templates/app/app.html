@@ -1,11 +1,16 @@
 {% extends '_base.html'%}
 
 {% block title %}VeloShop{% endblock title %}
-{% block header %}
-{% for chapter in chapters %}
-<h1>
-    {{chapter.name}}
-</h1>
 
-{% endfor %}
+
+{% block header %}
+
+    {% include 'includes/_header.html' %}
+
+    {% for chapter in chapters %}
+    <h1>
+        {{chapter.name}}
+    </h1>
+
+    {% endfor %}
 {% endblock header %}
