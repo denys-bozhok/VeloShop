@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "inter";
+    src: url("../fonts/Inter/static/Inter-Regular.ttf");
+}
+
+@font-face {
+    font-family: "kaisei";
+    src: url("../fonts/Kaisei_Opti/KaiseiOpti-Regular.ttf");
+}
+
+@font-face {
+    font-family: "assistant";
+    src: url("../fonts/Assistant/static/Assistant-Regular.ttf");
+}
+
+
+:root {
+    /** COLORS */
+    --background_primary: rgb ();
+    --background_secondary: rgb ();
+    --background_additional: rgb ();
+
+    --text-color_primary: rgb ();
+    --text-color_secondary: rgb ();
+    --text-color_additional: rgb ();
+
+
+    /** FONTS */
+    --font-famyly_primary: ;
+    --font-famyly_secondary: ;
+    --font-famyly_additional: ;
+
+    --font-size_xs: ;
+    --font-size_s: ;
+    --font-size_m: ;
+    --font-size_l: ;
+    --font-size_xl: ;
+
+    --line-height-primary: 23.54px;
+    --line-height-seconadaty: 18.31px;
+
+    /** PADDING/MARGIN */
+    --padding_xxs: 160px;
+    --padding_xs: 60px;
+    --padding_s: 50px;
+    --padding_m: 40px;
+    --padding_l: 30px;
+    --padding_xl: 20px;
+    --padding_xxl: 10px;
+
+    --margin_xxs: 160px;
+    --margin_xs: 60px;
+    --margin_s: 50px;
+    --margin_m: 40px;
+    --margin_l: 30px;
+    --margin_xl: 20px;
+    --margin_xxl: 10px;
+
+
+    /** WIDTH/HEIGTH */
+    --width_xxs: 160px;
+    --width_xs: 60px;
+    --width_s: 50px;
+    --width_m: 40px;
+    --width_l: 30px;
+    --width_xl: 20px;
+    --width_xxl: 10px;
+
+    --heigth_xxs: 160px;
+    --heigth_xs: 60px;
+    --heigth_s: 50px;
+    --heigth_m: 40px;
+    --heigth_l: 30px;
+    --heigth_xl: 20px;
+    --heigth_xxl: 10px;
+}
