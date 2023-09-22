@@ -16,9 +16,13 @@
         type="image/x-icon"
     >
 
-    {% block style %}{% endblock style %}
-
+    <link rel="stylesheet" href="{% static 'extra-classes.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'variables.css' %}">
+    
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    {% block style %}{% endblock style %}
 
 </head>
 

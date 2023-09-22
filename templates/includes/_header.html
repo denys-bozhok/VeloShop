@@ -1,112 +1,178 @@
 <!--? int`s for big size of monitor  -->
-<div class="subheader_wrapper">
-    <div class="subheader">
+<div class="subheader_wrapper flex-center">
+    <div class="subheader flex-between">
         <nav class="subheader__nav">
-            <li class="subheader-nav-element">
-                <a href="#">About us</a>
-            </li>
+            <ul class="subheader__ul flex-between">
+                <li class="subheader-nav-element">
+                    <a href="#" class="subheader-link">
+                        About us
+                    </a>
+                </li>
 
-            <li class="subheader-nav-element">
-                <a href="#">Contacts</a>
-            </li>
+                <li class="subheader-nav-element">
+                    <a href="#" class="subheader-link">
+                        Contacts
+                    </a>
+                </li>
 
-            <li class="subheader-nav-element">
-                <a href="#">Political of confidance</a>
-            </li>
+                <!-- <li class="subheader-nav-element">
+                    <a href="#"
+                    class="subheader-link">
+                        Political of confidance
+                    </a>
+                </li> -->
 
-            <li class="subheader-nav-element">
-                <a href="#">Shipping and payment</a>
-            </li>
+                <li class="subheader-nav-element">
+                    <a href="#" class="subheader-link">
+                        Shipping and payment
+                    </a>
+                </li>
 
-            <li class="subheader-nav-element">
-                <a href="#">Warranties and returns</a>
-            </li>
+                <!-- <li class="subheader-nav-element">
+                    <a href="#"
+                    class="subheader-link">
+                        Warranties and returns
+                    </a>
+                </li> -->
+            </ul>
         </nav>
+        <div class="subheader-social__wrapper flex-between">
+            <div class="subheader-social">
+                <a href="#" class="subheader-link">
+                    <img src="static/images/icons/icon_telegram.png" alt="No image, sorry" class="social-img">
+                </a>
+            </div>
 
-        <div class="user__menu">
-            <div class="menu-element__wrapper">
-                <div class="menu-element">
-                    <div class="element-icon">
-                        <img src="#" alt="No image, sorry">
+            <div class="subheader-social">
+                <a href="#" class="subheader-link">
+                    <img src="static/images/icons/icon_instagram.png" alt="No image, sorry" class="social-img">
+                </a>
+            </div>
+
+            <div class="subheader-social">
+                <a href="#" class="subheader-link">
+                    <img src="static/images/icons/icon_facebook.png" alt="No image, sorry" class="social-img">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="user__menu flex-between">
+            <div class="menu-element__wrapper ">
+                <div class="menu-element flex-between">
+                    <div class="element">
+                        <img src="static/images/icons/icon_heart.png" alt="No image, sorry" class="element-icon">
                     </div>
 
-                    <a href="#">Favorites</a>
+                    <a href="#" class="subheader-link">
+                        Favorites (0)
+                    </a>
                 </div>
             </div>
 
             <div class="menu-element__wrapper">
-                <div class="menu-element">
-                    <div class="element-icon">
-                        <img src="#" alt="No image, sorry">
+                <div class="menu-element flex-between">
+                    <div class="element">
+                        <img src="static/images/icons/icon_comparisons.png" alt="No image, sorry" class="element-icon">
                     </div>
 
-                    <a href="#">Comparisons</a>
+                    <a href="#" class="subheader-link">
+                        Comparisons (0)
+                    </a>
                 </div>
             </div>
 
             <div class="menu-lenguage__wrapper">
-                <div class="menu__lenguage">
-                    <div class="lenguage lenguage__en">en</div>
-                    <div class="lenguage lenguage__ru">ru</div>
+                Lenguage
+                <div hidden class="menu__lenguage flex-between">
+                    <div class="lenguage lenguage__en">
+                        <a href="#" class="subheader-link">
+                            EN
+                            <img src="static/images/icons/icon_uk.png" alt="No image, sorry" class="element-icon">
+                        </a>
+                    </div>
+
+                    <div class="lenguage lenguage__ru">
+                        <a href="#" class="subheader-link">
+                            UA
+                            <img src="static/images/icons/icon_ua.png" alt="No image, sorry" class="element-icon">
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="menu-user-info">
-                <div class="user__img">
-                    <img src="#" 
-                    alt="No image, sorry" 
-                    class="avatar">
+            <div class="menu-user-info flex-center">
+                <div class="user-info flex-center">
+                    <img src="static/images/icons/icon_log_in.png" alt="No image, sorry" class="element-icon">
+
+                    <div class="log_in">Log in</div>
                 </div>
 
-                <div class="user__img">
-                    <img src="#" 
-                    alt="No image, sorry" 
-                    class="avatar__anonim">
-                </div>
+                <div class="menu-nav">
+                    <nav hidden class="nav_for_anonimus">
+                        <a href="#" class="subheader-link">
+                            Log In
+                        </a>
 
-                <div class="user_name">
-                    <div class="user__anonim">Log in</div>
-                    <div class="user__autorized">Hi, Username!</div>
-                </div>
-
-                <div class="menu__nav">
-                    <nav class="nav_for_anonimus">
-                        <a href="#">Log In</a>
-                        <a href="#">Registration</a>
+                        <a href="#" class="subheader-link">
+                            Registration
+                        </a>
                     </nav>
+                </div>
 
-                    <nav class="nav_for_autorized">
+                {% if not user %}
+                <div class="user-info flex-center">
+                    <div class="user__img">
+                        <img src="#" alt="No image, sorry" class="avatar">
+                    </div>
+
+                    <div class="user__name">Hi, Username!</div>
+                </div>
+
+                <div class="menu-nav">
+                    <nav hidden class="nav_for_autorized">
                         <a href="#">Personal Area</a>
                         <a href="#">Favorites</a>
                         <a href="#">Desires</a>
                         <a href="#">Log Out</a>
                     </nav>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-<div class="header_wrapper">
+<div class="header__wrapper flex-center">
     <div class="header">
-        <div class="header-element">
-            <div class="header__logo">
-                <div class="logotype"></div>
+        <div class="flex-between">
+            <div class="header-element">
+                <div class="header__logo">
+                    <img src="static/images/logotype.png" 
+                    alt="No image, sorry" 
+                    class="logotype">
+                </div>
             </div>
-        </div>
 
-        <div class="header-element">
-            <div class="search">
-                <input type="text">
+            <div class="header-element">
+                <div class="search">
+                    <input type="text">
+                </div>
             </div>
-        </div>
 
-        <div class="header-element">
-            <div class="cart">
-                <a href="#">
-                    <div class="cart__img"></div>
-                    <div class="cart__title">Cart</div>
-                </a>
+            <div class="header-element">
+                <div class="cart flex-between">
+                    <div class="cart__img">
+                        <img src="static/images/icons/icon_cart.png" 
+                        alt="No image, sorry" 
+                        class="icon_cart">
+                    </div>
+
+                    <a href="#" 
+                    class="header-link">
+                        Cart
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -118,5 +184,5 @@
 </div>
 
 <div class="mobile_nav_wrapper">
-    
+
 </div>
