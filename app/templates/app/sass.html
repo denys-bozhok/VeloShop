@@ -1,5 +1,7 @@
 {% load sass_tags %}
+{% load compress %}
 {% load static %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,14 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% compress css %}
+    <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'bootstrap/bootstrap.scss' %}" rel="stylesheet" type="text/css" />
 
-    <link href="{% sass_src 'app/css/style.scss' %}" rel="stylesheet" type="text/css" />
-
-
+    {% endcompress %}
 </head>
 
 <body>
-    <h1>hello</h1>
+    <p class="h1">h1. Bootstrap heading</p>
 </body>
 
 </html>
