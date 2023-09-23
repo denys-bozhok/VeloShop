@@ -9,3 +9,7 @@ def home(req):
     return render(req, 'app/app.html', {
         'chapters': chapters
     })
+    
+
+def sass (req):
+        return render(req, 'app/sass.html',)

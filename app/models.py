@@ -19,6 +19,10 @@ def products_filename_wrapper(instance, filename):
     return os.path.join(f'images/products/{instance.article}/', filename)
 
 
+# * -----TEMPLATE`S ELEMENTS-----
+
+
+
 # * -----CATEGORIES-----
 class Chapter(models.Model):
     name = models.CharField(max_length=20, 
@@ -71,7 +75,7 @@ class SubCategory(models.Model):
         return f'{self.name}'
 
 
-# * -----INCLUDES-----
+# * -----PRODUCT`S INCLUDES-----
 class Manufacturer(models.Model):
     name = models.CharField(max_length=20, unique=True)
     image = models.FileField(upload_to='images/categories/')

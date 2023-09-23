@@ -37,8 +37,32 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sass_processor',
     'app',
 ]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SCSS_ROOT = BASE_DIR / 'scss'
+
+# SCSS_COMPILE = [
+#     'site.scss',                                                                                                                                                                                                                                                                                        
+#     'admin/admin.scss',
+# ]
+
+SCSS_INCLUDE_PATHS = [
+    BASE_DIR / 'node_modules'
+]
+
+CSS_STYLE = 'compressed'
+CSS_MAP = True
+CSS_COMPILE_DIR = BASE_DIR / 'static' / 'css'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,6 +142,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_ROOT = BASE_DIR / 'static'
+
+SASS_PROCESSOR_ROOT = STATICFILES_ROOT
 
 MEDIA_DIR = BASE_DIR / 'media'
 MEDIA_ROOT = MEDIA_DIR
