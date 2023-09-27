@@ -12,7 +12,8 @@ def products_filename_wrapper(instance, filename):
     
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(instance.article, ext)
-    
+
+#? for delete image, if filename is reserved
     # if Product.objects.get(image=f"images/products/{filename}"):
     #     Product.objects.get(image=f"images/products/{filename}").image.delete(save=True)
     
@@ -20,15 +21,83 @@ def products_filename_wrapper(instance, filename):
 
 
 # * -----TEMPLATE`S ELEMENTS-----
+class SocialNetwork (models.Model):
+    name = models.CharField(max_length=20, 
+                            unique=True)
+    
+    image = models.FileField(upload_to='images/icons/social_networks')
+    link = models.CharField(max_length=50, default='#', unique=True)
+    
+    def __str__(self):
+        return f'{self.name}'
+    
+    
+class SiteNavigation (models.Model):
+    name = models.CharField(max_length=20, 
+                            unique=True)
+    
+    description = models.TextField()
+    
+    slug = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
+    
+    def __str__(self):
+        return f'{self.name}'
+    
+
+class FavoritesAndOther (models.Model):
+    name = models.CharField(max_length=20, 
+                            unique=True)
+    
+    icon = models.FileField(upload_to='images/icons/favorites_and_other')
+    
+    value = models.IntegerField(default=0, 
+                                validators=[MinValueValidator(0)])
+    
+    slug = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
+    
+    def __str__(self):
+        return f'{self.name}'
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=20, 
+                            unique=True)
+    
+    icon = models.FileField(upload_to='images/icons/languages')
+    
+    short_name = models.CharField(max_length=3, 
+                            unique=True)
+    
+    slug = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+
+    def save(self):
+        self.slug = slugify(self.short_name)
+        super().save()
+
+    def __str__(self):
+        return f'{self.name} ({self.short_name})'
+    
 
 # * -----CATEGORIES-----
 class Chapter(models.Model):
     name = models.CharField(max_length=20, 
                             unique=True)
+    
     image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
+    
     slug = models.CharField(max_length=30, 
                             editable=False, 
                             auto_created=True)
@@ -46,6 +115,7 @@ class Category(models.Model):
     image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    
     slug = models.CharField(max_length=30, 
                             editable=False, 
                             auto_created=True)
@@ -62,7 +132,17 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=20, unique=True)
     image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    
+    category = models.ForeignKey(Category, 
+                                 blank=True,
+                                 null=True, 
+                                 on_delete=models.DO_NOTHING)
+    
+    sub_category = models.ForeignKey('self',
+                                     blank=True,
+                                     null=True, 
+                                     on_delete=models.DO_NOTHING)
+
     slug = models.CharField(max_length=30, 
                             editable=False, 
                             auto_created=True)
@@ -80,6 +160,7 @@ class Manufacturer(models.Model):
     name = models.CharField(max_length=20, unique=True)
     image = models.FileField(upload_to='images/categories/')
     description = models.TextField(blank=True, null=True)
+    
     slug = models.CharField(max_length=30, 
                             editable=False, 
                             auto_created=True)
@@ -116,7 +197,8 @@ class WheelSize(models.Model):
                                decimal_places=1,
                                unique=True,
                                validators=[MinValueValidator(6), 
-                                           MaxValueValidator(31)],)
+                                           MaxValueValidator(31)])
+    
     image = models.FileField(upload_to='images/sizes/')
 
     def __str__(self):
@@ -137,16 +219,19 @@ class Product(models.Model):
                                      blank=True,
                                      null=True, 
                                      on_delete=models.DO_NOTHING)
+    
     label = models.CharField(max_length=30)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     article = models.CharField(max_length=30, unique=True)
     image = models.FileField(upload_to=products_filename_wrapper)
     characteristics = models.ManyToManyField(Characteristic, blank=True)
+    
     category = models.ForeignKey(Category, 
                                  on_delete=models.DO_NOTHING, 
                                  blank=True, 
                                  null=True)
+    
     subcategory = models.ForeignKey(SubCategory, 
                                  on_delete=models.DO_NOTHING, 
                                  blank=True, 
@@ -178,6 +263,7 @@ class Bicycle(Product):
     color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
     wheel = models.ForeignKey(WheelSize, on_delete=models.DO_NOTHING)
     frame = models.ForeignKey(FrameSize, on_delete=models.DO_NOTHING)
+    
     year = models.IntegerField(validators=[MinValueValidator(2000)], 
                                blank=True, 
                                null=True)
