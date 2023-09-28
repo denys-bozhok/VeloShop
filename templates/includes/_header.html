@@ -3,101 +3,56 @@
     <div class="subheader flex-between">
         <nav class="subheader__nav">
             <ul class="subheader__ul flex-between">
+                {% for site_navigation in site_navigations %}
                 <li class="subheader-nav-element">
-                    <a href="#" class="subheader-link">
-                        About us
+                    <a href="about/{{site_navigation.slug}}" class="subheader-link">
+                        {{site_navigation.name}}
                     </a>
                 </li>
-
-                <li class="subheader-nav-element">
-                    <a href="#" class="subheader-link">
-                        Contacts
-                    </a>
-                </li>
-
-                <!-- <li class="subheader-nav-element">
-                    <a href="#"
-                    class="subheader-link">
-                        Political of confidance
-                    </a>
-                </li> -->
-
-                <li class="subheader-nav-element">
-                    <a href="#" class="subheader-link">
-                        Shipping and payment
-                    </a>
-                </li>
-
-                <!-- <li class="subheader-nav-element">
-                    <a href="#"
-                    class="subheader-link">
-                        Warranties and returns
-                    </a>
-                </li> -->
+                {% endfor %}
             </ul>
         </nav>
+
         <div class="subheader-social__wrapper flex-between">
+            {% for social_network in social_networks %}
             <div class="subheader-social">
-                <a href="#" class="subheader-link">
-                    <img src="static/images/icons/icon_telegram.png" alt="No image, sorry" class="social-img">
+                <a href="https://{{social_network.link}}" class="subheader-link">
+                    <img src="media/{{social_network.image}}" alt="No image, sorry" class="social-img">
                 </a>
             </div>
-
-            <div class="subheader-social">
-                <a href="#" class="subheader-link">
-                    <img src="static/images/icons/icon_instagram.png" alt="No image, sorry" class="social-img">
-                </a>
-            </div>
-
-            <div class="subheader-social">
-                <a href="#" class="subheader-link">
-                    <img src="static/images/icons/icon_facebook.png" alt="No image, sorry" class="social-img">
-                </a>
-            </div>
+            {% endfor %}
         </div>
 
 
         <div class="user__menu flex-between">
+            {% for favorite_and_other in favorites_and_other %}
             <div class="menu-element__wrapper ">
                 <div class="menu-element flex-between">
                     <div class="element">
-                        <img src="static/images/icons/icon_heart.png" alt="No image, sorry" class="element-icon">
+                        <img src="media/{{favorite_and_other.icon}}" 
+                            alt="No image, sorry" 
+                            class="element-icon">
                     </div>
 
-                    <a href="#" class="subheader-link">
-                        Favorites (0)
+                    <a href="user/{{favorite_and_other.slug}}" 
+                        class="subheader-link">
+                        {{favorite_and_other.name}}({{favorite_and_other.value}})
                     </a>
                 </div>
             </div>
-
-            <div class="menu-element__wrapper">
-                <div class="menu-element flex-between">
-                    <div class="element">
-                        <img src="static/images/icons/icon_comparisons.png" alt="No image, sorry" class="element-icon">
-                    </div>
-
-                    <a href="#" class="subheader-link">
-                        Comparisons (0)
-                    </a>
-                </div>
-            </div>
-
+            {% endfor %}
+            
             <div class="menu-lenguage__wrapper">
-                Lenguage
-                <div hidden class="menu__lenguage flex-between">
-                    <div class="lenguage lenguage__en">
-                        <a href="#" class="subheader-link">
-                            EN
-                            <img src="static/images/icons/icon_uk.png" alt="No image, sorry" class="element-icon">
+                Language
+                <div class="menu__lenguage flex-between">
+                    {% for language in languages%}
+                    <div class="languages">
+                        <a href="{{language.slug}}" class="subheader-link">
+                            {{language.short_name}}
+                            <img src="media/{{language.icon}}" alt="No image, sorry" class="element-icon">
                         </a>
                     </div>
-
-                    <div class="lenguage lenguage__ru">
-                        <a href="#" class="subheader-link">
-                            UA
-                            <img src="static/images/icons/icon_ua.png" alt="No image, sorry" class="element-icon">
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -132,8 +87,6 @@
                 <div class="menu-nav">
                     <nav hidden class="nav_for_autorized">
                         <a href="#">Personal Area</a>
-                        <a href="#">Favorites</a>
-                        <a href="#">Desires</a>
                         <a href="#">Log Out</a>
                     </nav>
                 </div>

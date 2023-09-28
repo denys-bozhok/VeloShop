@@ -4,6 +4,8 @@ from django.utils.text import slugify
 
 import os
 
+from . import utilites
+
 
 #* -----WRAPPERS-----
 
@@ -21,17 +23,6 @@ def products_filename_wrapper(instance, filename):
 
 
 # * -----TEMPLATE`S ELEMENTS-----
-class SocialNetwork (models.Model):
-    name = models.CharField(max_length=20, 
-                            unique=True)
-    
-    image = models.FileField(upload_to='images/icons/social_networks')
-    link = models.CharField(max_length=50, default='#', unique=True)
-    
-    def __str__(self):
-        return f'{self.name}'
-    
-    
 class SiteNavigation (models.Model):
     name = models.CharField(max_length=20, 
                             unique=True)
@@ -48,6 +39,17 @@ class SiteNavigation (models.Model):
     def __str__(self):
         return f'{self.name}'
     
+    
+class SocialNetwork (models.Model):
+    name = models.CharField(max_length=20, 
+                            unique=True)
+    
+    image = models.FileField(upload_to='images/icons/social_networks')
+    link = models.CharField(max_length=50, default='#', unique=True)
+    
+    def __str__(self):
+        return f'{self.name}'
+
 
 class FavoritesAndOther (models.Model):
     name = models.CharField(max_length=20, 

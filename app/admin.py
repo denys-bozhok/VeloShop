@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import *
 
-    
+
 admin.site.register(SocialNetwork)
 admin.site.register(SiteNavigation)
 admin.site.register(FavoritesAndOther)

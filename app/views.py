@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from .models import Chapter
+
+from . import models, utilites
 
 
 def home(req):
-    chapters = Chapter.objects.all()
 
+    transmitted_data = {}
+    transmitted_data.update(utilites.get_subheader_dict())
+    transmitted_data.update(utilites.get_chapter_dict())
 
-    return render(req, 'app/app.html', {
-        'chapters': chapters
-    })
+    return render(req, 'app/app.html', transmitted_data)
     
 
 def sass (req):
