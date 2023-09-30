@@ -1,0 +1,21 @@
+<img src="{{user.image}}" alt="No image, sorry" class="social-img">
+
+<form action="{% url 'profile' %}" method='post'>
+    {% csrf_token %}
+    <div class="forms-element"> 
+        <label class="form-imput-label" for="{{form.first_name.id_for_label}}">first_name</label>
+        {{form.first_name}}
+    </div>
+
+    <div class="forms-element"> 
+        <label class="form-imput-label" for="{{form.last_name.id_for_label}}">last_name</label>
+        {{form.last_name}}
+    </div>
+
+
+    <div class="forms-element"> 
+        <label class="form-imput-label" for="{{form.image.id_for_label}}">image</label>
+        {{form.image}}
+    </div>
+
+    <input class = "form-button" type="submit" value="Submit">

@@ -2,8 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from users.models import CustomUser
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.models import User
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from app.utilites import get_chapter_dict, get_subheader_dict
 
 
@@ -34,7 +34,7 @@ def registration(req):
         form = UserRegistrationForm(data=req.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('users:login'))
+            return HttpResponseRedirect(reverse('login'))
     else:
         form = UserRegistrationForm()
 
@@ -43,3 +43,19 @@ def registration(req):
     context.update(get_subheader_dict())
 
     return render(req, 'users/registration.html', context)
+
+
+def profile(req):
+    if req.method == 'POST':
+        form = UserProfileForm(data=req.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        form = UserProfileForm()
+
+    context = {'form': form}
+    context.update(get_chapter_dict())
+    context.update(get_subheader_dict())
+
+    return render(req, 'users/profile.html', context)

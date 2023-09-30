@@ -1,9 +1,9 @@
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 
-from users.models import CustomUser
+from users.models import User
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -15,11 +15,15 @@ class UserLoginForm(AuthenticationForm):
         'placeholder': 'Enter your password'}))
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ('username', 'password',)
 
 
 class UserRegistrationForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-imput',
+        'placeholder': 'Enter your username'}))
+    
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-imput',
         'placeholder': 'Enter your first name'}))
@@ -28,11 +32,7 @@ class UserRegistrationForm(UserCreationForm):
         'class': 'form-imput',
         'placeholder': 'Enter your last name'}))
     
-    phone = forms.IntegerField(widget=forms.TextInput(attrs={
-        'class': 'form-imput',
-        'placeholder': 'Enter your phone'}))
-    
-    email = forms.IntegerField(widget=forms.EmailInput(attrs={
+    email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-imput',
         'placeholder': 'Enter your email'}))
     
@@ -45,5 +45,24 @@ class UserRegistrationForm(UserCreationForm):
         'placeholder': 'Confirm your password'}))
     
     class Meta:
-        model = CustomUser
-        fields = ('first_name', 'last_name', 'phone', 'email', 'password1', 'password2')
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+
+
+class UserProfileForm(UserChangeForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-imput',
+        'placeholder': 'Enter your first name'}))
+    
+    last_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-imput',
+        'placeholder': 'Enter your last name'}))
+    
+    image = forms.FileField(widget=forms.FileInput(attrs={
+        'class': 'form-imput',
+        'placeholder': 'Enter image'}))
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'image',)
