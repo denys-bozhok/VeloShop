@@ -24,7 +24,7 @@ def products_filename_wrapper(instance, filename):
 # * -----PRODUCT`S INCLUDES-----
 class Manufacturer(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    image = models.FileField(upload_to='images/categories/')
+    image = models.FileField(upload_to='images/manufactirers/')
     description = models.TextField(blank=True, null=True)
     
     slug = models.CharField(max_length=30, 
@@ -40,32 +40,28 @@ class Manufacturer(models.Model):
 
 
 class Color(models.Model):
-    name = models.CharField(max_length=20, unique=True)
+    first_color = models.CharField(max_length=10)
+    second_color = models.CharField(max_length=10, blank=True, null=True)
     
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.first_color}, {self.second_color}'
 
 
 class FrameSize(models.Model):
-    size = models.DecimalField(max_digits=3, 
+    size = models.DecimalField(max_digits=7, 
                                decimal_places=1,
                                unique=True,
-                               validators=[MinValueValidator(6), 
-                                           MaxValueValidator(31)],)
-    image = models.FileField(upload_to='images/sizes/')
-    
+                               validators=[MinValueValidator(6),],)
+
     def __str__(self):
         return f'{self.size}'
 
 
 class WheelSize(models.Model):
-    size = models.DecimalField(max_digits=3, 
+    size = models.DecimalField(max_digits=7, 
                                decimal_places=1,
                                unique=True,
-                               validators=[MinValueValidator(6), 
-                                           MaxValueValidator(31)])
-    
-    image = models.FileField(upload_to='images/sizes/')
+                               validators=[MinValueValidator(6),],)
 
     def __str__(self):
         return f'{self.size}'
@@ -76,7 +72,8 @@ class Characteristic(models.Model):
     description = models.TextField()
     
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}: {self.description}'
+
 
 
 # * -----PRODUCTS-----
@@ -90,7 +87,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     article = models.CharField(max_length=30, unique=True)
-    image = models.FileField(upload_to=products_filename_wrapper)
+
     characteristics = models.ManyToManyField(Characteristic, blank=True)
     
     category = models.ForeignKey(Category, 
@@ -114,6 +111,8 @@ class Product(models.Model):
                             editable=False, 
                             auto_created=True)
     
+    image = models.FileField(upload_to=products_filename_wrapper, blank=True)
+    
     def save(self):
         self.slug = slugify(self.label)
         super().save()
@@ -135,9 +134,26 @@ class Bicycle(Product):
                                null=True)
     
 
+class BicycleGalery(models.Model):
+    product = models.ForeignKey(Bicycle, default=None, on_delete=models.CASCADE)
+
+    article = models.CharField(max_length=30, 
+                            editable=False, 
+                            auto_created=True)
+    
+    image = models.FileField(upload_to=products_filename_wrapper, blank=True)
+ 
+    def __str__(self):
+        return self.product.article
+    
+    def save(self):
+        self.article = self.product.article
+        super().save()
+    
 class Helmet(Product):
     pass
 
 
 class Lighting(Product):
     pass
+
