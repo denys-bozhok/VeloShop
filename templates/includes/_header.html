@@ -17,7 +17,7 @@
             {% for social_network in social_networks %}
             <div class="subheader-social">
                 <a href="https://{{social_network.link}}" class="subheader-link">
-                    <img src="media/{{social_network.image}}" alt="No image, sorry" class="social-img">
+                    <img src="../../media/{{social_network.image}}" alt="No image, sorry" class="social-img">
                 </a>
             </div>
             {% endfor %}
@@ -29,7 +29,7 @@
             <div class="menu-element__wrapper ">
                 <div class="menu-element flex-between">
                     <div class="element">
-                        <img src="media/{{favorite_and_other.icon}}" 
+                        <img src="../../media/{{favorite_and_other.icon}}" 
                             alt="No image, sorry" 
                             class="element-icon">
                     </div>
@@ -49,7 +49,7 @@
                     <div class="languages">
                         <a href="{{language.slug}}" class="subheader-link">
                             {{language.short_name}}
-                            <img src="media/{{language.icon}}" alt="No image, sorry" class="element-icon">
+                            <img src="../../media/{{language.icon}}" alt="No image, sorry" class="element-icon">
                         </a>
                     </div>
                     {% endfor %}
@@ -100,7 +100,7 @@
     <div class="header">
         <div class="header__container flex-between">
             <div class="header__logo">
-                <img src="static/images/logotype.png" alt="No image, sorry" class="logotype">
+                <img src="../../static/images/logotype.png" alt="No image, sorry" class="logotype">
             </div>
 
             <div class="header-element">
@@ -112,7 +112,7 @@
             <div class="header-element">
                 <div class="cart flex-between">
                     <div class="cart__img">
-                        <img src="static/images/icons/icon_cart.png" alt="No image, sorry" class="icon_cart">
+                        <img src="../../static/images/icons/icon_cart.png" alt="No image, sorry" class="icon_cart">
                     </div>
 
                     <a href="#" class="header-link">

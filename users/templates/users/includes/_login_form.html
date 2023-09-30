@@ -1,0 +1,15 @@
+
+<form action="{% url 'login' %}" method='post'>
+    {% csrf_token %}
+    <div class="forms-element">
+        <label class="form-imput-label" for="{{ form.username.id_for_label}}">e-mail</label>
+        {{form.username}}
+    </div>
+
+    <div class="forms-element"> 
+        <label class="form-imput-label" for="{{ form.password.id_for_label}}">Password</label>
+        {{form.password}}
+    </div>
+
+    <input class = "form-button" type="submit" value="Submit">
+    
