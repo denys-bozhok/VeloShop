@@ -80,7 +80,7 @@ class Chapter(models.Model):
     name = models.CharField(max_length=20, 
                             unique=True)
     
-    image = models.FileField(upload_to='images/categories/')
+    image = models.FileField(upload_to='images/icons/categories/')
     description = models.TextField(blank=True, null=True)
     
     slug = models.CharField(max_length=30, 
@@ -97,7 +97,7 @@ class Chapter(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    image = models.FileField(upload_to='images/categories/')
+    image = models.FileField(upload_to='images/icons/categories/')
     description = models.TextField(blank=True, null=True)
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     
@@ -115,7 +115,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    image = models.FileField(upload_to='images/categories/')
+    image = models.FileField(upload_to='images/icons/categories/')
     description = models.TextField(blank=True, null=True)
     
     category = models.ForeignKey(Category, 
