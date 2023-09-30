@@ -4,6 +4,5 @@ from .views import home, sass
 
 
 urlpatterns = [
-    path('', home),
-    path('sass', sass),
+    path('', home, name='index'),
     ]

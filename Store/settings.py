@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'sass_processor',
     'compressor',
     'app',
+    'products',
+    'users',
 ]
 
 STATICFILES_FINDERS = [
