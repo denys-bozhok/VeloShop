@@ -52,17 +52,20 @@ class UserRegistrationForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-imput',
-        'placeholder': 'Enter your first name'}))
+        'class': 'form-imput'}))
     
     last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-imput',
-        'placeholder': 'Enter your last name'}))
+        'class': 'form-imput'}))
     
-    image = forms.FileField(widget=forms.FileInput(attrs={
-        'class': 'form-imput',
-        'placeholder': 'Enter image'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-imput', 'readonly': True}))
+    
+    email = forms.CharField(widget=forms.EmailInput(attrs={
+        'class': 'form-imput', 'readonly': True}))
+    
+    image = forms.ImageField(widget=forms.FileInput(attrs={
+        'class': 'custom-file-imput'}), required=False)
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'image',)
+        fields = ('first_name', 'last_name', 'image', 'username', 'email',)

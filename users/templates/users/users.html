@@ -1,0 +1,23 @@
+{% extends '_base.html'%}
+
+
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block style %}{% endblock style %}
+
+{% block header %}
+    {% include 'includes/_header.html' %}
+{% endblock header %}
+
+{% block main %}
+    {% if title == 'Registration'%}
+        {% include 'users/includes/_registration_form.html' %}
+    {% elif title == 'Login'%}
+        {% include 'users/includes/_login_form.html' %}
+    {% else%}
+        {% include 'users/includes/_profile_form.html' %}
+    {% endif %}
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

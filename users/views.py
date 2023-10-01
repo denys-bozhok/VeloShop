@@ -8,6 +8,7 @@ from app.utilites import get_chapter_dict, get_subheader_dict
 
 
 def login(req):
+    title = 'Login'
     if req.method == 'POST':
         form = UserLoginForm(data=req.POST)
         if form.is_valid():
@@ -22,14 +23,15 @@ def login(req):
     else:
         form = UserLoginForm()
     
-    context = {'form': form, 'reauest': login}
+    context = {'form': form, 'title': title}
     context.update(get_chapter_dict())
     context.update(get_subheader_dict())
 
-    return render(req, 'users/login.html', context)
+    return render(req, 'users/users.html', context)
 
 
 def registration(req):
+    title = 'Registration'
     if req.method == 'POST':
         form = UserRegistrationForm(data=req.POST)
         if form.is_valid():
@@ -38,24 +40,26 @@ def registration(req):
     else:
         form = UserRegistrationForm()
 
-    context = {'form': form}
+    context = {'form': form, 'title': title}
     context.update(get_chapter_dict())
     context.update(get_subheader_dict())
 
-    return render(req, 'users/registration.html', context)
+    return render(req, 'users/users.html', context)
 
 
 def profile(req):
+    title = 'Profile'
     if req.method == 'POST':
-        form = UserProfileForm(data=req.POST)
+        print(req.POST)
+        form = UserProfileForm(instance=req.user, data=req.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('profile'))
     else:
-        form = UserProfileForm()
+        form = UserProfileForm(instance=req.user)
 
-    context = {'form': form}
+    context = {'form': form, 'title': title}
     context.update(get_chapter_dict())
     context.update(get_subheader_dict())
 
-    return render(req, 'users/profile.html', context)
+    return render(req, 'users/users.html', context)
