@@ -1,5 +1,70 @@
-@use 'variables';
-@use 'mixims';
-@use 'base';
+@font-face {
+  font-family: "inter";
+  src: url("../fonts/inter/Inter-Regular.ttf"); }
+
+@font-face {
+  font-family: "rockout";
+  src: url("../fonts/rockout/Rockout.otf"); }
+
+@font-face {
+  font-family: "assistant";
+  src: url("../fonts/assistant/Assistant-Regular.ttf"); }
+
+/** COLORS */
+/** FONTS */
+/** PADDING/MARGIN */
+/** WIDTH/HEIGTH */
+#app {
+  font-family: "assistant"; }
+
+.subheader-nav-element,
+.menu-element__wrapper,
+.menu-lenguage__wrapper,
+.lenguage,
+.element-icon {
+  padding-right: 0.3rem; }
+
+.subheader_wrapper {
+  background-color: black;
+  color: whitesmoke; }
+
+.subheader,
+.header {
+  width: 80rem;
+  padding: 0.5rem; }
+
+.element-icon {
+  height: 0.6rem; }
+
+.user-info:hover,
+.subheader-link:hover,
+.menu-lenguage__wrapper:hover {
+  color: orange; }
+
+.social-img {
+  height: 2rem;
+  margin: 0 0.5rem 0 0.5rem;
+  padding: calc($padding_xxs * 2);
+  border: 0.2rem solid var(--text-color_additional);
+  border-radius: 50%; }
+
+.social-img:hover {
+  border: 0.2rem solid orange; }
+
+.logotype {
+  height: 5rem; }
+
+.icon_cart {
+  height: 2rem;
+  padding-right: 1rem; }
+
+.header__container {
+  width: 100%; }
+
+.header__logo {
+  width: 50%; }
+
+.header-link {
+  font-size: 2rem; }
 
 /*# sourceMappingURL=style.css.map */
