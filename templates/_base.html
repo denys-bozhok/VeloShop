@@ -1,5 +1,7 @@
 {% load static %}
 {% load livereload_tags %}
+{% load sass_tags %}
+{% load compress %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +16,12 @@
 
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
 
-    <link rel="stylesheet" href="{% static 'extra-classes.css' %}">
-
-    <link rel="stylesheet" href="{% static 'variables.css' %}">
-
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% compress css %}
+        <link href="{% sass_src 'scss/_variables.scss' %}" rel="stylesheet" type="text/css" />   
+        <link href="{% sass_src 'scss/_mixims.scss' %}" rel="stylesheet" type="text/css" />   
+        <link href="{% sass_src 'scss/_base.scss' %}" rel="stylesheet" type="text/css" />    
+        <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    {% endcompress %}
 
     {% block style %}{% endblock style %}
 
@@ -26,12 +29,10 @@
 
 <body>
     <div id="app">
-        {% block header %}
-        {% endblock header %}
+        {% block header %}{% endblock header %}
         {% block main %}{% endblock main %}
         {% block footer %}{% endblock footer %}
     </div>
 </body>
 {% livereload_script %}
-
 </html>
