@@ -1,12 +1,11 @@
-.flex-center, .flex-between {
+@mixin flex-between{
     display: flex;
     align-items: center;
-}
-
-.flex-between {
     justify-content: space-between;
 }
 
-.flex-center {
+@mixin flex-center{
+    display: flex;
+    align-items: center;
     justify-content: center;
 }

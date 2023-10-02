@@ -1,7 +1,3 @@
-.flex-center, .flex-between {
-  display: flex;
-  align-items: center; }
-
 .flex-between {
   justify-content: space-between; }
 

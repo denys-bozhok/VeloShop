@@ -1,3 +1,17 @@
-body {
-    background: yellow;
+@import 'static/scss/variables';
+@import 'static/scss/mixims';
+
+.main{
+    @include flex-center;
 }
+
+.main-chapters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+.main-chapters{
+    width: $width_xxl;
+    padding: $padding_s;
+}
+

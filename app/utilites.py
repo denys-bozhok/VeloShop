@@ -24,3 +24,20 @@ def get_chapter_dict():
     chapter_dict = {'chapters': chapters}
 
     return chapter_dict
+
+
+def get_category_in_chapter_dict(slug):
+    chapter = models.Chapter.objects.get(slug=slug)
+    categories = models.Category.objects.filter(chapter=chapter)
+    chapter_dict = {'categories': categories,
+                    'chapter': chapter}
+
+    return chapter_dict
+
+def get_subcategories_dict(slug):
+    category = models.Category.objects.get(slug=slug)
+    subcategories = models.SubCategory.objects.filter(category=category)
+    chapter_dict = {'subcategories': subcategories,
+                    'category': category}
+
+    return chapter_dict

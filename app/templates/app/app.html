@@ -1,16 +1,25 @@
 {% extends '_base.html'%}
+{% load sass_tags %}
 
-{% block title %}VeloShop{% endblock title %}
-
+{% block title %}{{title}}{% endblock title %}
+{% block style %}
+    <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock style %}
 
 {% block header %}
-
     {% include 'includes/_header.html' %}
-
-    {% for chapter in chapters %}
-    <h1>
-        {{chapter.name}}
-    </h1>
-
-    {% endfor %}
 {% endblock header %}
+
+{% block main %}
+    <main class="main">
+        <div class="main__wrapper">
+            {% if title == "VeloShop" %}
+                {% include './includes/_chapters.html' %}
+            {% elif title == chapter.name%}
+                {% include './includes/_chapter.html' %}
+            {% elif title == category.name%}
+                {% include './includes/_category.html' %}
+            {% endif%}
+        </div>
+    </main>    
+{% endblock main %}
