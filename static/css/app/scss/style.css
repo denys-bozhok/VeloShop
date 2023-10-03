@@ -21,10 +21,11 @@
 
 .main-chapters {
   display: grid;
-  grid-template-columns: 1fr 1fr; }
-
-.main-chapters {
+  grid-template-columns: 1fr 1fr;
   width: 80rem;
-  padding: 0.5rem; }
+  padding-top: 0.5rem; }
+
+.chapter {
+  margin: 0.5rem; }
 
 /*# sourceMappingURL=style.css.map */

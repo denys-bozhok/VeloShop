@@ -5,13 +5,15 @@
     @include flex-center;
 }
 
-.main-chapters {
+.main-chapters{
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
-
-.main-chapters{
     width: $width_xxl;
-    padding: $padding_s;
+    padding-top: $padding_s;
 }
 
+.chapter {
+
+    margin: $margin_s;
+  }  
+  

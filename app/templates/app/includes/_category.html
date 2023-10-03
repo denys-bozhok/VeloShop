@@ -1,6 +1,6 @@
 <div class="category-title__wrapper">
-    <div class="category" style="background: url(media/{{ category.image }})">
-        <div class="chapter-title">
+    <div class="category" style="background: url(media/{{category.image}})">
+        <div class="category-title">
             {{category.name}}
         </div>
     </div>
@@ -9,7 +9,7 @@
 <div class="main-subcategories">
   {% for subcategory in subcategories %}
     <div class="main-subcategory">
-      <div class="subcategory" style="background: url(media/{{category.image }})">
+      <div class="subcategory" style="background: url(media/{{category.image}})">
         <a href="{{subcategory.slug}}/" class="subcategory-title">{{subcategory.name}}</a>
       </div>
     </div>

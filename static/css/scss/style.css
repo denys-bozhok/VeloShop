@@ -58,8 +58,7 @@ li {
   padding-right: 0.3rem; }
 
 .user-info:hover,
-.subheader-link:hover,
-.menu-lenguage__wrapper:hover {
+.subheader-link:hover {
   color: orange; }
 
 .subheader,

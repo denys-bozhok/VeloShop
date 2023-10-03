@@ -1,6 +1,6 @@
 <div class="chapter-title__wrapper">
     <div class="chapter"
-        style="background: url(media/{{ chapter.image }})">
+        style="background: url(media/{{chapter.image}})">
         <div class="chapter-title">
             {{chapter.name}}
         </div>
@@ -10,7 +10,7 @@
 <div class="main-categories">
   {% for category in categories %}
     <div class="main-category">
-      <div class="category" style="background: url(media/{{ category.image }})">
+      <div class="category" style="background: url(media/{{category.image}})">
         <a href="{{chapter.slug}}/{{category.slug}}" class="category-title">{{category.name }}</a>
       </div>
     </div>

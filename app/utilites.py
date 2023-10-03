@@ -36,6 +36,7 @@ def get_category_in_chapter_dict(slug):
 
 def get_subcategories_dict(slug):
     category = models.Category.objects.get(slug=slug)
+    print(category.chapter)
     subcategories = models.SubCategory.objects.filter(category=category)
     chapter_dict = {'subcategories': subcategories,
                     'category': category}

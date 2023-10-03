@@ -19,6 +19,8 @@
                 {% include './includes/_chapter.html' %}
             {% elif title == category.name%}
                 {% include './includes/_category.html' %}
+            {% elif title == subcategory.name%}
+                {% include './includes/_subcategory.html' %}
             {% endif%}
         </div>
     </main>    
