@@ -1,6 +1,7 @@
 from . import models
 
 
+
 #* -----GET DICTIONARY FOR TEMPLATE-----
 def get_subheader_dict():
     
@@ -18,27 +19,38 @@ def get_subheader_dict():
 
     return subheader_dict
 
-def get_chapter_dict():
-    chapters = models.Chapter.objects.all()
-    
-    chapter_dict = {'chapters': chapters}
 
-    return chapter_dict
+def get_site_navigate(slug):
+    site_navigate = models.SiteNavigation.objects.get(slug=slug)
+    title = site_navigate.name
+    site_navigate_dict = {'title': title, 'site_navigate': site_navigate}
+
+    return site_navigate_dict
+
+def get_chapter_dict():
+    title = 'VeloShop'
+    chapters = models.Chapter.objects.all()
+    chapters_dict = {'title': title, 'chapters': chapters}
+
+    return chapters_dict
 
 
 def get_category_in_chapter_dict(slug):
     chapter = models.Chapter.objects.get(slug=slug)
+    title = chapter.name
     categories = models.Category.objects.filter(chapter=chapter)
     chapter_dict = {'categories': categories,
-                    'chapter': chapter}
+                    'chapter': chapter,
+                    'title': title}
 
     return chapter_dict
 
 def get_subcategories_dict(slug):
     category = models.Category.objects.get(slug=slug)
-    print(category.chapter)
-    subcategories = models.SubCategory.objects.filter(category=category)
+    title = category.name
+    subcategories = models.SubCategory.objects.filter(category=category).filter(sub_category=None)
     chapter_dict = {'subcategories': subcategories,
-                    'category': category}
+                    'category': category,
+                    'title': title}
 
     return chapter_dict

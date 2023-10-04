@@ -11,7 +11,7 @@
   {% for category in categories %}
     <div class="main-category">
       <div class="category" style="background: url(media/{{category.image}})">
-        <a href="{{chapter.slug}}/{{category.slug}}" class="category-title">{{category.name }}</a>
+        <a href="/category/{{category.slug}}/" class="category-title">{{category.name }}</a>
       </div>
     </div>
   {% endfor %}

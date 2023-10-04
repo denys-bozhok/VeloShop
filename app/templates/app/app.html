@@ -21,6 +21,8 @@
                 {% include './includes/_category.html' %}
             {% elif title == subcategory.name%}
                 {% include './includes/_subcategory.html' %}
+            {% elif title == site_navigate.name%}
+                {% include './includes/_site_navigate.html' %}
             {% endif%}
         </div>
     </main>    
