@@ -1,7 +1,6 @@
 from . import models
 
 
-
 #* -----GET DICTIONARY FOR TEMPLATE-----
 def get_subheader_dict():
     
@@ -24,7 +23,6 @@ def get_site_navigate(slug):
     site_navigate = models.SiteNavigation.objects.get(slug=slug)
     title = site_navigate.name
     site_navigate_dict = {'title': title, 'site_navigate': site_navigate}
-
     return site_navigate_dict
 
 def get_chapter_dict():
