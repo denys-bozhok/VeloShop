@@ -68,6 +68,7 @@ def profile(req):
     
     return render(req, 'users/users.html', context)
 
+
 @login_required
 def logout(req):
 	auth.logout(req)
