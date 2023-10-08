@@ -21,7 +21,6 @@
 }
 
 .subheader_wrapper,
-.menu-user-info,
 .user-info,
 .header__wrapper{
     @include flex-center;
@@ -36,8 +35,9 @@
     padding-right: $padding_xs;
 }
 
-.user-info:hover,
-.subheader-link:hover {
+
+.subheader-link:hover,
+.menu-lenguage-title:hover {
     color: $text-color_additional_hover;
 }
 
@@ -67,7 +67,20 @@
 .social-img:hover {
     border: .2rem solid $text-color_additional_hover;
 }
+.user-info-nav,  .menu-nav, .menu__lenguage{
+    display: none;
+    position: absolute;
+    background-color: gray;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
+.menu-user-info:hover, .user-info:hover, .menu-lenguage__wrapper:hover{
+    .menu-nav, .user-info-nav, .menu__lenguage{
+        display: inline-block;
+    }
+
+}
 
 .logotype {
     height: $heigth_l;

@@ -43,52 +43,53 @@
             {% endfor %}
             
             <div class="menu-lenguage__wrapper">
-                Language
-                <div class="menu__lenguage flex-between">
-                    {% for language in languages%}
-                    <div class="languages">
-                        <a href="{{language.slug}}" class="subheader-link">
-                            {{language.short_name}}
-                            <img src="/media/{{language.icon}}" alt="No image, sorry" class="element-icon">
-                        </a>
+                <div class="menu-lenguage-title">
+                    Language
+                    <div class="menu__lenguage">
+                        {% for language in languages%}
+                        <div class="languages">
+                            <a href="{{language.slug}}" class="subheader-link">
+                                {{language.short_name}}
+                                <img src="/media/{{language.icon}}" alt="No image, sorry" class="element-icon">
+                            </a>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
             </div>
 
-            <div class="menu-user-info flex-center">
+            <div class="menu-user-info">
+                {% if user.is_authenticated %}
+                <div class="user-info flex-center">
+                    <div class="log_in">Hello, {{user.username}}!</div>
+                </div>
+
+                
+                <div class="user-info-nav">
+                    <a href="/users/profile/" class="subheader-link">
+                        Profile
+                    </a>
+
+                    <a href="/users/logout/" class="subheader-link">
+                        Log Out
+                    </a>
+                </div>
+
+                {% else %}
                 <div class="user-info flex-center">
                     <img src="/static/images/icons/icon_log_in.png" alt="No image, sorry" class="element-icon">
 
-                    <div class="log_in">Log in</div>
+                    <div class="log_in">Login</div>
                 </div>
 
                 <div class="menu-nav">
-                    <nav hidden class="nav_for_anonimus">
-                        <a href="#" class="subheader-link">
-                            Log In
-                        </a>
+                    <a href="/users/login" class="subheader-link">
+                        Log In
+                    </a>
 
-                        <a href="#" class="subheader-link">
-                            Registration
-                        </a>
-                    </nav>
-                </div>
-
-                {% if not user %}
-                <div class="user-info flex-center">
-                    <div class="user__img">
-                        <img src="#" alt="No image, sorry" class="avatar">
-                    </div>
-
-                    <div class="user__name">Hi, Username!</div>
-                </div>
-
-                <div class="menu-nav">
-                    <nav hidden class="nav_for_autorized">
-                        <a href="#">Personal Area</a>
-                        <a href="#">Log Out</a>
-                    </nav>
+                    <a href="/users/registration" class="subheader-link">
+                        Registration
+                    </a>
                 </div>
                 {% endif %}
             </div>

@@ -44,9 +44,10 @@ class UserRegistrationForm(UserCreationForm):
         'class': 'form-imput',
         'placeholder': 'Confirm your password'}))
     
+    
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
 
@@ -63,9 +64,10 @@ class UserProfileForm(UserChangeForm):
     email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-imput', 'readonly': True}))
     
-    image = forms.ImageField(widget=forms.FileInput(attrs={
-        'class': 'custom-file-imput'}), required=False)
-
+    image = forms.FileField(widget=forms.FileInput(attrs={
+        'class': 'custom-file'}), required=False)
+    
+    # print(image)
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'image', 'username', 'email',)
+        fields = ['first_name', 'last_name', 'image', 'username', 'email']

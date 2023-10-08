@@ -43,7 +43,6 @@ li {
   justify-content: space-between; }
 
 .subheader_wrapper,
-.menu-user-info,
 .user-info,
 .header__wrapper {
   display: flex;
@@ -57,8 +56,8 @@ li {
 .element-icon {
   padding-right: 0.3rem; }
 
-.user-info:hover,
-.subheader-link:hover {
+.subheader-link:hover,
+.menu-lenguage-title:hover {
   color: orange; }
 
 .subheader,
@@ -82,6 +81,16 @@ li {
 
 .social-img:hover {
   border: 0.2rem solid orange; }
+
+.user-info-nav, .menu-nav, .menu__lenguage {
+  display: none;
+  position: absolute;
+  background-color: gray;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1; }
+
+.menu-user-info:hover .menu-nav, .menu-user-info:hover .user-info-nav, .menu-user-info:hover .menu__lenguage, .user-info:hover .menu-nav, .user-info:hover .user-info-nav, .user-info:hover .menu__lenguage, .menu-lenguage__wrapper:hover .menu-nav, .menu-lenguage__wrapper:hover .user-info-nav, .menu-lenguage__wrapper:hover .menu__lenguage {
+  display: inline-block; }
 
 .logotype {
   height: 5rem; }

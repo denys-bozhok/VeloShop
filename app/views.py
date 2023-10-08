@@ -4,8 +4,6 @@ from . import models, utilites
 
 def home(req):
     transmitted_data = (utilites.get_chapter_dict())
-        
-
     transmitted_data.update(utilites.get_subheader_dict())
 
     return render(req, 'app/app.html', transmitted_data)
@@ -20,9 +18,6 @@ def about(req, about_slug):
 
 def chapters(req, chapter_slug):
     transmitted_data = (utilites.get_category_in_chapter_dict(chapter_slug))
-    category_id = transmitted_data['categories'][0].id
-    products = Bicycle.objects.all()
-    print(products)
     transmitted_data.update(utilites.get_subheader_dict())
 
     return render(req, 'app/app.html', transmitted_data)

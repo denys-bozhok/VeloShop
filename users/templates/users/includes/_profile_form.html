@@ -1,31 +1,38 @@
-{% csrf_token %}
-<img src="../../media/{{user.image}}" alt="No image, sorry" class="social-img">
-
-<form action="{% url 'profile' %}" method='post'>
+<div class="profile__wrapper">
     {% csrf_token %}
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form.first_name.id_for_label}}">first_name</label>
-        {{form.first_name}}
-    </div>
+    <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
 
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form.last_name.id_for_label}}">last_name</label>
-        {{form.last_name}}
-    </div>
+    <form action="{% url 'profile' %}" method='post'>
+        {% csrf_token %}
+        <div class="forms-element"> 
+            <label class="form-imput-label" for="{{form.first_name.id_for_label}}">first_name</label>
+            {{form.first_name}}
+        </div>
 
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form.first_name.id_for_label}}">username</label>
-        {{form.username}}
-    </div>
+        <div class="forms-element"> 
+            <label class="form-imput-label" for="{{form.last_name.id_for_label}}">last_name</label>
+            {{form.last_name}}
+        </div>
 
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form.first_name.id_for_label}}">email</label>
-        {{form.email}}
-    </div>
+        <div class="forms-element"> 
+            <label class="form-imput-label" for="{{form.first_name.id_for_label}}">username</label>
+            {{form.username}}
+        </div>
 
-    <div class="custom-file"> 
-        {{form.image}}
-        <label class="custom-file-label" for="{{form.image.id_for_label}}">image</label>
-    </div>
+        <div class="forms-element"> 
+            <label class="form-imput-label" for="{{form.first_name.id_for_label}}">email</label>
+            {{form.email}}
+        </div>
 
-    <input class = "form-button" type="submit" value="Submit">
+        <div class="custom-file"> 
+            {{form.image}}
+            <label class="custom-file-label" for="{{form.image.id_for_label}}">image</label>
+        </div>
+
+        <input class = "form-button" type="submit" value="Submit">
+
+</div>
+
+<div class="basket__wrapper">
+    {% include 'includes/_basket.html' %}
+</div>
