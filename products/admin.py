@@ -9,7 +9,8 @@ admin.site.register(WheelSize)
 admin.site.register(SuspensionTravel)
 admin.site.register(Material)
 admin.site.register(Weight)
-admin.site.register(Characteristic)
+admin.site.register(CharacteristicTitle)
+admin.site.register(CharacteristicDescription)
 
 
 class BicycleGaleryAdmin(admin.StackedInline):

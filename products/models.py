@@ -80,12 +80,18 @@ class Weight(models.Model):
         return f'{self.weight}g'
 
 
-class Characteristic(models.Model):
+class CharacteristicTitle(models.Model):
     name = models.CharField(max_length=30)
-    description = models.TextField()
     
     def __str__(self):
-        return f'{self.name}: {self.description}'
+        return f'{self.name}'
+    
+
+class CharacteristicDescription(models.Model):
+    description = models.ForeignKey(CharacteristicTitle, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.name}'
 
 
 # * -----PRODUCTS-----
@@ -95,7 +101,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     article = models.CharField(max_length=30, unique=True)
-    characteristics = models.ManyToManyField(Characteristic, blank=True)
+    characteristics = models.ForeignKey(CharacteristicDescription, on_delete=models.CASCADE, blank=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, blank=True, null=True)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.DO_NOTHING, blank=True, null=True)
     rating = models.FloatField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
