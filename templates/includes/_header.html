@@ -1,95 +1,111 @@
 <!--? int`s for big size of monitor  -->
-<div class="subheader_wrapper flex-center">
-    <div class="subheader flex-between">
-        <nav class="subheader__nav">
-            <ul class="subheader__ul flex-between">
+
+<div class="subheader__wrapper">
+    <div class="subheader">
+        <nav class="site-navigation">
+            <ul class="navigation">
                 {% for site_navigation in site_navigations %}
-                <li class="subheader-nav-element">
-                    <a href="/about/{{site_navigation.slug}}" class="subheader-link">
-                        {{site_navigation.name}}
-                    </a>
+                <li class="site-navigation-element">
+                    <p>
+                        <a href="/about/{{site_navigation.slug}}">{{site_navigation.name}}</a>
+                    </p>
                 </li>
                 {% endfor %}
             </ul>
         </nav>
 
-        <div class="subheader-social__wrapper flex-between">
+        <div class="social">
             {% for social_network in social_networks %}
-            <div class="subheader-social">
-                <a href="https://{{social_network.link}}" class="subheader-link">
+            <p>
+                <a href="https://{{social_network.link}}" class="">
                     <img src="/media/{{social_network.image}}" alt="No image, sorry" class="social-img">
                 </a>
-            </div>
+            </p>
             {% endfor %}
         </div>
 
+        <div class="user-menu__wrapper">
+            <div class="favorites__wrapper">
+                {% for favorite_and_other in favorites_and_other %}
+                <div class="favorites">
+                    <p>
+                        <img src="/media/{{favorite_and_other.icon}}" alt="No image, sorry" class="favorites-ico">
 
-        <div class="user__menu flex-between">
-            {% for favorite_and_other in favorites_and_other %}
-            <div class="menu-element__wrapper ">
-                <div class="menu-element flex-between">
-                    <div class="element">
-                        <img src="/media/{{favorite_and_other.icon}}" 
-                            alt="No image, sorry" 
-                            class="element-icon">
-                    </div>
 
-                    <a href="/user/{{favorite_and_other.slug}}" 
-                        class="subheader-link">
-                        {{favorite_and_other.name}}({{favorite_and_other.value}})
-                    </a>
+                        <a href="/user/{{favorite_and_other.slug}}">
+                            {{favorite_and_other.name}}({{favorite_and_other.value}})
+                        </a>
+                    </p>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-            
-            <div class="menu-lenguage__wrapper">
-                <div class="menu-lenguage-title">
-                    Language
-                    <div class="menu__lenguage">
+
+            <div class="lenguage__wrapper">
+                <p>Language</p>
+
+                <div class="menu">
+                    <div>
                         {% for language in languages%}
-                        <div class="languages">
-                            <a href="{{language.slug}}" class="subheader-link">
+                        <p class="language">
+                            <a href="{{language.slug}}" class="">
                                 {{language.short_name}}
-                                <img src="/media/{{language.icon}}" alt="No image, sorry" class="element-icon">
+                                <img src="/media/{{language.icon}}" alt="No image, sorry" class="lenguage-image">
+                                {{language.name}}
                             </a>
-                        </div>
+                        </p>
                         {% endfor %}
                     </div>
                 </div>
             </div>
 
-            <div class="menu-user-info">
+            <div class="menu__wrapper">
                 {% if user.is_authenticated %}
-                <div class="user-info flex-center">
-                    <div class="log_in">Hello, {{user.username}}!</div>
+                <div>
+                    <p>Hello, {{user.username}}!</p>
                 </div>
 
-                
-                <div class="user-info-nav">
-                    <a href="/users/profile/" class="subheader-link">
-                        Profile
-                    </a>
+                <div class="menu">
+                    <div>
+                        {% if user.image %}
+                        <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
+                        {% else %}
+                        <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
+                        {% endif %}
+                    </div>
 
-                    <a href="/users/logout/" class="subheader-link">
-                        Log Out
-                    </a>
+                    <div>
+                        <p>
+                            <a href="/users/profile/" class="">Profile</a>
+                        </p>
+
+                        <p>
+                            <a href="/users/logout/" class="">Logout</a>
+                        </p>
+                    </div>
                 </div>
 
                 {% else %}
-                <div class="user-info flex-center">
-                    <img src="/static/images/icons/icon_log_in.png" alt="No image, sorry" class="element-icon">
-
-                    <div class="log_in">Login</div>
+                <div class="login">
+                    <p>
+                        <img src="/static/images/icons/icon_log_in.png" alt="No image, sorry">
+                        Login
+                    </p>
                 </div>
 
-                <div class="menu-nav">
-                    <a href="/users/login" class="subheader-link">
-                        Log In
-                    </a>
+                <div class="menu">
+                    <div>
+                        <div>
+                            <p>
+                                <a href="/users/login">Log In</a>
+                            </p>
+                        </div>
 
-                    <a href="/users/registration" class="subheader-link">
-                        Registration
-                    </a>
+                        <div>
+                            <p>
+                                <a href="/users/registration">Registration</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 {% endif %}
             </div>
@@ -97,33 +113,43 @@
     </div>
 </div>
 
-<div class="header__wrapper flex-center">
+<header class="header__wrapper">
     <div class="header">
-        <div class="header__container flex-between">
-            <div class="header__logo">
-                <a href="/"><img src="/static/images/logotype.png" alt="No image, sorry" class="logotype"></a>
-            </div>
+        <div class="logo">
+            <a href="/">
+                <img src="/static/images/logotype.png" alt="No image, sorry" class="logotype">
+            </a>
+        </div>
 
-            <div class="header-element">
-                <div class="header__search">
-                    <input type="text" value="Search" />
-                </div>
-            </div>
-
-            <div class="header-element">
-                <div class="cart flex-between">
-                    <div class="cart__img">
-                        <img src="/static/images/icons/icon_cart.png" alt="No image, sorry" class="icon_cart">
-                    </div>
-
-                    <a href="/users/profile" class="header-link">
-                        Cart
-                    </a>
-                </div>
+        <div class="search__wrapper">
+            <div class="search">
+                <input type="text" value="Search"/>
             </div>
         </div>
+
+        <div class="store-info">
+            <div>
+                <p>
+                    09:00 - 18:00
+                </p>
+
+                <p>
+                    Mon - Sat
+                </p>
+            </div>
+        </div>
+
+        <div class="cart__wrapper">
+            <div class="cart">
+                <a href="/users/profile">
+                    Cart (0)
+                    <img src="/static/images/icons/icon_cart.png" alt="No image, sorry" class="cart__image">
+                </a>
+            </div>
+        </div>
+
     </div>
-</div>
+</header>
 
 <!--? int`s for mobile -->
 <div class="mobile_header_wrapper">
