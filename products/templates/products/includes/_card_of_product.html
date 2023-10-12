@@ -1,0 +1,56 @@
+<div class="card_of_product__wrapper">
+    <div class="card_of_product">
+        <div class="galery__wrapper">
+            <div class="primary_image__wrapper">
+                <img src="/media/{{product.image}}" alt="Sorry, no image" class="primary__image">
+            </div>
+
+            <div class="galery-list">
+                {% for photo in galery %}
+                <div class="galery">
+                    <img src="/media/{{photo.image}}" alt="Sorry, no image" class="galery-image">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="product-info">
+            <p>{{product.label}}</p>
+
+            <p>{{product.manufacturer}}</p>
+            <p>{{product.rating}}</p>
+            <p>{{product.year}}</p>
+
+            <p>{{product.article}}</p>
+            <p>{{product.model}}</p>
+
+            <p>{{product.description}}</p>
+
+            <p>{{product.frame_size}}</p>
+            <p>{{product.wheel}}</p>
+
+            {% for color in colors %}
+            <div class="color" style="background-color: rgb{{color.rgb}};">
+
+            </div>
+            {% endfor %}
+            <p>{{product.color.rgb}}</p>
+            
+            <p>{{product.price}}</p>
+            
+            <div class="product-buttom">
+                <a href="#">Add to cart</a>
+            </div>
+        </div>
+        
+        
+    </div>
+    {% for characteristic in characteristics %}
+    <div>
+        <p>{{characteristic.name}}</p>
+        <p>{{characteristic.description}}</p>
+
+    </div>
+    {% endfor %}
+
+</div>

@@ -5,7 +5,6 @@
 .main__wrapper {
     @include flex-center;
     padding-top: $padding_m * 2;
-
     .chapters__wrapper {
         padding-top: $padding_m * 2;
 

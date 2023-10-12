@@ -1,0 +1,25 @@
+{% extends '_base.html'%}
+{% load sass_tags %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block style %}
+    <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'products/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock style %}
+
+{% block header %}
+    {% include 'includes/_header.html' %}
+{% endblock header %}
+
+{% block main %}
+    <main class="main__wrapper">
+        <div class="main">
+            {% include 'products/includes/_card_of_product.html' %}
+        </div>
+    </main>    
+{% endblock main %}
+
+{% block footer %}
+    {% include 'includes/_footer.html' %}
+{% endblock footer %}

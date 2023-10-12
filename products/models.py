@@ -124,7 +124,7 @@ class Product(models.Model):
 
 class Bicycle(Product):
     model = models.CharField(max_length=20)
-    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
+    color = models.ManyToManyField(Color)
     wheel = models.ForeignKey(WheelSize, on_delete=models.DO_NOTHING)
     frame_size = models.ForeignKey(Size, on_delete=models.DO_NOTHING)
     frame_material = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
@@ -153,7 +153,6 @@ class Accessorie(Product):
     size = models.ForeignKey(Size, on_delete=models.DO_NOTHING, blank=True, null=True)
     weight = models.ForeignKey(Weight, on_delete=models.DO_NOTHING, blank=True, null=True)
     model = models.CharField(max_length=20, blank=True, null=True)
-
 
 
 class AccessorieGalery(models.Model):

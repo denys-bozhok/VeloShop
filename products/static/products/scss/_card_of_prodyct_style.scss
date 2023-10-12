@@ -1,0 +1,38 @@
+@import './static/scss/variables';
+@import './static/scss/mixims';
+
+
+
+.card_of_product__wrapper {
+    .card_of_product {
+        @include flex-between;
+        .galery__wrapper {
+            width: 30rem;
+
+            .primary__image {
+                height: 30rem;
+                border: 1px solid black;
+            }
+
+            .galery-list {
+                @include flex-between;
+                .galery-image {
+                    padding: $padding_l;
+                    
+                    height: auto;
+                    width: 200px;
+                    border: 1px solid black;
+                }
+
+            }
+
+        }
+        .product-info{
+            width: 40rem;
+            .color{
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+    }
+}

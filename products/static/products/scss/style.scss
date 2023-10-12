@@ -1,5 +1,6 @@
-@import './static/scss/variables';
-@import './static/scss/mixims';
+
+@import 'card_of_prodyct_style.scss';
+
 
 .product__wrapper{
     @include flex-center;
@@ -22,7 +23,7 @@
             }
 
             .blind-element{
-                visibility: unset;
+                visibility: collapse;
             }
 
             .product-menu{
