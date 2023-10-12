@@ -2,17 +2,17 @@
 
 <div class="subheader__wrapper">
     <div class="subheader">
-        <nav class="site-navigation">
-            <ul class="navigation">
+        <div>
+            <nav class="navigation">
                 {% for site_navigation in site_navigations %}
-                <li class="site-navigation-element">
-                    <p>
+                <ul class="site-navigation-element">
+                    <li>
                         <a href="/about/{{site_navigation.slug}}">{{site_navigation.name}}</a>
-                    </p>
-                </li>
+                    </li>
+                </ul>
                 {% endfor %}
-            </ul>
-        </nav>
+            </nV>
+        </div>
 
         <div class="social">
             {% for social_network in social_networks %}
@@ -30,7 +30,6 @@
                 <div class="favorites">
                     <p>
                         <img src="/media/{{favorite_and_other.icon}}" alt="No image, sorry" class="favorites-ico">
-
 
                         <a href="/user/{{favorite_and_other.slug}}">
                             {{favorite_and_other.name}}({{favorite_and_other.value}})
@@ -60,9 +59,7 @@
 
             <div class="menu__wrapper">
                 {% if user.is_authenticated %}
-                <div>
-                    <p>Hello, {{user.username}}!</p>
-                </div>
+                <div><p>Hello, {{user.username}}!</p></div>
 
                 <div class="menu">
                     <div>
@@ -74,36 +71,24 @@
                     </div>
 
                     <div>
-                        <p>
-                            <a href="/users/profile/" class="">Profile</a>
-                        </p>
+                        <p><a href="/users/profile/" class="">Profile</a></p>
 
-                        <p>
-                            <a href="/users/logout/" class="">Logout</a>
-                        </p>
+                        <p><a href="/users/logout/" class="">Logout</a></p>
                     </div>
                 </div>
-
                 {% else %}
                 <div class="login">
-                    <p>
-                        <img src="/static/images/icons/icon_log_in.png" alt="No image, sorry">
-                        Login
-                    </p>
+                    <p><img src="/static/images/icons/icon_log_in.png" alt="No image, sorry">Login</p>
                 </div>
 
                 <div class="menu">
                     <div>
                         <div>
-                            <p>
-                                <a href="/users/login">Log In</a>
-                            </p>
+                            <p><a href="/users/login">Log In</a></p>
                         </div>
 
                         <div>
-                            <p>
-                                <a href="/users/registration">Registration</a>
-                            </p>
+                            <p><a href="/users/registration">Registration</a></p>
                         </div>
                     </div>
                 </div>
@@ -123,19 +108,14 @@
 
         <div class="search__wrapper">
             <div class="search">
-                <input type="text" value="Search"/>
+                <input type="text"/>
             </div>
         </div>
 
         <div class="store-info">
             <div>
-                <p>
-                    09:00 - 18:00
-                </p>
-
-                <p>
-                    Mon - Sat
-                </p>
+                <p>09:00 - 18:00</p>
+                <p>Mon - Sat</p>
             </div>
         </div>
 

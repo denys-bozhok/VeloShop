@@ -72,11 +72,12 @@
     }
 }
 
+
 .header__wrapper {
     padding-top: $padding_m;
 
     .logotype {
-        height: $heigth_l;
+        width: $width_m + $width_s;
     }
 
     .search__wrapper {

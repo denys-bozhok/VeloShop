@@ -1,19 +1,31 @@
-@import 'static/scss/variables';
-@import 'static/scss/mixims';
+@import './static/scss/variables';
+@import './static/scss/mixims';
 
-.main{
+
+.main__wrapper{
     @include flex-center;
+    .chapters__wrapper{
+        padding-top: $padding_m * 2;
+        .chapters{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .chapter{
+            width: 31rem;
+            height: 15rem;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 2%;
+
+            margin: .2rem;
+            text-align: center;
+            color: $text-color_additional;
+            padding-top: 2rem;
+            a{
+
+                font-size: 6rem;
+            }
+        }
+    }
 }
-
-.main-chapters{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: $width_xxl;
-    padding-top: $padding_s;
-}
-
-.chapter {
-
-    margin: $margin_s;
-  }  
-  

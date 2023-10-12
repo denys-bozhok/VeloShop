@@ -2,6 +2,7 @@
 {% load sass_tags %}
 
 {% block title %}{{title}}{% endblock title %}
+
 {% block style %}
     <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
 {% endblock style %}
@@ -11,8 +12,8 @@
 {% endblock header %}
 
 {% block main %}
-    <main class="main">
-        <div class="main__wrapper">
+    <main class="main__wrapper">
+        <div class="main">
             {% if title == "VeloShop" %}
                 {% include './includes/_chapters.html' %}
             {% elif title == chapter.name%}
@@ -27,3 +28,7 @@
         </div>
     </main>    
 {% endblock main %}
+
+{% block footer %}
+    {% include 'includes/_footer.html' %}
+{% endblock footer %}

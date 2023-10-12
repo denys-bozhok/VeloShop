@@ -16,9 +16,9 @@
     <link rel="shortcut icon" href="{% static '/images/favicon.png' %}" type="image/x-icon">
 
     {% compress css %}   
+    {% block style %}{% endblock style %}
         <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
         
-        {% block style %}{% endblock style %}
     {% endcompress %}
         
 </head>

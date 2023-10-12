@@ -1,0 +1,99 @@
+<!--? int`s for big size of monitor  -->
+
+<div class="subheader__wrapper">
+    <div class="subheader">
+        <div>
+            <nav class="navigation">
+                {% for site_navigation in site_navigations %}
+                <ul class="site-navigation-element">
+                    <li>
+                        <a href="/about/{{site_navigation.slug}}">{{site_navigation.name}}</a>
+                    </li>
+                </ul>
+                {% endfor %}
+            </nV>
+        </div>
+
+        <div class="social">
+            {% for social_network in social_networks %}
+            <p>
+                <a href="https://{{social_network.link}}" class="">
+                    <img src="/media/{{social_network.image}}" alt="No image, sorry" class="social-img">
+                </a>
+            </p>
+            {% endfor %}
+        </div>
+
+        <div class="user-menu__wrapper">
+            <div class="favorites__wrapper">
+                {% for favorite_and_other in favorites_and_other %}
+                <div class="favorites">
+                    <p>
+                        <img src="/media/{{favorite_and_other.icon}}" alt="No image, sorry" class="favorites-ico">
+
+                        <a href="/user/{{favorite_and_other.slug}}">
+                            {{favorite_and_other.name}}({{favorite_and_other.value}})
+                        </a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="lenguage__wrapper">
+                <p>Language</p>
+
+                <div class="menu">
+                    <div>
+                        {% for language in languages%}
+                        <p class="language">
+                            <a href="{{language.slug}}" class="">
+                                {{language.short_name}}
+                                <img src="/media/{{language.icon}}" alt="No image, sorry" class="lenguage-image">
+                                {{language.name}}
+                            </a>
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu__wrapper">
+                {% if user.is_authenticated %}
+                <div><p>Hello, {{user.username}}!</p></div>
+
+                <div class="menu">
+                    <div>
+                        {% if user.image %}
+                        <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
+                        {% else %}
+                        <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <p><a href="/users/profile/" class="">Profile</a></p>
+
+                        <p><a href="/users/logout/" class="">Logout</a></p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="login">
+                    <p><img src="/static/images/icons/icon_log_in.png" alt="No image, sorry">Login</p>
+                </div>
+
+                <div class="menu">
+                    <div>
+                        <div>
+                            <p><a href="/users/login">Log In</a></p>
+                        </div>
+
+                        <div>
+                            <p><a href="/users/registration">Registration</a></p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

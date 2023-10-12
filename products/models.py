@@ -54,7 +54,7 @@ class Size(models.Model):
 
 
 class WheelSize(models.Model):
-    size = models.DecimalField(max_digits=7, decimal_places=1, unique=True, validators=[MinValueValidator(6),])
+    size = models.DecimalField(max_digits=10, decimal_places=1, unique=True, validators=[MinValueValidator(6),])
 
     def __str__(self):
         return f'{self.size}'
@@ -81,17 +81,18 @@ class Weight(models.Model):
 
 
 class CharacteristicTitle(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     
     def __str__(self):
         return f'{self.name}'
     
 
 class CharacteristicDescription(models.Model):
-    description = models.ForeignKey(CharacteristicTitle, on_delete=models.CASCADE)
-    
+    name = models.ForeignKey(CharacteristicTitle, on_delete=models.CASCADE)
+    description = models.TextField()
+
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} - {self.description}'
 
 
 # * -----PRODUCTS-----

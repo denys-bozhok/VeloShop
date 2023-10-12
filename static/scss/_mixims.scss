@@ -9,3 +9,9 @@
     align-items: center;
     justify-content: center;
 }
+
+@mixin grid-2{
+    display: grid;
+    gap: 20px;
+    grid-template-rows: 200px auto 100px;
+}

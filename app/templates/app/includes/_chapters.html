@@ -1,9 +1,9 @@
-<div class="main-chapters">
-  {% for chapter in chapters %}
-    <div class="main-chapter">
-      <div class="chapter" style="background: url(/media/{{chapter.image}})">
-        <a href="/chapter/{{chapter.slug}}" class="chapter-link">{{chapter.name}}</a>
-      </div>
+<div class="chapters__wrapper">
+  <div class="chapters">
+    {% for chapter in chapters %}
+    <div class="chapter" style="background-image: url(/media/{{chapter.image}})">
+      <a href="/chapter/{{chapter.slug}}">{{chapter.name}}</a>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>

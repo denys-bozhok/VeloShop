@@ -10,6 +10,7 @@
   font-family: "assistant";
   src: url("/static/fonts/assistant/Assistant-Regular.ttf"); }
 
+@use "sass:list";
 /** COLORS */
 /** FONTS */
 /** PADDING/MARGIN */
@@ -27,6 +28,7 @@ li {
   list-style-type: none; }
 
 #app {
+  height: 100%;
   font-family: "assistant"; }
 
 .subheader,
@@ -79,7 +81,7 @@ li {
 .header__wrapper {
   padding-top: 1rem; }
   .header__wrapper .logotype {
-    height: 5rem; }
+    width: 15rem; }
   .header__wrapper .search__wrapper {
     border-bottom: 2px solid darkgray;
     border-radius: 5%; }
