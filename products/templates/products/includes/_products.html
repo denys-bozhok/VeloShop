@@ -1,0 +1,37 @@
+<div class="products">
+    <div class="product__wrapper">
+      {% for product in goods %}
+      <div class="product">
+        <div>
+          <img src="/media/{{product.image}}" alt="No image, sorry" style="height: 10rem;">
+        </div>
+  
+        <div class="product-info">
+          <div>
+            {{product.label}}
+          </div>
+  
+          <div>
+            {{product.price}}
+          </div>
+  
+          <div>
+            {{product.rating}}
+          </div>
+  
+          <div>
+            {{product.article}}
+          </div>
+  
+          <div>
+            {{product.description}}
+          </div>
+  
+          <div>
+            {{product.characteristics}}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>

@@ -1,18 +1,17 @@
-<div class="chapter-title__wrapper">
-    <div class="chapter"
-        style="background: url(/media/{{chapter.image}})">
-        <div class="chapter-title">
-            {{chapter.name}}
-        </div>
-    </div>
+<div class="chapter__wrapper">
+  <div class="chapter" style="background: url(/media/{{chapter.image}})">
+    <p>
+      {{chapter.name}}
+    </p>
+  </div>
 </div>
 
-<div class="main-categories">
+<div class="categories">
   {% for category in categories %}
-    <div class="main-category">
-      <div class="category" style="background: url(/media/{{category.image}})">
-        <a href="/category/{{category.slug}}/" class="category-title">{{category.name }}</a>
-      </div>
-    </div>
+  <div class="category__wrapper">
+    <p class="category" style="background: url(/media/{{category.image}})">
+      <a href="/category/{{category.slug}}/">{{category.name }}</a>
+    </p>
+  </div>
   {% endfor %}
 </div>

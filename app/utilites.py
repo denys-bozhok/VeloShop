@@ -1,9 +1,34 @@
+import products
+
 from . import models
 
 
+
+def get_product_in_category(categories):
+    goods = []
+
+    for category in categories:
+        try:
+            goods.append(products.models.Bicycle.objects.get(category=category))
+        except:
+            pass
+        
+        try:
+            goods.append(products.models.Bicycle.objects.get(subcategory=category))
+        except:
+            pass
+        
+        try:
+            goods.append(products.models.Hamlet.objects.get(category=category))
+        except:
+            pass
+
+    return goods
+
+
 #* -----GET DICTIONARY FOR TEMPLATE-----
-def get_subheader_dict():
-    
+
+def get_subheader_data():
     site_navigations = models.SiteNavigation.objects.all()
     social_networks = models.SocialNetwork.objects.all()
     favorites_and_other = models.FavoritesAndOther.objects.all()
@@ -19,13 +44,15 @@ def get_subheader_dict():
     return subheader_dict
 
 
-def get_site_navigate(slug):
+def get_about_data(slug):
     site_navigate = models.SiteNavigation.objects.get(slug=slug)
     title = site_navigate.name
     site_navigate_dict = {'title': title, 'site_navigate': site_navigate}
+    
     return site_navigate_dict
 
-def get_chapter_dict():
+
+def get_home_data():
     title = 'VeloShop'
     chapters = models.Chapter.objects.all()
     chapters_dict = {'title': title, 'chapters': chapters}
@@ -33,22 +60,34 @@ def get_chapter_dict():
     return chapters_dict
 
 
-def get_category_in_chapter_dict(slug):
-    chapter = models.Chapter.objects.get(slug=slug)
-    title = chapter.name
-    categories = models.Category.objects.filter(chapter=chapter)
-    chapter_dict = {'categories': categories,
-                    'chapter': chapter,
-                    'title': title}
+def get_categories_data(slug):
+    try:
+        chapter = models.Chapter.objects.get(slug=slug)
+        categories = models.Category.objects.filter(chapter_id=chapter.id)
+        goods = get_product_in_category(categories)
+        title = chapter.name
+        chapter_dict = {'categories': categories,
+                        'chapter': chapter,
+                        'title': title,
+                        'goods': goods}
 
+    except:
+        chapter_dict = {}
+
+    
     return chapter_dict
 
-def get_subcategories_dict(slug):
+
+def get_subcategories_data(slug):
     category = models.Category.objects.get(slug=slug)
     title = category.name
-    subcategories = models.SubCategory.objects.filter(category=category).filter(sub_category=None)
+    subcategories = models.SubCategory.objects.filter(category_id=category.id)
+
+    goods = get_product_in_category(subcategories)
+
     chapter_dict = {'subcategories': subcategories,
                     'category': category,
-                    'title': title}
+                    'title': title,
+                    'goods': goods,}
 
     return chapter_dict
