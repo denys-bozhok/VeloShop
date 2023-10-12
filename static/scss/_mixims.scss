@@ -10,8 +10,9 @@
     justify-content: center;
 }
 
-@mixin grid-2{
+@mixin grid-products{
     display: grid;
     gap: 20px;
-    grid-template-rows: 200px auto 100px;
+    grid-template-rows: repeat(auto, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }

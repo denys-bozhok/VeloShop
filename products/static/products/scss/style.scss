@@ -1,0 +1,40 @@
+@import './static/scss/variables';
+@import './static/scss/mixims';
+
+.product__wrapper{
+    @include flex-center;
+    padding-top: $padding_l * 2;
+    .products{
+        @include grid-products;
+        width: 80%;
+        .product-img{
+            overflow: hidden;
+            width: 20rem;
+            height: 30rem;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid black; 
+
+            p{
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+            .blind-element{
+                visibility: unset;
+            }
+
+            .product-menu{
+                position: relative; 
+                top: 18rem;
+
+            }
+        }
+        .product-buttom{
+            width: 20rem;
+            height: 3rem;
+            background: linear-gradient(transparent 3%, red, transparent 97%);
+        }
+    }
+}

@@ -5,7 +5,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 
-from app.models import Category, Chapter, SubCategory
+from app.models import Category, SubCategory
 import os
 
 
@@ -37,11 +37,11 @@ class Manufacturer(models.Model):
 
 
 class Color(models.Model):
-    first_color = models.CharField(max_length=10)
-    second_color = models.CharField(max_length=10, blank=True, null=True)
+    color = models.CharField(max_length=10)
+    rgb = models.CharField(max_length=13)
 
     def __str__(self):
-        return f'{self.first_color}, {self.second_color}'
+        return f'{self.color}'
 
 
 class Size(models.Model):
@@ -58,6 +58,7 @@ class WheelSize(models.Model):
 
     def __str__(self):
         return f'{self.size}'
+
 
 class SuspensionTravel(models.Model):
     suspension_travel = models.FloatField(validators=[MinValueValidator(0),],)
@@ -77,19 +78,19 @@ class Weight(models.Model):
     weight = models.FloatField(validators=[MinValueValidator(0),])
     
     def __str__(self):
-        return f'{self.weight}g'
+        return f'{self.weight}kg'
 
 
-class CharacteristicTitle(models.Model):
+class Characteristic(models.Model):
     name = models.CharField(max_length=30, unique=True)
     
     def __str__(self):
         return f'{self.name}'
     
 
-class CharacteristicDescription(models.Model):
-    name = models.ForeignKey(CharacteristicTitle, on_delete=models.CASCADE)
-    description = models.TextField()
+class CharacteristicValue(models.Model):
+    name = models.ForeignKey(Characteristic, on_delete=models.CASCADE)
+    description = models.TextField(max_length=50)
 
     def __str__(self):
         return f'{self.name} - {self.description}'
@@ -98,11 +99,11 @@ class CharacteristicDescription(models.Model):
 # * -----PRODUCTS-----
 class Product(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, blank=True,null=True, on_delete=models.DO_NOTHING)
-    label = models.CharField(max_length=30)
+    label = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     article = models.CharField(max_length=30, unique=True)
-    characteristics = models.ForeignKey(CharacteristicDescription, on_delete=models.CASCADE, blank=True)
+    characteristics = models.ManyToManyField(CharacteristicValue, blank=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, blank=True, null=True)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.DO_NOTHING, blank=True, null=True)
     rating = models.FloatField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
@@ -115,22 +116,24 @@ class Product(models.Model):
         super().save()
 
     def __str__(self):
-        return f'{self.label}'
+        return f'{self.label}/{self.category}'
 
     class Meta:
         abstract = True
 
 
 class Bicycle(Product):
+    model = models.CharField(max_length=20)
     color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
     wheel = models.ForeignKey(WheelSize, on_delete=models.DO_NOTHING)
     frame_size = models.ForeignKey(Size, on_delete=models.DO_NOTHING)
     frame_material = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
     suspension = models.BooleanField(default=False)
-    suspension_travel = models.ForeignKey(SuspensionTravel, on_delete=models.DO_NOTHING)
+    suspension_travel = models.ForeignKey(SuspensionTravel, on_delete=models.DO_NOTHING, blank=True, null=True)
     weight = models.ForeignKey(Weight, on_delete=models.DO_NOTHING, blank=True, null=True)
     year = models.IntegerField(validators=[MinValueValidator(2000)], blank=True, null=True)
-    
+
+
 
 class BicycleGalery(models.Model):
     product = models.ForeignKey(Bicycle, default=None, on_delete=models.CASCADE)
@@ -145,14 +148,16 @@ class BicycleGalery(models.Model):
         super().save()
     
 
-class Hamlet(Product):
-    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
-    size = models.ForeignKey(Size, on_delete=models.DO_NOTHING)
+class Accessorie(Product):
+    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING, blank=True, null=True)
+    size = models.ForeignKey(Size, on_delete=models.DO_NOTHING, blank=True, null=True)
     weight = models.ForeignKey(Weight, on_delete=models.DO_NOTHING, blank=True, null=True)
+    model = models.CharField(max_length=20, blank=True, null=True)
 
 
-class HamletGalery(models.Model):
-    product = models.ForeignKey(Hamlet, default=None, on_delete=models.CASCADE)
+
+class AccessorieGalery(models.Model):
+    product = models.ForeignKey(Accessorie, default=None, on_delete=models.CASCADE)
     article = models.CharField(max_length=30,editable=False, auto_created=True)
     image = models.FileField(upload_to=products_filename_wrapper, blank=True)
 
@@ -164,6 +169,21 @@ class HamletGalery(models.Model):
         super().save()
 
 
-class Lighting(Product):
-    pass
+class Component(Product):
+    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING, blank=True, null=True)
+    size = models.ForeignKey(Size, on_delete=models.DO_NOTHING, blank=True, null=True)
+    weight = models.ForeignKey(Weight, on_delete=models.DO_NOTHING, blank=True, null=True)
+    model = models.CharField(max_length=20, blank=True, null=True)
 
+
+class ComponentGalery(models.Model):
+    product = models.ForeignKey(Component, default=None, on_delete=models.CASCADE)
+    article = models.CharField(max_length=30,editable=False, auto_created=True)
+    image = models.FileField(upload_to=products_filename_wrapper, blank=True)
+
+    def __str__(self):
+        return self.product.article
+    
+    def save(self):
+        self.article = self.product.article
+        super().save()

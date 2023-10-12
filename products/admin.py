@@ -9,8 +9,8 @@ admin.site.register(WheelSize)
 admin.site.register(SuspensionTravel)
 admin.site.register(Material)
 admin.site.register(Weight)
-admin.site.register(CharacteristicTitle)
-admin.site.register(CharacteristicDescription)
+admin.site.register(Characteristic)
+admin.site.register(CharacteristicValue)
 
 
 class BicycleGaleryAdmin(admin.StackedInline):
@@ -25,13 +25,13 @@ class BycicleGaleryAdmin(admin.ModelAdmin):
     pass
 
 
-class HamletGaleryAdmin(admin.StackedInline):
-    model = HamletGalery
-@admin.register(Hamlet)
-class HamletAdmin(admin.ModelAdmin):
-    inlines = [HamletGaleryAdmin]
+class AccessorieGaleryAdmin(admin.StackedInline):
+    model = AccessorieGalery
+@admin.register(Accessorie)
+class AccessorieAdmin(admin.ModelAdmin):
+    inlines = [AccessorieGaleryAdmin]
     class Meta:
-       model = Hamlet
-@admin.register(HamletGalery)
-class HamletGaleryAdmin(admin.ModelAdmin):
+       model = Accessorie
+@admin.register(AccessorieGalery)
+class AccessorieGaleryAdmin(admin.ModelAdmin):
     pass

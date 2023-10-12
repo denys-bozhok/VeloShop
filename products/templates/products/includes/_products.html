@@ -1,37 +1,44 @@
 <div class="product__wrapper">
-    <div class="products">
-      {% for product in goods %}
-      <div class="product">
+  <div class="products">
+    {% for product in product_list %}
+    <div class="product">
+      <div class="product-img" style="background-image: url(/media/{{product.image}})">
+        <p>
+          <a href="/products/{{product.slug}}/">{{product.label }}</a>
+        </p>
+        
+        {% if product.rating != 0 %}
+        <p>
+          {{product.rating}}
+        </p>
+        {% else %}
+        <p class="blind-element">
+          {{product.rating}}
+        </p>
+        {% endif %}
+
+        
         <div>
-          <img src="/media/{{product.image}}" alt="No image, sorry" style="height: 10rem;">
+          {{product.price}}
         </div>
-  
-        <div class="product-info">
-          <div>
-            {{product.label}}
+        
+        <div>
+          {{product.color}}
+        </div>
+
+        <div class="product-menu">
+          <div class="product-buttom">
+            <a href="#">Buy</a>
           </div>
   
-          <div>
-            {{product.price}}
+          <div class="product-buttom">
+            <a href="#">About</a>
           </div>
   
-          <div>
-            {{product.rating}}
-          </div>
-  
-          <div>
-            {{product.article}}
-          </div>
-  
-          <div>
-            {{product.description}}
-          </div>
-  
-          <div>
-            {{product.characteristics}}
-          </div>
         </div>
       </div>
-      {% endfor %}
+
     </div>
+    {% endfor %}
   </div>
+</div>

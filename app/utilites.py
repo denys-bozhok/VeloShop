@@ -3,29 +3,6 @@ import products
 from . import models
 
 
-
-def get_product_in_category(categories):
-    goods = []
-
-    for category in categories:
-        try:
-            goods.append(products.models.Bicycle.objects.get(category=category))
-        except:
-            pass
-        
-        try:
-            goods.append(products.models.Bicycle.objects.get(subcategory=category))
-        except:
-            pass
-        
-        try:
-            goods.append(products.models.Hamlet.objects.get(category=category))
-        except:
-            pass
-
-    return goods
-
-
 #* -----GET DICTIONARY FOR TEMPLATE-----
 
 def get_subheader_data():
@@ -62,15 +39,39 @@ def get_home_data():
 
 def get_categories_data(slug):
     chapter = models.Chapter.objects.get(slug=slug)
-    categories = models.Category.objects.filter(chapter_id=chapter.id)
-    goods = get_product_in_category(categories)
+    categories = models.Category.objects.filter(chapter=chapter)
+    product_list = []
+
+    match(chapter.slug):
+        case 'bicycles':
+            for category in categories:
+
+                bicycles = products.models.Bicycle.objects.filter(category=category)
+                for bicycle in bicycles:
+                    product_list.append(bicycle)
+
+        case 'accessories':
+            for category in categories:
+                accessories = products.models.Accessorie.objects.filter(category=category)
+
+                for accessorie in accessories:
+                    product_list.append(accessorie)
+
+        case 'components':
+            for category in categories:
+                components = products.models.Component.objects.filter(category=category)
+
+                for component in components:
+                    product_list.append(component)
+
+        case _:
+            return {'msg': 'No products in category'}
+        
     title = chapter.name
     chapter_dict = {'categories': categories,
                     'chapter': chapter,
                     'title': title,
-                    'goods': goods}
-
-
+                    'product_list': product_list}
     
     return chapter_dict
 
@@ -78,13 +79,26 @@ def get_categories_data(slug):
 def get_subcategories_data(slug):
     category = models.Category.objects.get(slug=slug)
     title = category.name
-    subcategories = models.SubCategory.objects.filter(category_id=category.id)
+    subcategories = models.SubCategory.objects.filter(category=category)
+    product_list = []
 
-    goods = get_product_in_category(subcategories)
+    for subcategory in subcategories:
+        bicycles = products.models.Bicycle.objects.filter(subcategory=subcategory)
+        for bicycle in bicycles:
+            product_list.append(bicycle)
+
+        accessories = products.models.Accessorie.objects.filter(subcategory=subcategory)
+        for accessorie in accessories:
+            product_list.append(accessorie)
+
+        components = products.models.Component.objects.filter(subcategory=subcategory)
+        for component in components:
+            product_list.append(component)
+
 
     chapter_dict = {'subcategories': subcategories,
                     'category': category,
                     'title': title,
-                    'goods': goods,}
+                    'product_list': product_list,}
 
     return chapter_dict

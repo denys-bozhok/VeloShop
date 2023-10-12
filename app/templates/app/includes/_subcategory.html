@@ -1,8 +1,22 @@
-<div class="subcategory-title__wrapper">
-    <div class="subcategory" style="background: url(/media/{{subcategory.image}})">
-        <div class="subcategory-title">
-            {{subcategory.name}}
-        </div>
+<div class="chapter__wrapper">
+    <div class="chapter" style="background: url(/media/{{subcategory.image}})">
+      <p>
+        {{subcategory.name}}
+      </p>
     </div>
-</div>
-
+  </div>
+  
+  
+  <div class="categories__wrapper">
+    <div class="categories">
+      {% for subcategory in subcategories %}
+        <p class="category" style="
+        background: url(/media/{{subcategory.image}});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;">
+          <p>{{subcategory.name }}</p>
+        </p>
+      {% endfor %}
+    </div>
+  </div>
