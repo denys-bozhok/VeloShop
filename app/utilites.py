@@ -61,18 +61,15 @@ def get_home_data():
 
 
 def get_categories_data(slug):
-    try:
-        chapter = models.Chapter.objects.get(slug=slug)
-        categories = models.Category.objects.filter(chapter_id=chapter.id)
-        goods = get_product_in_category(categories)
-        title = chapter.name
-        chapter_dict = {'categories': categories,
-                        'chapter': chapter,
-                        'title': title,
-                        'goods': goods}
+    chapter = models.Chapter.objects.get(slug=slug)
+    categories = models.Category.objects.filter(chapter_id=chapter.id)
+    goods = get_product_in_category(categories)
+    title = chapter.name
+    chapter_dict = {'categories': categories,
+                    'chapter': chapter,
+                    'title': title,
+                    'goods': goods}
 
-    except:
-        chapter_dict = {}
 
     
     return chapter_dict

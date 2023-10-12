@@ -26,45 +26,31 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr); }
     .main__wrapper .chapters__wrapper .chapter {
-      width: 50rem;
-      height: 20rem;
-      border: 1px solid black;
+      width: 31rem;
+      height: 15rem;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       border-radius: 2%;
       margin: .2rem;
       text-align: center;
-      color: orange;
+      color: whitesmoke;
       padding-top: 2rem; }
       .main__wrapper .chapters__wrapper .chapter a {
-        font-size: 5rem; }
+        font-size: 6rem; }
   .main__wrapper .chapter__wrapper {
     display: flex;
     align-items: center;
     justify-content: center; }
     .main__wrapper .chapter__wrapper .chapter p {
       font-size: 2rem; }
-  .main__wrapper .categories__wrapper {
+  .main__wrapper .categories {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-top: 2rem; }
-    .main__wrapper .categories__wrapper .categories {
-      width: 80%;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(auto, 1fr); }
-      .main__wrapper .categories__wrapper .categories .category {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 300px;
-        height: 200px;
-        border: 1px solid black;
-        border-radius: 3%;
-        margin: 0.3rem;
-        padding: 0.5rem;
-        text-align: center; }
+    justify-content: center; }
+  .main__wrapper .category__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
 
 /*# sourceMappingURL=style.css.map */

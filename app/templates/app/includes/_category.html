@@ -1,11 +1,22 @@
-<div class="subcategories__wrapper">
-  <div class="subcategories">
+<div class="chapter__wrapper">
+  <div class="chapter" style="background: url(/media/{{category.image}})">
+    <p>
+      {{category.name}}
+    </p>
+  </div>
+</div>
+
+
+<div class="categories__wrapper">
+  <div class="categories">
     {% for subcategory in subcategories %}
-    <div class="subcategory">
-      <div class="subcategory-image" style="background: url(/media/{{subcategory.image}})">
-        <a href="/category/{{category.slug}}/{{subcategory.slug}}/" class="subcategory-title">{{subcategory.name}}</a>
-      </div>
-    </div>
+      <p class="category" style="
+      background: url(/media/{{subcategory.image}});
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;">
+        <a href="/category/{{category.slug}}/{{subcategory.slug}}/">{{subcategory.name }}</a>
+      </p>
     {% endfor %}
   </div>
 </div>

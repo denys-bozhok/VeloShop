@@ -26,19 +26,18 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr); }
     .main__wrapper .chapters__wrapper .chapter {
-      width: 50rem;
-      height: 20rem;
-      border: 1px solid black;
+      width: 31rem;
+      height: 15rem;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       border-radius: 2%;
       margin: .2rem;
       text-align: center;
-      color: orange;
+      color: whitesmoke;
       padding-top: 2rem; }
       .main__wrapper .chapters__wrapper .chapter a {
-        font-size: 5rem; }
+        font-size: 6rem; }
   .main__wrapper .chapter__wrapper {
     display: flex;
     align-items: center;
@@ -53,8 +52,9 @@
     .main__wrapper .categories__wrapper .categories {
       width: 80%;
       display: grid;
+      justify-content: center;
       grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(auto, 1fr); }
+      grid-template-rows: repeat(3, 1fr); }
       .main__wrapper .categories__wrapper .categories .category {
         background-size: cover;
         background-repeat: no-repeat;

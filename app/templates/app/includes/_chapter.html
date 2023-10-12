@@ -6,12 +6,17 @@
   </div>
 </div>
 
-<div class="categories">
-  {% for category in categories %}
-  <div class="category__wrapper">
-    <p class="category" style="background: url(/media/{{category.image}})">
-      <a href="/category/{{category.slug}}/">{{category.name }}</a>
-    </p>
+
+<div class="categories__wrapper">
+  <div class="categories">
+    {% for category in categories %}
+      <p class="category" style="
+      background: url(/media/{{category.image}});
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;">
+        <a href="/category/{{category.slug}}/">{{category.name }}</a>
+      </p>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>

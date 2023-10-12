@@ -2,17 +2,22 @@
 @import './static/scss/mixims';
 
 
-.main__wrapper{
+.main__wrapper {
     @include flex-center;
-    .chapters__wrapper{
+    padding-top: $padding_m * 2;
+
+    .chapters__wrapper {
         padding-top: $padding_m * 2;
-        .chapters{
+
+        .chapters {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
         }
-        .chapter{
-            width: 31rem;
-            height: 15rem;
+
+        .chapter {
+            width: 50rem;
+            height: 20rem;
+            border: 1px solid black;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -20,11 +25,46 @@
 
             margin: .2rem;
             text-align: center;
-            color: $text-color_additional;
+            color: orange;
             padding-top: 2rem;
-            a{
 
-                font-size: 6rem;
+            a {
+                font-size: 5rem;
+            }
+        }
+    }
+
+    .chapter__wrapper {
+        @include flex-center;
+
+        .chapter {
+            p {
+                font-size: $font-size_l;
+            }
+        }
+    }
+
+    .categories__wrapper {
+        @include flex-center;
+        padding-top: $padding_m * 2;
+        
+        .categories {
+            width: 80%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(auto, 1fr);
+            
+            .category {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 300px;
+                height: 200px;
+                border: 1px solid black;
+                border-radius: 3%;
+                margin: $margin_xs;
+                padding: $padding_s;
+                text-align: center;
             }
         }
     }
