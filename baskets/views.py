@@ -5,9 +5,10 @@ from .models import Basket
 
 
 @login_required
-def basket_add(req, slug):
-    product = Bicycle.objects.get(slug=slug)
-    baskets = Basket.objects.filter(user=req.user, product=product)
+def basket_add(req, product):
+    if Bicycle.objects.get(id=id):
+        product = Bicycle.objects.get(id=id)
+        baskets = Basket.objects.filter(user=req.user, product=product)
 
     if not basket.exists:
         Basket.objects.create(user=req.user, product=product, quantity=1)

@@ -22,8 +22,6 @@ def card_of_product(req, slug):
     title = product.label
     colors = models.Bicycle.objects.get(id=product.id).color.all()
     characteristics = models.Bicycle.objects.get(id=product.id).characteristics.all()
-    
-    print(characteristics)
 
     transmision_data = {
         'product': product,

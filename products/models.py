@@ -4,9 +4,9 @@ from django.db import models
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
+import os
 
 from app.models import Category, SubCategory
-import os
 
 
 #* -----WRAPPERS-----
@@ -14,11 +14,29 @@ import os
 def products_filename_wrapper(instance, filename):
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(instance.article, ext)
-#? for delete image, if filename is reserved
-    # if Product.objects.get(image=f"images/products/{filename}"):
-    #     Product.objects.get(image=f"images/products/{filename}").image.delete(save=True)
+
     return os.path.join(f'images/products/{instance.article}/', filename)
 
+
+
+
+class ProductsQuerySet(models.QuerySet):
+    def get_all_products(self):
+
+        products = []
+        bicycles = Bicycle.get_all_bicycles('')
+        accessories = Accessorie.objects.all()
+        components = Component.objects.all()
+        products_list = bicycles, accessories, components
+
+        i = 0
+
+        while i < len(products_list):
+            for product in products_list[i]:
+                products.append(product)
+                i += 1
+
+        return products
 
 
 # * -----PRODUCT`S INCLUDES-----
@@ -64,6 +82,7 @@ class SuspensionTravel(models.Model):
     suspension_travel = models.FloatField(validators=[MinValueValidator(0),],)
 
     def __str__(self):
+
         return f'{self.suspension_travel}mm'
 
 
@@ -117,7 +136,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.label}/{self.category}'
-
+    
     class Meta:
         abstract = True
 
