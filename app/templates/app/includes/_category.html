@@ -9,14 +9,14 @@
 
 <div class="categories__wrapper">
   <div class="categories">
-    {% for subcategory in subcategories %}
-      <p class="category" style="
-      background: url(/media/{{subcategory.image}});
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;">
-        <a href="/category/{{category.slug}}/{{subcategory.slug}}/">{{subcategory.name }}</a>
-      </p>
+    {% for subcategory in sub_categories %}
+    <p class="category" style="
+        background: url(/media/{{subcategory.image}});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;">
+      <a href="{% url 'category' category.slug %}{{subcategory.slug}}">{{subcategory.name }}</a>
+    </p>
     {% endfor %}
   </div>
 </div>

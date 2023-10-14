@@ -103,7 +103,7 @@ class SubCategory(models.Model):
     image = models.FileField(upload_to='images/icons/categories/')
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    sub_category = models.ForeignKey('self', blank=True, on_delete=models.DO_NOTHING)
+    sub_category = models.ForeignKey('self', blank=True, null=True, on_delete=models.DO_NOTHING)
     slug = models.CharField(max_length=30, editable=False, auto_created=True)
 
     def save(self:object):

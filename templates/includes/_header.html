@@ -84,11 +84,11 @@
                 <div class="menu">
                     <div>
                         <div>
-                            <p><a href="/users/login">Log In</a></p>
+                            <p><a href="{% url 'login' %}">Log In</a></p>
                         </div>
 
                         <div>
-                            <p><a href="/users/registration">Registration</a></p>
+                            <p><a href="{% url 'registration' %}">Registration</a></p>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
 <header class="header__wrapper">
     <div class="header">
         <div class="logo">
-            <a href="/">
+            <a href="{% url 'index' %}">
                 <img src="/static/images/logotype.png" alt="No image, sorry" class="logotype">
             </a>
         </div>
