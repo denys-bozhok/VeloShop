@@ -1,22 +1,18 @@
 from django.db import models
-
-from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 
-from . import utilites
 
-
-class ProductsQuerySet(models.QuerySet):
-    def get_all_models(self:object) ->set:
+class CharterQuerySet(models.QuerySet):
+    def all_models(self:object) ->set:
         models = self.objects.all()
         return models
     
-    def get_model_by_slug(self:object, slug:str) ->object:
+    def model_by_slug(self:object, slug:str) ->object:
         model = self.objects.get(slug=slug)
         return model
     
-    def get_model_by_id(self:object, id:int) ->object:
+    def model_by_id(self:object, id:int) ->object:
         model = self.objects.get(id=id)
         return model
 
@@ -107,7 +103,7 @@ class SubCategory(models.Model):
     image = models.FileField(upload_to='images/icons/categories/')
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    sub_category = models.OneToOneField('self', blank=True, on_delete=models.DO_NOTHING)
+    sub_category = models.ForeignKey('self', blank=True, on_delete=models.DO_NOTHING)
     slug = models.CharField(max_length=30, editable=False, auto_created=True)
 
     def save(self:object):

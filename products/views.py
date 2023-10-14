@@ -31,7 +31,7 @@ def card_of_product(req, slug):
         'characteristics': characteristics,
     }
 
-    transmision_data.update(utilites.get_subheader_data())
+    transmision_data.update(utilites.subheader())
 
     return render(req, 'products/products.html', transmision_data)
 

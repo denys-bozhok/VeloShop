@@ -1,60 +1,41 @@
 from django.shortcuts import render
-from products.models import *
 
-from . import models, utilites
-
-def home(req):
-    transmitted_data = (utilites.get_home_data())
-    transmitted_data.update(utilites.get_subheader_data())
-
-    return render(req, 'app/app.html', transmitted_data)
+from .models import SiteNavigation, Chapter, CharterQuerySet, Category, SubCategory
+from .utilites import subheader, for_categories
 
 
-def about(req, about_slug):
-    transmitted_data = (utilites.get_about_data(about_slug))
-    transmitted_data.update(utilites.get_subheader_data())
 
-    return render(req, 'app/app.html', transmitted_data)
+def home(req:object) -> classmethod:
+    context = {'title': 'VeloShop', 'chapters': CharterQuerySet.all_models(Chapter)}
+    context.update(subheader())
 
-
-def chapters(req, chapter_slug):
-    transmitted_data = (utilites.get_subheader_data())
-    transmitted_data.update(utilites.get_categories_data(chapter_slug))
-
-    return render(req, 'app/app.html', transmitted_data)
-
-def category(req, category_slug):
-    
-    transmitted_data = utilites.get_subcategories_data(category_slug)
-    transmitted_data.update(utilites.get_subheader_data())
-
-    return render(req, 'app/app.html', transmitted_data)
+    return render(req, 'app/app.html', context)
 
 
-def subcategory(req, category_slug, subcategory_slug):
-    subcategory = models.SubCategory.objects.get(slug=subcategory_slug)
-    title = subcategory.name
-    product_list = []
+def abouts(req:object, about_slug:str) -> classmethod:
+    about = CharterQuerySet.model_by_slug(SiteNavigation, about_slug)
+    context = {'title': about.name, 'about':about}
+    context.update(subheader())
 
-    bicycles = Bicycle.objects.filter(subcategory=subcategory)
+    return render(req, 'app/app.html', context)
 
-    for bicycle in bicycles:
-        product_list.append(bicycle)
 
-    if product_list == []:
-        components = Component.objects.filter(subcategory=subcategory)
-        for component in components:
-            product_list.append(component)
+def chapters(req:object, chapter_slug:str) -> classmethod:
+    context = for_categories(chapter_slug, Chapter)
+    context.update(subheader())
 
-    if product_list == []:
-        accessories = Accessorie.objects.filter(subcategory=subcategory)
-        for accessorie in accessories:
-            product_list.append(accessorie)
+    return render(req, 'app/app.html', context)
 
-    transmitted_data = {'title': title, 
-                        'subcategory': subcategory,
-                        'product_list': product_list,}
-    
-    transmitted_data.update(utilites.get_subheader_data())
 
-    return render(req, 'app/app.html', transmitted_data)
+def categories(req:object, category_slug:str, ) -> classmethod:
+    context = for_categories(category_slug, Category)
+    context.update(subheader())
+
+    return render(req, 'app/app.html', context)
+
+
+def subcategories(req:object, category_slug, subcategory_slug) -> classmethod:
+    context = for_categories(subcategory_slug, SubCategory)
+    context.update(subheader())
+
+    return render(req, 'app/app.html', context)

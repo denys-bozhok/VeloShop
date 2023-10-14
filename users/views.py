@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.urls import reverse
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from app.utilites import get_subheader_data
+from app.utilites import subheader
 from baskets.models import Basket
 
 
@@ -24,7 +24,7 @@ def login(req):
         form = UserLoginForm()
     
     context = {'form': form, 'title': title}
-    context.update(get_subheader_data())
+    context.update(subheader())
     return render(req, 'users/users.html', context)
 
 
@@ -39,7 +39,7 @@ def registration(req):
         form = UserRegistrationForm()
 
     context = {'form': form, 'title': title}
-    context.update(get_subheader_data())
+    context.update(subheader())
     return render(req, 'users/users.html', context)
 
 
@@ -64,7 +64,7 @@ def profile(req):
                'title': title,
                'baskets': baskets}
     
-    context.update(get_subheader_data())
+    context.update(subheader())
     
     return render(req, 'users/users.html', context)
 

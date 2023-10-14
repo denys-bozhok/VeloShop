@@ -1,104 +1,43 @@
-import products
+from products.models import ProductsQuerySet
 
-from . import models
+from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category, Chapter
 
 
 #* -----GET DICTIONARY FOR TEMPLATE-----
 
-def get_subheader_data():
-    site_navigations = models.SiteNavigation.objects.all()
-    social_networks = models.SocialNetwork.objects.all()
-    favorites_and_other = models.FavoritesAndOther.objects.all()
-    languages = models.Language.objects.all()
+def subheader() -> dict:
+    context = {
+        'abouts': CharterQuerySet.all_models(SiteNavigation),
+        'social_networks': CharterQuerySet.all_models(SocialNetwork),
+        'favorites_and_other': CharterQuerySet.all_models(FavoritesAndOther),
+        'languages': CharterQuerySet.all_models(Language)
+        }
 
-    subheader_dict = {
-        'site_navigations': site_navigations,
-        'social_networks': social_networks,
-        'favorites_and_other': favorites_and_other,
-        'languages': languages,
-    }
-
-    return subheader_dict
+    return context
 
 
-def get_about_data(slug):
-    site_navigate = models.SiteNavigation.objects.get(slug=slug)
-    title = site_navigate.name
-    site_navigate_dict = {'title': title, 'site_navigate': site_navigate}
-    
-    return site_navigate_dict
-
-
-def get_home_data():
-    title = 'VeloShop'
-    chapters = models.Chapter.objects.all()
-    chapters_dict = {'title': title, 'chapters': chapters}
-
-    return chapters_dict
-
-
-def get_categories_data(slug):
-    chapter = models.Chapter.objects.get(slug=slug)
-    categories = models.Category.objects.filter(chapter=chapter)
-    product_list = []
-
-    match(chapter.slug):
-        case 'bicycles':
-            for category in categories:
-
-                bicycles = products.models.Bicycle.objects.filter(category=category)
-                for bicycle in bicycles:
-                    product_list.append(bicycle)
-
-        case 'accessories':
-            for category in categories:
-                accessories = products.models.Accessorie.objects.filter(category=category)
-
-                for accessorie in accessories:
-                    product_list.append(accessorie)
-
-        case 'components':
-            for category in categories:
-                components = products.models.Component.objects.filter(category=category)
-
-                for component in components:
-                    product_list.append(component)
-
-        case _:
-            return {'msg': 'No products in category'}
+def for_categories(slug:str, model:object) -> dict:
+    match(model.__name__):
+        case 'Chapter':
+            print(model.__name__)
+            chapter = CharterQuerySet.model_by_slug(Chapter, slug)
+            categories = Category.objects.filter(chapter=chapter)
+            products = list(filter(lambda product: product.category.chapter.slug == slug, ProductsQuerySet.all_products('')))
+            return {'categories': categories,'chapter': chapter,'title': chapter.name,'products': products}
         
-    title = chapter.name
-    chapter_dict = {'categories': categories,
-                    'chapter': chapter,
-                    'title': title,
-                    'product_list': product_list}
-    
-    return chapter_dict
-
-
-def get_subcategories_data(slug):
-    category = models.Category.objects.get(slug=slug)
-    title = category.name
-    subcategories = models.SubCategory.objects.filter(category=category)
-    product_list = []
-
-    for subcategory in subcategories:
-        bicycles = products.models.Bicycle.objects.filter(subcategory=subcategory)
-        for bicycle in bicycles:
-            product_list.append(bicycle)
-
-        accessories = products.models.Accessorie.objects.filter(subcategory=subcategory)
-        for accessorie in accessories:
-            product_list.append(accessorie)
-
-        components = products.models.Component.objects.filter(subcategory=subcategory)
-        for component in components:
-            product_list.append(component)
-
-
-    chapter_dict = {'subcategories': subcategories,
-                    'category': category,
-                    'title': title,
-                    'product_list': product_list,}
-
-    return chapter_dict
+        case 'Category':
+            print(model.__name__)
+            category = CharterQuerySet.model_by_slug(model, slug)
+            subcategories = SubCategory.objects.filter(slug=slug)
+            products = list(filter(lambda product: product.category.slug == slug, ProductsQuerySet.all_products('')))
+            return {'subcategories': subcategories,'category': category, 'title': category.name, 'products': products}
+        
+        case 'SubCategory':
+            print(model.__name__)
+            subcategory = CharterQuerySet.model_by_slug(model, slug)
+            subcategories = SubCategory.objects.filter(slug=slug)
+            products = list(filter(lambda product: product.subcategory.slug == slug, ProductsQuerySet.all_products('')))
+            return {'subcategories': subcategories,'subcategory': subcategory, 'title': subcategory.name, 'products': products}
+                
+        case _:
+            return

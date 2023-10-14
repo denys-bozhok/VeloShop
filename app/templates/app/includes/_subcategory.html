@@ -1,7 +1,7 @@
 <div class="chapter__wrapper">
-    <div class="chapter" style="background: url(/media/{{subcategory.image}})">
+    <div class="chapter" style="background: url(/media/{{sub_category.image}})">
       <p>
-        {{subcategory.name}}
+        {{sub_category.name}}
       </p>
     </div>
   </div>
@@ -11,10 +11,11 @@
     <div class="categories">
       {% for subcategory in subcategories %}
         <p class="category" style="
-        background: url(/media/{{subcategory.image}});
+        background: url(/media/{{category.image}});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;">
+          <a href="/category/{{category.slug}}/{{subcategory.slug}}/">{{subcategory.name }}</a>
           <p>{{subcategory.name }}</p>
         </p>
       {% endfor %}

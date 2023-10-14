@@ -4,10 +4,10 @@
     <div class="subheader">
         <div>
             <nav class="navigation">
-                {% for site_navigation in site_navigations %}
+                {% for about in abouts %}
                 <ul class="site-navigation-element">
                     <li>
-                        <a href="/about/{{site_navigation.slug}}">{{site_navigation.name}}</a>
+                        <a href="/about/{{about.slug}}">{{about.name}}</a>
                     </li>
                 </ul>
                 {% endfor %}

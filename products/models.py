@@ -11,20 +11,18 @@ from app.models import Category, SubCategory
 
 #* -----WRAPPERS-----
 #? it`s for rename image of product and create folder by articul 
-def products_filename_wrapper(instance, filename):
+def products_filename_wrapper(instance:object, filename:str):
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(instance.article, ext)
 
     return os.path.join(f'images/products/{instance.article}/', filename)
 
 
-
-
 class ProductsQuerySet(models.QuerySet):
-    def get_all_products(self):
+    def all_products(self:object)->list:
 
         products = []
-        bicycles = Bicycle.get_all_bicycles('')
+        bicycles = Bicycle.objects.all()
         accessories = Accessorie.objects.all()
         components = Component.objects.all()
         products_list = bicycles, accessories, components
@@ -46,11 +44,11 @@ class Manufacturer(models.Model):
     description = models.TextField(blank=True, null=True)
     slug = models.CharField(max_length=30, editable=False, auto_created=True)
 
-    def save(self):
+    def save(self:object):
         self.slug = slugify(self.name)
         super().save()
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.name}'
 
 
@@ -58,7 +56,7 @@ class Color(models.Model):
     color = models.CharField(max_length=10)
     rgb = models.CharField(max_length=13)
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.color}'
 
 
@@ -67,43 +65,42 @@ class Size(models.Model):
     minimal = models.IntegerField(validators=[MinValueValidator(0)])
     maximal = models.IntegerField(validators=[MinValueValidator(0)])
     
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.short_name} ({self.minimal} - {self.minimal}cm)'
 
 
 class WheelSize(models.Model):
     size = models.DecimalField(max_digits=10, decimal_places=1, unique=True, validators=[MinValueValidator(6),])
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.size}'
 
 
 class SuspensionTravel(models.Model):
     suspension_travel = models.FloatField(validators=[MinValueValidator(0),],)
 
-    def __str__(self):
-
+    def __str__(self:object)->str:
         return f'{self.suspension_travel}mm'
 
 
 class Material(models.Model):
     name = models.CharField(max_length=10)
     
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.name}'
     
 
 class Weight(models.Model):
     weight = models.FloatField(validators=[MinValueValidator(0),])
     
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.weight}kg'
 
 
 class Characteristic(models.Model):
     name = models.CharField(max_length=30, unique=True)
     
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.name}'
     
 
@@ -111,7 +108,7 @@ class CharacteristicValue(models.Model):
     name = models.ForeignKey(Characteristic, on_delete=models.CASCADE)
     description = models.TextField(max_length=50)
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.name} - {self.description}'
 
 
@@ -134,7 +131,7 @@ class Product(models.Model):
         self.slug = slugify(self.label)
         super().save()
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return f'{self.label}/{self.category}'
     
     class Meta:
@@ -159,7 +156,7 @@ class BicycleGalery(models.Model):
     article = models.CharField(max_length=30, editable=False, auto_created=True)
     image = models.FileField(upload_to=products_filename_wrapper, blank=True)
  
-    def __str__(self):
+    def __str__(self:object)->str:
         return self.product.article
     
     def save(self):
@@ -179,7 +176,7 @@ class AccessorieGalery(models.Model):
     article = models.CharField(max_length=30,editable=False, auto_created=True)
     image = models.FileField(upload_to=products_filename_wrapper, blank=True)
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return self.product.article
     
     def save(self):
@@ -199,7 +196,7 @@ class ComponentGalery(models.Model):
     article = models.CharField(max_length=30,editable=False, auto_created=True)
     image = models.FileField(upload_to=products_filename_wrapper, blank=True)
 
-    def __str__(self):
+    def __str__(self:object)->str:
         return self.product.article
     
     def save(self):
