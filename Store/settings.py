@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'compressor',
     'app',
     'products',
-    'baskets',
+    'carts',
 ]
 
 STATICFILES_FINDERS = [
@@ -87,6 +87,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Store.wsgi.application'
 

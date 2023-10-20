@@ -35,6 +35,20 @@ class ProductsQuerySet(models.QuerySet):
                 i += 1
 
         return products
+    
+    def gallery_for_product(self:object, product:object) -> object:
+        match(product.category.chapter.name):
+            case 'Bicycle':
+                galery = models.BicycleGalery.objects.filter(article=product.article)
+                return galery
+            case 'Accessorie':
+                galery = models.BicycleGalery.objects.filter(article=product.article)
+                return galery
+            case 'Component':
+                galery = models.BicycleGalery.objects.filter(article=product.article)
+                return galery
+            case _:
+                return    
 
 
 # * -----PRODUCT`S INCLUDES-----
@@ -159,7 +173,7 @@ class BicycleGalery(models.Model):
     def __str__(self:object)->str:
         return self.product.article
     
-    def save(self):
+    def save(self:object):
         self.article = self.product.article
         super().save()
     
@@ -179,7 +193,7 @@ class AccessorieGalery(models.Model):
     def __str__(self:object)->str:
         return self.product.article
     
-    def save(self):
+    def save(self:object):
         self.article = self.product.article
         super().save()
 
@@ -199,6 +213,6 @@ class ComponentGalery(models.Model):
     def __str__(self:object)->str:
         return self.product.article
     
-    def save(self):
+    def save(self:object):
         self.article = self.product.article
         super().save()

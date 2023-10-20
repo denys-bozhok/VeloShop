@@ -34,7 +34,7 @@ def categories(req:object, category_slug:str, ) -> classmethod:
     return render(req, 'app/app.html', context)
 
 
-def sub_categories(req:object, category_slug, sub_category_slug:str) -> classmethod:
+def sub_categories(req:object, category_slug:str, sub_category_slug:str) -> classmethod:
     context = for_categories(sub_category_slug, SubCategory, category_slug)
     context.update(subheader())
     return render(req, 'app/app.html', context)

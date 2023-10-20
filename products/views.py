@@ -1,38 +1,25 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from app import utilites
 from . import models
 
 
-# Create your views here.
-
 def card_of_product(req, slug):
-    if models.Bicycle.objects.get(slug=slug):
-        product = models.Bicycle.objects.get(slug=slug)
-        galery = models.BicycleGalery.objects.filter(article=product.article)
+    products = models.ProductsQuerySet.all_products('')
 
-    elif models.Accessorie.objects.get(slug=slug):
-        product = models.Accessorie.objects.get(slug=slug)
-        galery = models.AccessorieGalery.objects.filter(article=product.article)
+    for item in products:
+        if item.slug == slug:
+            product = item
 
-    else:
-        product = models.Component.objects.get(slug=slug)
-        galery = models.ComponentGalery.objects.filter(article=product.article)
 
-    title = product.label
-    colors = models.Bicycle.objects.get(id=product.id).color.all()
-    characteristics = models.Bicycle.objects.get(id=product.id).characteristics.all()
-
-    transmision_data = {
+    context = {
         'product': product,
-        'title': title,
-        'galery': galery,
-        'colors': colors,
-        'characteristics': characteristics,
+        'galery': models.ProductsQuerySet.gallery_for_product('', product),
+        'title': product.label,
+        'colors': product.color.all(),
+        'characteristics': product.characteristics.all(),
     }
 
-    transmision_data.update(utilites.subheader())
+    context.update(utilites.subheader())
 
-    return render(req, 'products/products.html', transmision_data)
-
-
+    return render(req, 'products/products.html', context)

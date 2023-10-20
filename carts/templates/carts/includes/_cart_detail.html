@@ -1,0 +1,8 @@
+{% for product in products %}
+<h2>name: {{product.product.label}}<br>
+    price: {{product.product.price}}<br>
+    quantity: {{product.quantity}}<br>
+    all: {{product.prices}}<br>
+</h2>
+{% endfor %}
+<h1>all: {{total_price}}</h1>

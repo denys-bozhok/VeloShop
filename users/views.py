@@ -5,7 +5,6 @@ from django.urls import reverse
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from app.utilites import subheader
-from baskets.models import Basket
 
 
 def login(req):
@@ -50,19 +49,17 @@ def profile(req):
     if req.method == 'POST':
 
         form = UserProfileForm(instance=req.user, data=req.POST, files=req.FILES)
-        print(form.files)
-        print(form.data['image'])
+
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('profile'))
     else:
         form = UserProfileForm(instance=req.user)
 
-    baskets = Basket.objects.filter(user=req.user)
 
     context = {'form': form, 
                'title': title,
-               'baskets': baskets}
+               }
     
     context.update(subheader())
     
