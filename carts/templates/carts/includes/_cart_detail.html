@@ -1,9 +1,9 @@
-{% for cart_proruct in cart_products %}
-<h2>name: {{cart_proruct.proruct.label}}<br>
-    price: {{cart_proruct.proruct.price}}<br>
-    quantity: {{cart_proruct.quantity}}<br>
-    all: {{cart_proruct.prices}}<br>
-    id: {{cart_proruct.item_id}}
+{% for cart_product in cart_products %}
+<h2>name: {{cart_product.product.label}}<br>
+    price: {{cart_product.product.price}}<br>
+    quantity: {{cart_product.quantity}}<br>
+    all: {{cart_product.prices}}<br>
+    id: {{cart_product.item_id}}
 </h2>
 {% endfor %}
 <h1>all: {{total_price}}</h1>

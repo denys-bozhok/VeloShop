@@ -41,14 +41,14 @@ def cart_detail(req):
     total_price = 0
 
     for item in cart_items:
-        for proruct in ProductsQuerySet.all_products(''):
-            if proruct.article == item.product:
-                prices = proruct.price * item.quantity
+        for product in ProductsQuerySet.all_products(''):
+            if product.article == item.product:
+                prices = product.price * item.quantity
                 total_price += prices
                 
                 product_data = {'quantity': item.quantity,
                                 "item_id": item.id,
-                                'proruct': proruct,
+                                'product': product,
                                 'prices': prices}
                 
                 cart_products.append(product_data)
