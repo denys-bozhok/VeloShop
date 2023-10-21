@@ -37,7 +37,7 @@ def remove_from_cart(req, cart_item_id):
 @login_required
 def cart_detail(req):
     cart_items = Cart.objects.filter(user=req.user)
-    products = []
+    cart_products = []
     total_price = 0
 
     for item in cart_items:
@@ -47,13 +47,14 @@ def cart_detail(req):
                 total_price += prices
                 
                 product_data = {'quantity': item.quantity,
-                                'product': proruct,
+                                "item_id": item.id,
+                                'proruct': proruct,
                                 'prices': prices}
                 
-                products.append(product_data)
+                cart_products.append(product_data)
 
     context = {
-        'products': products,
+        'cart_products': cart_products,
         'total_price': total_price
     }
 
