@@ -1,5 +1,5 @@
 <div class="profile__wrapper">
-    {% csrf_token %}
+
     <img src="/media/{{user.image}}" alt="No image, sorry" class="social-img">
 
     <form action="{% url 'profile' %}" method='post'>

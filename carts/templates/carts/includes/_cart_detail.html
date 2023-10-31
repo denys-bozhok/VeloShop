@@ -1,9 +1,16 @@
 {% for cart_product in cart_products %}
-<h2>name: {{cart_product.product.label}}<br>
-    price: {{cart_product.product.price}}<br>
-    quantity: {{cart_product.quantity}}<br>
-    all: {{cart_product.prices}}<br>
-    id: {{cart_product.item_id}}
-</h2>
+<div>
+    <p>name:{{cart_product.product.label}}</p>
+    <p>price: {{cart_product.product.price}}</p>
+    <div>
+        <div class="form-imput">
+            <input class = "form-button" type="number" value="{{cart_product.quantity}}">
+            <a href=""></a>
+        </div>
+    </div>
+    <p>all: {{cart_product.product_sum}}</p>
+    <p>id: {{cart_product.item_id}}</p>
+</div>
 {% endfor %}
-<h1>all: {{total_price}}</h1>
+
+<h1>all: {{total}}</h1>
