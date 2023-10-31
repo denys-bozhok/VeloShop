@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from products.models import *
+from .forms import EditProductSumForm
 from .models import Cart
 
 
@@ -60,3 +61,12 @@ def cart_detail(req):
 
     return render(req, "carts/includes/_cart_detail.html", context)
 
+
+@login_required
+def edit_product_sum(req, id):
+
+    form = EditProductSumForm(req.POST or None, data=req.data)
+    if req.POST and form.is_valid():
+        form.save()
+
+        return redirect(req.META['HTTP_PREFER'])

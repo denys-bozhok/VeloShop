@@ -47,15 +47,13 @@ def profile(req):
     title = 'Profile'
 
     if req.method == 'POST':
-
         form = UserProfileForm(instance=req.user, data=req.POST, files=req.FILES)
-
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('profile'))
+        
     else:
         form = UserProfileForm(instance=req.user)
-
 
     context = {'form': form, 
                'title': title,
