@@ -64,9 +64,16 @@ def cart_detail(req):
 
 @login_required
 def edit_product_sum(req, id):
-
-    form = EditProductSumForm(req.POST or None, data=req.data)
-    if req.POST and form.is_valid():
-        form.save()
-
-        return redirect(req.META['HTTP_PREFER'])
+    cart = Cart.objects.get(id=id)
+    
+    if req.method == 'POST':
+        form_for_quantity = EditProductSumForm(instance=cart, data=req.POST)
+        cart.quantity = req.POST['quantity']
+        cart.save()
+        return HttpResponseRedirect(reverse('profile'))
+    else:
+        form_for_quantity = EditProductSumForm(instance=cart)
+    context = {'form_for_quantity': form_for_quantity, 
+               'cart': cart}
+    
+    return render(req, 'carts/carts.html', context)
