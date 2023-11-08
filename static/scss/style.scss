@@ -39,11 +39,11 @@
     }
 
     .subheader {
-        p {
+        p, a {
             margin: 0 $margin_xs 0 $margin_xs;
         }
 
-        p:hover {
+        p:hover, a:hover {
             color: $text-color_additional_hover;
 
             .social-img {

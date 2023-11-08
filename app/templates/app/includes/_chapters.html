@@ -2,7 +2,9 @@
   <div class="chapters">
     {% for chapter in chapters %}
     <div class="chapter" style="background-image: url(/media/{{chapter.image}})">
-      <a href="{% url 'chapter' chapter.slug%}">{{chapter.name}}</a>
+      <div>
+        <a href="{% url 'chapter' chapter.slug%}">{{chapter.name}}</a>
+      </div>
     </div>
     {% endfor %}
   </div>

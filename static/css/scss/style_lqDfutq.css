@@ -10,6 +10,7 @@
   font-family: "assistant";
   src: url("/static/fonts/assistant/Assistant-Regular.ttf"); }
 
+@use "sass:list";
 /** COLORS */
 /** FONTS */
 /** PADDING/MARGIN */
@@ -56,7 +57,7 @@ li {
   width: 80%; }
 
 .subheader__wrapper {
-  background: black;
+  background: darkmagenta;
   color: whitesmoke;
   padding: 0.5rem 0 0.5rem 0; }
   .subheader__wrapper img {
@@ -64,9 +65,9 @@ li {
   .subheader__wrapper .subheader p, .subheader__wrapper .subheader a {
     margin: 0 0.3rem 0 0.3rem; }
   .subheader__wrapper .subheader p:hover, .subheader__wrapper .subheader a:hover {
-    color: magenta; }
+    color: cyan; }
     .subheader__wrapper .subheader p:hover .social-img, .subheader__wrapper .subheader a:hover .social-img {
-      border-color: magenta; }
+      border-color: cyan; }
   .subheader__wrapper .subheader .social-img {
     height: 2rem;
     border: 0.1rem solid whitesmoke;
@@ -87,7 +88,7 @@ li {
     border-bottom: 2px solid darkgray;
     border-radius: 5%; }
     .header__wrapper .search__wrapper .search input {
-      color: magenta;
+      color: cyan;
       padding: 1rem;
       background: none;
       border: none; }

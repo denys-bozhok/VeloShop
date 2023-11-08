@@ -5,6 +5,18 @@
 .main__wrapper {
     @include flex-center;
     padding-top: $padding_m * 2;
+
+    a {
+        color: darkmagenta;
+        text-shadow: whitesmoke 0 0 5px;
+    }
+    
+    a:hover{
+        font-size: 1.5rem;
+        color: $text-color_additional_hover;
+        transition-duration: 150ms;
+    }
+
     .chapters__wrapper {
         padding-top: $padding_m * 2;
 
@@ -16,20 +28,36 @@
         .chapter {
             width: 50rem;
             height: 20rem;
-            border: 1px solid black;
+
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border-radius: 2%;
 
             margin: .2rem;
             text-align: center;
-            color: orange;
-            padding-top: 2rem;
+            color: white;
+            padding-top: 3rem;
 
-            a {
-                font-size: 5rem;
+
+            div {
+                width: 100%;
+                background: linear-gradient(transparent 10%, black 45% 60%, transparent 90%);
+
+                a {
+                    font-size: 5rem;
+                }
+
+                a:hover {
+                    font-size: 6rem;
+                }
             }
+        }
+
+        .chapter:hover{
+            margin: 0;
+            border: 5px solid darkmagenta;
+            transition-duration: 150ms;
+            box-shadow: black 2px 2px 10px;
         }
     }
 
@@ -46,13 +74,13 @@
     .categories__wrapper {
         @include flex-center;
         padding-top: $padding_m * 2;
-        
+
         .categories {
             width: 80%;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(auto, 1fr);
-            
+
             .category {
                 background-size: cover;
                 background-repeat: no-repeat;

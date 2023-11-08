@@ -10,6 +10,7 @@
   font-family: "assistant";
   src: url("/static/fonts/assistant/Assistant-Regular.ttf"); }
 
+@use "sass:list";
 /** COLORS */
 /** FONTS */
 /** PADDING/MARGIN */

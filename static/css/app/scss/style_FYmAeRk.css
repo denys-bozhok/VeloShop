@@ -10,6 +10,7 @@
   font-family: "assistant";
   src: url("/static/fonts/assistant/Assistant-Regular.ttf"); }
 
+@use "sass:list";
 /** COLORS */
 /** FONTS */
 /** PADDING/MARGIN */
@@ -20,12 +21,11 @@
   justify-content: center;
   padding-top: 2rem; }
   .main__wrapper a {
-    color: darkmagenta;
-    text-shadow: whitesmoke 0 0 5px; }
+    text-shadow: black 0 0 3px; }
   .main__wrapper a:hover {
-    font-size: 1.5rem;
-    color: magenta;
-    transition-duration: 150ms; }
+    font-size: 3rem;
+    color: orange;
+    transition-duration: 100ms; }
   .main__wrapper .chapters__wrapper {
     padding-top: 2rem; }
     .main__wrapper .chapters__wrapper .chapters {
@@ -43,16 +43,15 @@
       padding-top: 3rem; }
       .main__wrapper .chapters__wrapper .chapter div {
         width: 100%;
-        background: linear-gradient(transparent 10%, black 45% 60%, transparent 90%); }
+        background: linear-gradient(transparent 1%, gray, transparent 99%); }
         .main__wrapper .chapters__wrapper .chapter div a {
           font-size: 5rem; }
         .main__wrapper .chapters__wrapper .chapter div a:hover {
           font-size: 6rem; }
     .main__wrapper .chapters__wrapper .chapter:hover {
       margin: 0;
-      border: 5px solid darkmagenta;
-      transition-duration: 150ms;
-      box-shadow: black 2px 2px 10px; }
+      border: 2px solid orange;
+      transition-duration: 100ms; }
   .main__wrapper .chapter__wrapper {
     display: flex;
     align-items: center;
