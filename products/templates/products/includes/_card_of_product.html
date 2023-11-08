@@ -15,19 +15,29 @@
         </div>
 
         <div class="product-info">
-            <p>{{product.label}}</p>
+            <p>
+            <h1>{{product.label}}</h1>
+            </p>
 
-            <p>{{product.manufacturer}}</p>
-            <p>{{product.rating}}</p>
-            <p>{{product.year}}</p>
+            <p>manufacturer:
+            <h3>{{product.manufacturer}}</h3>
+            </p>
+            <p>model:
+            <h3>{{product.model}}</h3>
+            </p>
+            <p>rating: {{product.rating}}</p>
+            <p>year: {{product.year}}</p>
 
-            <p>{{product.article}}</p>
-            <p>{{product.model}}</p>
+            <p>article: {{product.article}}</p>
 
             <p>{{product.description}}</p>
 
-            <p>{{product.frame_size}}</p>
-            <p>{{product.wheel}}</p>
+            <p>size:
+            <h3>{{product.frame_size}}</h3>
+            </p>
+            <p>wheel:
+            <h3>{{product.wheel}}</h3>
+            </p>
 
             {% for color in colors %}
             <div class="color" style="background-color: rgb{{color.rgb}};">
@@ -35,21 +45,26 @@
             </div>
             {% endfor %}
             <p>{{product.color.rgb}}</p>
-            
-            <p>{{product.price}}</p>
-            
+
+            <p>price:
+            <h3>{{product.price}}</h3>
+            </p>
+
             <div class="product-buttom">
-                <a href="{%url 'carts:add_to_cart' product.article %}">Add to cart</a>
+                <a href="{%url 'carts:add_to_cart' product.article %}">
+                    <h2>Add to cart</h2>
+                </a>
             </div>
         </div>
-        
-        
-    </div>
-    {% for characteristic in characteristics %}
-    <div>
-        <p>{{characteristic.name}}</p>
-        <p>{{characteristic.description}}</p>
 
+    </div>
+
+    <h2>characteristics</h2>
+
+    {% for characteristic in characteristics %}
+    <div class="characteristics">
+        <p><h4>{{characteristic.name}}:</h4></p>
+        <p>{{characteristic.description}}</p>
     </div>
     {% endfor %}
 

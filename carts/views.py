@@ -70,7 +70,7 @@ def edit_product_sum(req, id):
         form_for_quantity = EditProductSumForm(instance=cart, data=req.POST)
         cart.quantity = req.POST['quantity']
         cart.save()
-        return HttpResponseRedirect(reverse('profile'))
+        return HttpResponseRedirect(reverse('carts:cart_detail'))
     else:
         form_for_quantity = EditProductSumForm(instance=cart)
     context = {'form_for_quantity': form_for_quantity, 

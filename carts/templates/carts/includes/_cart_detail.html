@@ -5,11 +5,10 @@
     <div>
         <div class="form-imput">
             <input class = "form-button" type="number" value="{{cart_product.quantity}}">
-            <a href=""></a>
+            <a href="edit/{{cart_product.item_id}}">edit</a>
         </div>
     </div>
     <p>all: {{cart_product.product_sum}}</p>
-    <p>id: {{cart_product.item_id}}</p>
 </div>
 {% endfor %}
 

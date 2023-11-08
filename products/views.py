@@ -11,7 +11,6 @@ def card_of_product(req, slug):
         if item.slug == slug:
             product = item
 
-
     context = {
         'product': product,
         'galery': models.ProductsQuerySet.gallery_for_product('', product),

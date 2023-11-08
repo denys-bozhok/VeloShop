@@ -1,41 +1,80 @@
-
 @import 'card_of_prodyct_style.scss';
 
 
-.product__wrapper{
+.product__wrapper {
     @include flex-center;
     padding-top: $padding_l * 2;
-    .products{
+
+    .products {
         @include grid-products;
         width: 80%;
-        .product-img{
+
+        .product-img {
+
             overflow: hidden;
             width: 20rem;
             height: 30rem;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border: 1px solid black; 
+            border: 1px solid black;
 
-            p{
+            p {
                 text-align: center;
                 font-size: 1.5rem;
             }
 
-            .blind-element{
+            .blind-element {
                 visibility: collapse;
             }
 
-            .product-menu{
-                position: relative; 
+            .product-menu {
+                position: relative;
                 top: 18rem;
 
             }
         }
-        .product-buttom{
+
+        .product-img:hover {
+            box-shadow: black 0 0 10px;
+            border: none;
+        }
+
+        a {
+            color: darkmagenta;
+        }
+
+        .product_label {
+            background: linear-gradient(transparent, darkgray, transparent);
+        }
+
+        .price {
+            text-align: center;
+            color: orange;
+            font-size: 2rem;
+            text-shadow: black 0 0 2px;
+        }
+
+        .product-buttom {
+            text-align: center;
+            font-size: 2rem;
             width: 20rem;
             height: 3rem;
+            background: linear-gradient(transparent 3%, black, transparent 97%);
+        }
+
+        .buy {
             background: linear-gradient(transparent 3%, red, transparent 97%);
+
+
+            a:hover {
+                color: cyan;
+                font-size: 2.2rem;
+            }
+        }
+
+        a:hover {
+            color: magenta;
         }
     }
 }

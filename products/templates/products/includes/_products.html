@@ -3,7 +3,7 @@
     {% for product in products %}
     <div class="product">
       <div class="product-img" style="background-image: url(/media/{{product.image}})">
-        <p>
+        <p class="product_label">
           <a href="/products/{{product.slug}}/">{{product.label }}</a>
         </p>
         
@@ -18,21 +18,17 @@
         {% endif %}
 
         
-        <div>
-          {{product.price}}
+        <div class="price">
+          {{product.price}}$
         </div>
         
-        <div>
-          {{product.color}}
-        </div>
-
         <div class="product-menu">
-          <div class="product-buttom">
-            <a href="#">Buy</a>
+          <div class="product-buttom buy">
+            <a href="{%url 'carts:add_to_cart' product.article %}">Add to cart</a>
           </div>
   
-          <div class="product-buttom">
-            <a href="#">About</a>
+          <div class="product-buttom about">
+            <a href="/products/{{product.slug}}/">About</a>
           </div>
   
         </div>
