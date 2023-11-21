@@ -1,7 +1,25 @@
-<form action="{% url 'carts:edit' cart.id%}" method='post'>
-    {% csrf_token %}
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form_for_quantity.quantity.id_for_label}}">quantity</label>
-        {{form_for_quantity.quantity}}
-    </div>
-    <input class = "form-button" type="submit" value="Submit">
+{% extends '_base.html'%}
+{% load sass_tags %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block style %}
+    <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src './scss/style.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock style %}
+
+{% block header %}
+    {% include 'includes/_header.html' %}
+{% endblock header %}
+
+{% block main %}
+    <main class="main__wrapper">
+        <div class="main">
+            {% include './includes/_cart_detail.html' %}
+        </div>
+    </main>    
+{% endblock main %}
+
+{% block footer %}
+    {% include 'includes/_footer.html' %}
+{% endblock footer %}

@@ -19,6 +19,6 @@ def card_of_product(req, slug):
         'characteristics': product.characteristics.all(),
     }
 
-    context.update(utilites.subheader())
+    context.update(utilites.subheader(req))
 
     return render(req, 'products/products.html', context)

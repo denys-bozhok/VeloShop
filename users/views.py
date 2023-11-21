@@ -23,7 +23,7 @@ def login(req):
         form = UserLoginForm()
     
     context = {'form': form, 'title': title}
-    context.update(subheader())
+    context.update(subheader(req))
     return render(req, 'users/users.html', context)
 
 
@@ -59,7 +59,7 @@ def profile(req):
                'title': title,
                }
     
-    context.update(subheader())
+    context.update(subheader(req))
     
     return render(req, 'users/users.html', context)
 

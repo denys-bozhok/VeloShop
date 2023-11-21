@@ -121,8 +121,8 @@
 
         <div class="cart__wrapper">
             <div class="cart">
-                <a href="/carts">
-                    Cart (0)
+                <a href="{% url 'carts:cart_detail' %}">
+                    Cart ({{cart_lenth}})
                     <img src="/static/images/icons/icon_cart.png" alt="No image, sorry" class="cart__image">
                 </a>
             </div>

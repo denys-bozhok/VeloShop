@@ -1,15 +1,24 @@
 {% for cart_product in cart_products %}
 <div>
     <p>name:{{cart_product.product.label}}</p>
+
     <p>price: {{cart_product.product.price}}</p>
+
     <div>
         <div class="form-imput">
             <input class = "form-button" type="number" value="{{cart_product.quantity}}">
             <a href="edit/{{cart_product.item_id}}">edit</a>
         </div>
     </div>
-    <p>all: {{cart_product.product_sum}}</p>
+
+    <p>sum: {{cart_product.product_sum}}</p>
+    
+    <div>
+        <div class="remove-cart-item">
+            <a href="{% url 'carts:remove_from_cart' cart_product.item_id %}">Remove item</a>
+        </div>
+    </div>
 </div>
 {% endfor %}
 
-<h1>all: {{total}}</h1>
+<h1>total cost: {{total}}</h1>
