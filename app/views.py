@@ -21,11 +21,6 @@ def abouts(req:object, about_slug:str) -> classmethod:
 
 def chapters(req:object, chapter_slug:str) -> classmethod:
     context = for_categories(chapter_slug, Chapter)
-
-    wheel = req.query_params.get('wheel')
-    if wheel:
-
-        print(context['products'])
     context.update(subheader(req))
 
     return render(req, 'app/app.html', context)
