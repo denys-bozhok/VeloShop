@@ -6,13 +6,13 @@
 
     <div>
         <div class="form-imput">
-            <input class = "form-button" type="number" value="{{cart_product.quantity}}">
+            <input class="form-button" type="number" value="{{cart_product.quantity}}">
             <a href="edit/{{cart_product.item_id}}">edit</a>
         </div>
     </div>
 
     <p>sum: {{cart_product.product_sum}}</p>
-    
+
     <div>
         <div class="remove-cart-item">
             <a href="{% url 'carts:remove_from_cart' cart_product.item_id %}">Remove item</a>
