@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "_mixims.css",
-	"sources": [
-		"_mixims.scss"
-	],
-	"names": [],
-	"mappings": "AAIA,AAAA,aAAa,CAAC;EACV,eAAe,EAAE,aAAa,GACjC;;AAED,AAAA,YAAY,CAAC;EACT,eAAe,EAAE,MAAM,GAC1B"
-}
