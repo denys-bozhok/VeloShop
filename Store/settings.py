@@ -54,7 +54,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
 ]
 
-COMPRESS_PRECOMPILERS = (    
+COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
@@ -139,9 +139,9 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / STATIC_URL
 
-SASS_PROCESSOR_ROOT = BASE_DIR / 'static/css'
+SASS_PROCESSOR_ROOT = BASE_DIR / STATIC_URL / 'css/'
 
 COMPRESS_ROOT = BASE_DIR / 'static'
 

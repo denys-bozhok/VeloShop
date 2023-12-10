@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "inter";
+  src: url("/static/fonts/inter/Inter-Regular.ttf"); }
+
+@font-face {
+  font-family: "rockout";
+  src: url("/static/fonts/rockout/Rockout.otf"); }
+
+@font-face {
+  font-family: "assistant";
+  src: url("/static/fonts/assistant/Assistant-Regular.ttf"); }
+
+/** COLORS */
+/** FONTS */
+/** PADDING/MARGIN */
+/** WIDTH/HEIGTH */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+li {
+  list-style-type: none; }
+
+#app {
+  height: 100%;
+  font-family: "assistant"; }
+
+.subheader,
+.navigation,
+.social,
+.favorites,
+.user-menu__wrapper,
+.login,
+.favorites__wrapper,
+.header,
+.store-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.subheader__wrapper,
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.subheader,
+.header {
+  width: 80%; }
+
+.subheader__wrapper {
+  background: black;
+  color: whitesmoke;
+  padding: 0.5rem 0 0.5rem 0; }
+  .subheader__wrapper img {
+    height: 0.6rem; }
+  .subheader__wrapper .subheader p, .subheader__wrapper .subheader a {
+    margin: 0 0.3rem 0 0.3rem; }
+  .subheader__wrapper .subheader p:hover, .subheader__wrapper .subheader a:hover {
+    color: magenta; }
+    .subheader__wrapper .subheader p:hover .social-img, .subheader__wrapper .subheader a:hover .social-img {
+      border-color: magenta; }
+  .subheader__wrapper .subheader .social-img {
+    height: 2rem;
+    border: 0.1rem solid whitesmoke;
+    border-radius: 50%;
+    padding: 0.3rem; }
+  .subheader__wrapper .subheader .lenguage-image {
+    height: 1rem; }
+  .subheader__wrapper .subheader .login-image {
+    margin: 0 0.3rem 0 0; }
+  .subheader__wrapper .subheader .menu {
+    display: none; }
+
+.header__wrapper {
+  padding-top: 1rem; }
+  .header__wrapper .logotype {
+    width: 15rem; }
+  .header__wrapper .search__wrapper {
+    border-bottom: 2px solid darkgray;
+    border-radius: 5%; }
+    .header__wrapper .search__wrapper .search input {
+      color: magenta;
+      padding: 1rem;
+      background: none;
+      border: none; }
+  .header__wrapper .cart__wrapper .cart__image {
+    height: 1rem; }
+
+.lenguage__wrapper:hover .menu,
+.menu__wrapper:hover .menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  padding-top: 1rem;
+  color: darkgray; }
+  .lenguage__wrapper:hover .menu div,
+  .menu__wrapper:hover .menu div {
+    background: ghostwhite; }
+
+/*# sourceMappingURL=style.css.map */
