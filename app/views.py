@@ -19,22 +19,22 @@ def abouts(req: object, about_slug: str) -> classmethod:
     return render(req, 'app/app.html', context)
 
 
-def chapters(req: object, chapter_slug: str, *page_number: int) -> classmethod:
-    context = for_categories(chapter_slug, Chapter, page_number)
+def chapters(req: object, chapter_slug: str) -> classmethod:
+    context = for_categories(req, chapter_slug, Chapter)
     context.update(subheader(req))
 
     return render(req, 'app/app.html', context)
 
 
-def categories(req: object, category_slug: str, page: int = 1) -> classmethod:
-    context = for_categories(category_slug, Category, page)
+def categories(req: object, category_slug: str) -> classmethod:
+    context = for_categories(req, category_slug, Category)
     context.update(subheader(req))
 
     return render(req, 'app/app.html', context)
 
 
-def sub_categories(req: object, category_slug: str, sub_category_slug: str, page: int = 1) -> classmethod:
-    context = for_categories(
-        sub_category_slug, SubCategory, category_slug, page)
+def sub_categories(req: object, category_slug: str, sub_category_slug: str) -> classmethod:
+    context = for_categories(req,
+                             sub_category_slug, SubCategory, category_slug)
     context.update(subheader(req))
     return render(req, 'app/app.html', context)

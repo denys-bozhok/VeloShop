@@ -2,17 +2,18 @@ from django.core.paginator import Paginator
 
 from products.models import ProductsQuerySet
 from carts.utilites import for_cart_detail
-from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category, Chapter
+from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 from carts.utilites import for_cart_detail
 
 
 # * -----GET DICTIONARY FOR TEMPLATE-----
-def paginator(page: int, products: dict, per_page: int) -> object:
+def pagination(req, products, per_page):
 
     paginator = Paginator(products, per_page)
-    products_paginator = paginator.page(page)
+    page_number = req.GET.get('page')
+    page = paginator.get_page(page_number)
 
-    return products_paginator
+    return page
 
 
 def subheader(req: object) -> dict:
@@ -23,7 +24,7 @@ def subheader(req: object) -> dict:
             'cart_lenth': for_cart_detail(req)['items_quantity']}
 
 
-def for_categories(slug: str, model: object, *category_slug: str, page_number: int = 1) -> dict:
+def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
     match(model.__name__):
         case 'Chapter':
             chapter = model.objects.get(slug=slug)
@@ -32,7 +33,7 @@ def for_categories(slug: str, model: object, *category_slug: str, page_number: i
             products = list(filter(lambda product: product.category.chapter.slug ==
                             slug, ProductsQuerySet.all_products('')))
 
-            products_paginator = paginator(page_number, products, 2)
+            products_paginator = pagination(req, products, 2)
 
             return {'categories': categories,
                     'chapter': chapter,
@@ -46,7 +47,7 @@ def for_categories(slug: str, model: object, *category_slug: str, page_number: i
             products = list(filter(lambda product: product.category.slug ==
                             slug, ProductsQuerySet.all_products('')))
 
-            products_paginator = paginator(page_number, products, 2)
+            products_paginator = pagination(req, products, 2)
 
             return {'sub_categories': sub_categories,
                     'category': category,
@@ -63,7 +64,7 @@ def for_categories(slug: str, model: object, *category_slug: str, page_number: i
             products = list(filter(lambda product: product.subcategory.slug ==
                             slug, ProductsQuerySet.all_products('')))
 
-            products_paginator = paginator(page_number, products, 2)
+            products_paginator = pagination(req, products, 2)
 
             return {'sub_categories': sub_categories,
                     'sub_category': sub_category,

@@ -4,34 +4,35 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block style %}
-    <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
-    <link href="{% sass_src 'products/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+<link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+<link href="{% sass_src 'products/scss/style.scss' %}" rel="stylesheet" type="text/css" />
 {% endblock style %}
 
 {% block header %}
-    {% include 'includes/_header.html' %}
+{% include 'includes/_header.html' %}
 {% endblock header %}
 
 {% block main %}
-    <main class="main__wrapper">
-        <div class="main">
-            {% if title == "VeloShop" %}
-                {% include './includes/_chapters.html' %}
-            {% elif title == chapter.name%}
-                {% include './includes/_chapter.html' %}
-            {% elif title == category.name%}
-                {% include './includes/_category.html' %}
-            {% elif title == sub_category.name%}
-                {% include './includes/_subcategory.html' %}
-            {% elif title == about.name%}
-                {% include './includes/_site_navigate.html' %}
-            {% endif%}
+<main class="main__wrapper">
+    <div class="main">
+        {% if title == "VeloShop" %}
+        {% include './includes/_chapters.html' %}
+        {% elif title == chapter.name%}
+        {% include './includes/_chapter.html' %}
+        {% elif title == category.name%}
+        {% include './includes/_category.html' %}
+        {% elif title == sub_category.name%}
+        {% include './includes/_subcategory.html' %}
+        {% elif title == about.name%}
+        {% include './includes/_site_navigate.html' %}
+        {% endif%}
 
-            {% include 'products/includes/_products.html' %}
-        </div>
-    </main>    
+        {% include 'products/includes/_products.html' %}
+        {% include 'products/includes/_paginator.html' %}
+    </div>
+</main>
 {% endblock main %}
 
 {% block footer %}
-    {% include 'includes/_footer.html' %}
+{% include 'includes/_footer.html' %}
 {% endblock footer %}
