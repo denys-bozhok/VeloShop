@@ -8,11 +8,17 @@
         {% endif %}
 
         {% for page in products.paginator.page_range%}
+
+        {% if products.number == page%}
+        {{page}}
+
+        {% else %}
         <li class="page-item">
             <a href="?page={{page}}">
                 {{page}}
             </a>
         </li>
+        {% endif %}
         {% endfor%}
 
         {% if products.has_next %}
