@@ -6,9 +6,25 @@ from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, 
 from carts.utilites import for_cart_detail
 
 
-# * -----GET DICTIONARY FOR TEMPLATE-----
-def pagination(req, products, per_page):
+# * -----UTILITES-----
+def filterset(req: object, products: list) -> list:
+    wheel = req.GET.get('wheel')
+    rating = req.GET.get('rating')
+    filtred_products = []
 
+    for product in products:
+        if product.wheel.__str__() == wheel:
+            filtred_products.append(product)
+        if product.rating.__str__() == rating:
+            filtred_products.append(product)
+
+    if filtred_products != []:
+        products = filtred_products
+
+    return products
+
+
+def pagination(req: object, products: list, per_page: int) -> classmethod:
     paginator = Paginator(products, per_page)
     page_number = req.GET.get('page')
     page = paginator.get_page(page_number)
@@ -16,6 +32,7 @@ def pagination(req, products, per_page):
     return page
 
 
+# * -----GET DICTIONARY FOR TEMPLATE-----
 def subheader(req: object) -> dict:
     return {'abouts': CharterQuerySet.all_models(SiteNavigation),
             'social_networks': CharterQuerySet.all_models(SocialNetwork),
@@ -32,6 +49,8 @@ def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
 
             products = list(filter(lambda product: product.category.chapter.slug ==
                             slug, ProductsQuerySet.all_products('')))
+
+            products = filterset(req, products)
 
             products_paginator = pagination(req, products, 2)
 
