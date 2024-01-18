@@ -7,16 +7,35 @@ from carts.utilites import for_cart_detail
 
 
 # * -----UTILITES-----
-def filterset(req: object, products: list) -> list:
-    wheel = req.GET.get('wheel')
-    rating = req.GET.get('rating')
+def filter(products, *args):
     filtred_products = []
 
     for product in products:
-        if product.wheel.__str__() == wheel:
+        if args[0] and product.args[0].__str__() == args[0].__name__:
             filtred_products.append(product)
-        if product.rating.__str__() == rating:
-            filtred_products.append(product)
+
+    #     if wheel and product.wheel.__str__() == wheel:
+    #         filtred_products.append(product)
+
+    # for filtred_product in filtred_products:
+    #     if rating:
+    #         if filtred_product.rating.__str__() != rating:
+    #             filtred_products.remove(filtred_product)
+
+    #     if wheel:
+    #         if filtred_product.wheel.__str__() != wheel:
+    #             filtred_products.remove(filtred_product)
+
+    filtred_products = list(set(filtred_products))
+
+    return filtred_products
+
+
+def filterset(req: object, products: list) -> list:
+    wheel = req.GET.get('wheel')
+    rating = req.GET.get('rating')
+
+    filtred_products = filtred_products(products, wheel, rating)
 
     if filtred_products != []:
         products = filtred_products
@@ -24,7 +43,7 @@ def filterset(req: object, products: list) -> list:
     return products
 
 
-def pagination(req: object, products: list, per_page: int) -> classmethod:
+def pagination(req: object, products: list, per_page=2) -> classmethod:
     paginator = Paginator(products, per_page)
     page_number = req.GET.get('page')
     page = paginator.get_page(page_number)
@@ -52,7 +71,7 @@ def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
 
             products = filterset(req, products)
 
-            products_paginator = pagination(req, products, 2)
+            products_paginator = pagination(req, products)
 
             return {'categories': categories,
                     'chapter': chapter,
@@ -66,7 +85,9 @@ def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
             products = list(filter(lambda product: product.category.slug ==
                             slug, ProductsQuerySet.all_products('')))
 
-            products_paginator = pagination(req, products, 2)
+            products = filterset(req, products)
+
+            products_paginator = pagination(req, products)
 
             return {'sub_categories': sub_categories,
                     'category': category,
@@ -83,7 +104,9 @@ def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
             products = list(filter(lambda product: product.subcategory.slug ==
                             slug, ProductsQuerySet.all_products('')))
 
-            products_paginator = pagination(req, products, 2)
+            products = filterset(req, products)
+
+            products_paginator = pagination(req, products)
 
             return {'sub_categories': sub_categories,
                     'sub_category': sub_category,
