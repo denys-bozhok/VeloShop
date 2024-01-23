@@ -1,33 +1,33 @@
 <form action="{% url 'registration' %}" method='post'>
     {% csrf_token %}
-    <div class="forms-element"> 
+    <div class="forms-element">
         <label class="form-imput-label" for="{{form.username.id_for_label}}">username</label>
         {{form.username}}
     </div>
-    <div class="forms-element"> 
+    <div class="forms-element">
         <label class="form-imput-label" for="{{form.username.id_for_label}}">first_name</label>
         {{form.first_name}}
     </div>
-    <div class="forms-element"> 
+    <div class="forms-element">
         <label class="form-imput-label" for="{{form.username.id_for_label}}">last_name</label>
         {{form.last_name}}
     </div>
 
-    <div class="forms-element"> 
+    <div class="forms-element">
         <label class="form-imput-label" for="{{form.email.id_for_label}}">email</label>
         {{form.email}}
     </div>
 
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{form.password1.id_for_label}}">password<1/label>
-        {{form.password1}}
+    <div class="forms-element">
+        <label class="form-imput-label" for="{{form.password1.id_for_label}}">password<1 /label>
+                {{form.password1}}
     </div>
-    
-    <div class="forms-element"> 
+
+    <div class="forms-element">
         <label class="form-imput-label" for="{{form.password2.id_for_label}}">password2</label>
         {{form.password2}}
     </div>
 
 
 
-    <input class = "form-button" type="submit" value="Submit">
+    <input class="form-button" type="submit" value="Submit">

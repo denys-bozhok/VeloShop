@@ -6,36 +6,29 @@ from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, 
 from carts.utilites import for_cart_detail
 
 
-# * -----UTILITES-----
-def filter(products, *args):
-    filtred_products = []
-
-    for product in products:
-        if args[0] and product.args[0].__str__() == args[0].__name__:
-            filtred_products.append(product)
-
-    #     if wheel and product.wheel.__str__() == wheel:
-    #         filtred_products.append(product)
-
-    # for filtred_product in filtred_products:
-    #     if rating:
-    #         if filtred_product.rating.__str__() != rating:
-    #             filtred_products.remove(filtred_product)
-
-    #     if wheel:
-    #         if filtred_product.wheel.__str__() != wheel:
-    #             filtred_products.remove(filtred_product)
-
-    filtred_products = list(set(filtred_products))
-
-    return filtred_products
-
-
+# * -----FILTERES-----
 def filterset(req: object, products: list) -> list:
     wheel = req.GET.get('wheel')
     rating = req.GET.get('rating')
+    filtred_products = []
 
-    filtred_products = filtred_products(products, wheel, rating)
+    for product in products:
+        if product.rating.__str__() == rating:
+            filtred_products.append(product)
+
+        if product.wheel.__str__() == wheel:
+            filtred_products.append(product)
+
+    for filtred_product in filtred_products:
+        if rating:
+            if filtred_product.rating.__str__() != rating:
+                filtred_products.remove(filtred_product)
+
+        if wheel:
+            if filtred_product.wheel.__str__() != wheel:
+                filtred_products.remove(filtred_product)
+
+    filtred_products = list(set(filtred_products))
 
     if filtred_products != []:
         products = filtred_products

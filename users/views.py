@@ -1,71 +1,51 @@
-from django.shortcuts import render, HttpResponseRedirect
+from typing import Any
+from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from django.urls import reverse
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView
 
+from common.views import TitleMixin
+from carts.models import Cart
+from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from app.utilites import subheader
 
 
-def login(req):
+class UserLoginView(TitleMixin, LoginView):
+    template_name = 'users/users.html'
+    form_class = UserLoginForm
     title = 'Login'
-    if req.method == 'POST':
-        form = UserLoginForm(data=req.POST)
-        if form.is_valid():
-            username = req.POST['username']
-            password = req.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user:
-                auth.login(req, user)
-                return HttpResponseRedirect(reverse('index'))
 
-    else:
-        form = UserLoginForm()
-    
-    context = {'form': form, 'title': title}
-    context.update(subheader(req))
-    return render(req, 'users/users.html', context)
+    def get_success_url(self) -> str:
+        return reverse_lazy('index')
 
 
-def registration(req):
+class UserRegistrationView(TitleMixin, CreateView):
+    model = User
+    form_class = UserRegistrationForm
+    template_name = 'users/users.html'
+    success_url = reverse_lazy('login')
     title = 'Registration'
-    if req.method == 'POST':
-        form = UserRegistrationForm(data=req.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('login'))
-    else:
-        form = UserRegistrationForm()
-
-    context = {'form': form, 'title': title}
-    context.update(subheader())
-    return render(req, 'users/users.html', context)
 
 
-@login_required
-def profile(req):
+class UserProfileView(TitleMixin, UpdateView):
+    model = User
+    form_class = UserProfileForm
+    template_name = 'users/users.html'
     title = 'Profile'
 
-    if req.method == 'POST':
-        form = UserProfileForm(instance=req.user, data=req.POST, files=req.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('profile'))
-        
-    else:
-        form = UserProfileForm(instance=req.user)
+    def get_success_url(self) -> str:
+        return reverse_lazy('profile', args=(self.object.id,))
 
-    context = {'form': form, 
-               'title': title,
-               }
-    
-    context.update(subheader(req))
-    
-    return render(req, 'users/users.html', context)
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super(UserProfileView, self).get_context_data(**kwargs)
+        context['buskets'] = Cart.objects.filter(user=self.object)
+        return context
 
 
 @login_required
 def logout(req):
-	auth.logout(req)
+    auth.logout(req)
 
-	return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER'))

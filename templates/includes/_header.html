@@ -11,7 +11,7 @@
                     </li>
                 </ul>
                 {% endfor %}
-            </nV>
+                </nV>
         </div>
 
         <div class="social">
@@ -59,7 +59,9 @@
 
             <div class="menu__wrapper">
                 {% if user.is_authenticated %}
-                <div><p>Hello, {{user.username}}!</p></div>
+                <div>
+                    <p>Hello, {{user.username}}!</p>
+                </div>
 
                 <div class="menu">
                     <div>
@@ -71,7 +73,7 @@
                     </div>
 
                     <div>
-                        <p><a href="/users/profile/" class="">Profile</a></p>
+                        <p><a href="{% url 'profile' user.id%}" class="">Profile</a></p>
 
                         <p><a href="/users/logout/" class="">Logout</a></p>
                     </div>
@@ -108,7 +110,7 @@
 
         <div class="search__wrapper">
             <div class="search">
-                <input type="text"/>
+                <input type="text" />
             </div>
         </div>
 
