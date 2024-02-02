@@ -28,8 +28,12 @@ class EmailVerification(models.Model):
         massage = f'For confirm email {
             self.user.email} click on the link {verification_link}'
 
-        send_mail(subject, massage, 'from@example.com',
-                  recipient_list=[self.user.email], fail_silently=False,)
+        send_mail(subject,
+                  massage,
+                  from_email=settings.EMAIL_HOST_USER,
+                  recipient_list=[self.user.email],
+                  fail_silently=False,
+                  )
 
     def is_expired(self):
         return True if now() >= self.expiration else False

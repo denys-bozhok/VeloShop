@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://localhost:8000/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -140,11 +140,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / STATIC_URL
-
 SASS_PROCESSOR_ROOT = BASE_DIR / STATIC_URL
-
 COMPRESS_ROOT = BASE_DIR / STATIC_URL
-
 MEDIA_DIR = BASE_DIR / 'media'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -154,9 +151,15 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
 
+AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
 
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'denys.already@gmail.com'
+EMAIL_HOST_PASSWORD = 'soht vqyk chgm iutf'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'denys.already@gmail.com'

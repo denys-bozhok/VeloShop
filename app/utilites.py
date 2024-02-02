@@ -36,7 +36,7 @@ def filterset(req: object, products: list) -> list:
     return products
 
 
-def pagination(req: object, products: list, per_page=2) -> classmethod:
+def pagination(req: object, products: list, per_page=1) -> classmethod:
     paginator = Paginator(products, per_page)
     page_number = req.GET.get('page')
     page = paginator.get_page(page_number)
