@@ -20,21 +20,18 @@ def abouts(req: object, about_slug: str) -> classmethod:
 
 
 def chapters(req: object, chapter_slug: str) -> classmethod:
-    context = for_categories(req, chapter_slug, Chapter)
+    context = for_categories(req, chapter_slug)
     context.update(subheader(req))
-
     return render(req, 'app/app.html', context)
 
 
 def categories(req: object, category_slug: str) -> classmethod:
-    context = for_categories(req, category_slug, Category)
+    context = for_categories(req, category_slug)
     context.update(subheader(req))
-
     return render(req, 'app/app.html', context)
 
 
 def sub_categories(req: object, category_slug: str, sub_category_slug: str) -> classmethod:
-    context = for_categories(req,
-                             sub_category_slug, SubCategory, category_slug)
+    context = for_categories(req, category_slug, sub_category_slug)
     context.update(subheader(req))
     return render(req, 'app/app.html', context)

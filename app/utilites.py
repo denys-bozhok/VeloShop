@@ -1,42 +1,13 @@
 from django.core.paginator import Paginator
 
-from products.models import ProductsQuerySet
+from filters.views import filtred_list
+from filters.models import ProductFilter
 from carts.utilites import for_cart_detail
-from .models import SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 from carts.utilites import for_cart_detail
+from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
 
-# * -----FILTERES-----
-def filterset(req: object, products: list) -> list:
-    wheel = req.GET.get('wheel')
-    rating = req.GET.get('rating')
-    filtred_products = []
-
-    for product in products:
-        if product.rating.__str__() == rating:
-            filtred_products.append(product)
-
-        if product.wheel.__str__() == wheel:
-            filtred_products.append(product)
-
-    for filtred_product in filtred_products:
-        if rating:
-            if filtred_product.rating.__str__() != rating:
-                filtred_products.remove(filtred_product)
-
-        if wheel:
-            if filtred_product.wheel.__str__() != wheel:
-                filtred_products.remove(filtred_product)
-
-    filtred_products = list(set(filtred_products))
-
-    if filtred_products != []:
-        products = filtred_products
-
-    return products
-
-
-def pagination(req: object, products: list, per_page=1) -> classmethod:
+def pagination(req: object, products, per_page=2) -> classmethod:
     paginator = Paginator(products, per_page)
     page_number = req.GET.get('page')
     page = paginator.get_page(page_number)
@@ -53,59 +24,42 @@ def subheader(req: object) -> dict:
             'cart_lenth': for_cart_detail(req)['items_quantity']}
 
 
-def for_categories(req, slug: str, model: object, *category_slug: str) -> dict:
-    match(model.__name__):
-        case 'Chapter':
-            chapter = model.objects.get(slug=slug)
-            categories = Category.objects.filter(chapter=chapter)
+def for_categories(req: object, *args) -> dict:
+    context = {}
+    products = []
 
-            products = list(filter(lambda product: product.category.chapter.slug ==
-                            slug, ProductsQuerySet.all_products('')))
+    try:
+        model = Chapter.objects.get(slug=args[0])
+        categories = Category.objects.filter(chapter=model)
 
-            products = filterset(req, products)
+        for category in categories:
+            products += ProductFilter.product_filter_by_category(category)
 
-            products_paginator = pagination(req, products)
+        filtred_products = ProductFilter.filter_products(req, products)
+        products = filtred_products
 
-            return {'categories': categories,
-                    'chapter': chapter,
-                    'title': chapter.name,
-                    'products': products_paginator}
+        context['categories'] = Category.objects.filter(chapter=model)
+        context['chapter'] = model
 
-        case 'Category':
-            category = model.objects.get(slug=slug)
-            sub_categories = SubCategory.objects.filter(category=category)
+    except:
+        try:
+            model = SubCategory.objects.get(slug=args[1])
+            sub_categories = SubCategory.objects.filter(sub_category=model)
+            context['sub_category'] = model
+        except:
+            model = Category.objects.get(slug=args[0])
+            sub_categories = SubCategory.objects.filter(category=model)
 
-            products = list(filter(lambda product: product.category.slug ==
-                            slug, ProductsQuerySet.all_products('')))
+        products += ProductFilter.product_filter_by_category(model)
 
-            products = filterset(req, products)
+        filtred_products = ProductFilter.filter_products(req, products)
+        products = filtred_products
 
-            products_paginator = pagination(req, products)
+        context['category'] = Category.objects.get(slug=args[0])
+        context['sub_categories'] = sub_categories
 
-            return {'sub_categories': sub_categories,
-                    'category': category,
-                    'title': category.name,
-                    'products': products_paginator}
+    products_paginator = pagination(req, list(products))
+    context['products'] = products_paginator
+    context['title'] = model.name
 
-        case 'SubCategory':
-            sub_category = model.objects.get(slug=slug)
-            sub_categories = SubCategory.objects.filter(
-                sub_category=sub_category)
-            category_slug = category_slug[0]
-            category = Category.objects.get(slug=category_slug)
-
-            products = list(filter(lambda product: product.subcategory.slug ==
-                            slug, ProductsQuerySet.all_products('')))
-
-            products = filterset(req, products)
-
-            products_paginator = pagination(req, products)
-
-            return {'sub_categories': sub_categories,
-                    'sub_category': sub_category,
-                    'title': sub_category.name,
-                    'products': products_paginator,
-                    'category': category}
-
-        case _:
-            return
+    return context
