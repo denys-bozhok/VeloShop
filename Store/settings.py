@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'sass_processor',
     'compressor',
     'queryset_sequence',
-    'filters',
     'app',
     'products',
     'carts',

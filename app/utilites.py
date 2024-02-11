@@ -1,9 +1,7 @@
 from django.core.paginator import Paginator
+from queryset_sequence import QuerySetSequence
 
-from filters.views import filtred_list
-from filters.models import ProductFilter
-from carts.utilites import for_cart_detail
-from carts.utilites import for_cart_detail
+from products.filters import all_products, filter_products
 from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
 
@@ -20,40 +18,37 @@ def subheader(req: object) -> dict:
     return {'abouts': CharterQuerySet.all_models(SiteNavigation),
             'social_networks': CharterQuerySet.all_models(SocialNetwork),
             'favorites_and_other': CharterQuerySet.all_models(FavoritesAndOther),
-            'languages': CharterQuerySet.all_models(Language),
-            'cart_lenth': for_cart_detail(req)['items_quantity']}
+            'languages': CharterQuerySet.all_models(Language)}
 
 
 def for_categories(req: object, *args) -> dict:
     context = {}
-    products = []
-
     try:
         model = Chapter.objects.get(slug=args[0])
+        products = []
         categories = Category.objects.filter(chapter=model)
 
         for category in categories:
-            products += ProductFilter.product_filter_by_category(category)
+            products += all_products().filter(category=category)
 
-        filtred_products = ProductFilter.filter_products(req, products)
-        products = filtred_products
-
-        context['categories'] = Category.objects.filter(chapter=model)
+        products = QuerySetSequence(products)
+        filtred = filter_products(req, products)
+        context['categories'] = categories
         context['chapter'] = model
 
     except:
         try:
-            model = SubCategory.objects.get(slug=args[1])
+            slug = args[1]
+            model = SubCategory.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(sub_category=model)
+            products = all_products().filter(subcategory=model)
+
             context['sub_category'] = model
         except:
-            model = Category.objects.get(slug=args[0])
+            slug = args[0]
+            model = Category.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(category=model)
-
-        products += ProductFilter.product_filter_by_category(model)
-
-        filtred_products = ProductFilter.filter_products(req, products)
-        products = filtred_products
+            products = all_products().filter(category=model)
 
         context['category'] = Category.objects.get(slug=args[0])
         context['sub_categories'] = sub_categories
