@@ -58,7 +58,7 @@ def cart_detail(req):
                 'product_quantity': product_quantity,
                 'products_cost': products_cost,
                 'product': product,
-                'item_id': item.id
+                'item': item
             }
 
         products.append(product_data)
