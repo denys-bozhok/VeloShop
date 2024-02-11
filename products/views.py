@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from app import utilites
 
-from .filters import all_products
+from . import models
 
 
-def card_of_product(req: object, slug: str) -> classmethod:
-    product = all_products().get(slug=slug)
+def card_of_product(req, slug):
+    products = models.ProductsQuerySet.all_products('')
+
+    for item in products:
+        if item.slug == slug:
+            product = item
+
     context = {
         'product': product,
+        'galery': models.ProductsQuerySet.gallery_for_product('', product),
         'title': product.label,
         'colors': product.color.all(),
         'characteristics': product.characteristics.all(),

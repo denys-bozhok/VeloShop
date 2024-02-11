@@ -1,24 +1,24 @@
-{% for item in cart_items %}
+{% for cart_product in cart_products %}
 <div>
-    <p>name:{{item.label}}</p>
+    <p>name:{{cart_product.product.label}}</p>
 
-    <p>price: {{product.price}}</p>
+    <p>price: {{cart_product.product.price}}</p>
 
     <div>
         <div class="form-imput">
-            <input class="form-button" type="number" value="{{item.quantity}}">
-            <a href="edit/{{item.item_id}}">edit</a>
+            <input class="form-button" type="number" value="{{cart_product.quantity}}">
+            <a href="edit/{{cart_product.item_id}}">edit</a>
         </div>
     </div>
 
-    <p>sum: {{item.product_sum}}</p>
+    <p>sum: {{cart_product.product_sum}}</p>
 
     <div>
         <div class="remove-cart-item">
-            <a href="{% url 'carts:remove_from_cart' item.id %}">Remove item</a>
+            <a href="{% url 'carts:remove_from_cart' cart_product.item_id %}">Remove item</a>
         </div>
     </div>
 </div>
 {% endfor %}
 
-<h1>total cost: {{total_price}}</h1>
+<h1>total cost: {{total}}</h1>

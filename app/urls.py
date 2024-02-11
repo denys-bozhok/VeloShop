@@ -11,5 +11,4 @@ urlpatterns = [
     path('category/<slug:category_slug>/<slug:sub_category_slug>/',
          sub_categories, name='sub_categories'),
 
-
 ]
