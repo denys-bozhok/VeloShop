@@ -1,11 +1,13 @@
+from . import models
 from django import forms
 
-from . import models
+from .models import Cart
 
 
-class EditProductSumForm(forms.ModelForm):
+class QuantityUpdateView(forms.ModelForm):
     quantity = forms.IntegerField(widget=forms.NumberInput(attrs={
         'class': 'form-imput'}))
+
     class Meta:
-        model = models.Cart
+        model = Cart
         exclude = ['quantity',]

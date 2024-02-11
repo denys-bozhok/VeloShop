@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 from .models import Cart
+from .forms import QuantityUpdateView
 from products.filters import all_products
 
 
@@ -34,15 +37,57 @@ def remove_from_cart(req, id):
 
 @login_required
 def cart_detail(req):
-    cart_items = Cart.objects.filter(user=req.user)
-    total_price = 0
+    try:
+        cart_items = Cart.objects.filter(user=req.user)
+    except:
+        cart_items = Cart.objects.filter(id=0)
 
-    for cart in cart_items:
-        total_price += all_products().get(article=cart.product).price
+    total_cost = 0
+
+    products = []
+
+    for item in cart_items:
+        product_quantity = item.quantity
+
+        for product in all_products().filter(article=item.product):
+            products_cost = product.price * product_quantity
+            total_cost += products_cost
+
+            product_data = {
+                'cart_id': item.id,
+                'product_quantity': product_quantity,
+                'products_cost': products_cost,
+                'product': product,
+                'item_id': item.id
+            }
+
+        products.append(product_data)
 
     context = {
         "cart_items": cart_items,
-        "total_price": total_price,
+        "total_cost": total_cost,
+        'products': products
     }
 
     return render(req, "carts/carts.html", context)
+
+
+@login_required
+def edit_quantity(req: object, cart_id: int) -> classmethod:
+    cart = Cart.objects.get(id=cart_id)
+
+    if req.method == 'POST':
+        form = QuantityUpdateView(instance=cart, data=req.POST)
+        cart.quantity = req.POST['quantity']
+        if cart.quantity == 0:
+            cart.delete()
+        else:
+            cart.save()
+            return HttpResponseRedirect(reverse('carts:cart_detail'))
+    else:
+        form = QuantityUpdateView(instance=cart)
+
+    context = {'form': form,
+               'cart': cart}
+
+    return render(req, 'carts/includes/_quantity_update.html', context)

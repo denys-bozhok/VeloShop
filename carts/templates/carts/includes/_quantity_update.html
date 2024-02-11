@@ -1,0 +1,8 @@
+<form action="{% url 'carts:edit_quantity' cart.id %}" method='post'>
+    {% csrf_token %}
+    <div class="forms-element">
+        <label class="form-imput-label" for="{{form.quantity.id_for_label}}">quantity</label>
+        {{form.quantity}}
+    </div>
+    <input class="form-button" type="submit" value="Submit">
+</form>
