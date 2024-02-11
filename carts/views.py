@@ -15,7 +15,6 @@ def add_to_cart(req, article):
         cart_item.save()
         messages.success(req, "Item added to your cart.")
     else:
-        print('HELLO')
         Cart.objects.create(user=req.user, product=article)
         messages.success(req, "Item added to your cart.")
 

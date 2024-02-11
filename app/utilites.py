@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from queryset_sequence import QuerySetSequence
 
-from products.filters import all_products, filter_products
+from products.filters import all_products
 from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
 
@@ -32,7 +32,7 @@ def for_categories(req: object, *args) -> dict:
             products += all_products().filter(category=category)
 
         products = QuerySetSequence(products)
-        filtred = filter_products(req, products)
+
         context['categories'] = categories
         context['chapter'] = model
 
