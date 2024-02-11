@@ -4,22 +4,22 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block style %}
-    <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
-    <link href="{% sass_src './scss/style.scss' %}" rel="stylesheet" type="text/css" />
+<link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+<link href="{% sass_src './scss/style.scss' %}" rel="stylesheet" type="text/css" />
 {% endblock style %}
 
 {% block header %}
-    {% include 'includes/_header.html' %}
+{% include 'includes/_header.html' %}
 {% endblock header %}
 
 {% block main %}
-    <main class="main__wrapper">
-        <div class="main">
-            {% include './includes/_cart_detail.html' %}
-        </div>
-    </main>    
+<main class="main__wrapper">
+    <div class="main">
+        {% include './includes/_cart_detail.html' %}
+    </div>
+</main>
 {% endblock main %}
 
 {% block footer %}
-    {% include 'includes/_footer.html' %}
+{% include 'includes/_footer.html' %}
 {% endblock footer %}
