@@ -5,7 +5,7 @@ from .filters import all_products
 
 
 def card_of_product(req: object, slug: str) -> classmethod:
-    product = all_products().get(slug=slug)
+    product = all_products(req).get(slug=slug)
     context = {
         'product': product,
         'title': product.label,
