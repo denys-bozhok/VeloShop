@@ -32,16 +32,16 @@ class SiteNavigation (models.Model):
 
 
 class SocialNetwork (models.Model):
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=20)
     image = models.FileField(upload_to='images/icons/social_networks')
-    link = models.CharField(max_length=50, default='#', unique=True)
+    link = models.CharField(max_length=50, default='#')
 
     def __str__(self: object) -> str:
         return f'{self.name}'
 
 
 class FavoritesAndOther (models.Model):
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=20)
     icon = models.FileField(upload_to='images/icons/favorites_and_other')
     value = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     slug = models.CharField(max_length=30, editable=False, auto_created=True)
