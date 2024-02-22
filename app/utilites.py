@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 from queryset_sequence import QuerySetSequence
 
 from products.filters import all_products
+from carts.models import Cart
 from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
 
@@ -15,10 +16,17 @@ def pagination(req: object, products, per_page=2) -> classmethod:
 
 # * -----GET DICTIONARY FOR TEMPLATE-----
 def subheader(req: object) -> dict:
+    cart_items = Cart.objects.filter(user=req.user)
+    carts_quantity = 0
+
+    for item in cart_items:
+        carts_quantity += item.quantity
+
     return {'abouts': CharterQuerySet.all_models(SiteNavigation),
             'social_networks': CharterQuerySet.all_models(SocialNetwork),
             'favorites_and_other': CharterQuerySet.all_models(FavoritesAndOther),
-            'languages': CharterQuerySet.all_models(Language)}
+            'languages': CharterQuerySet.all_models(Language),
+            'carts_quantity': carts_quantity, }
 
 
 def for_categories(req: object, *args) -> dict:

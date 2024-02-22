@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from app import utilites
 from .models import Cart
 from .forms import QuantityUpdateView
 from products.filters import all_products
@@ -47,28 +48,27 @@ def cart_detail(req):
     products = []
 
     for item in cart_items:
-        product_quantity = item.quantity
+        form = QuantityUpdateView(instance=item)
 
-        for product in all_products().filter(article=item.product):
-            products_cost = product.price * product_quantity
-            total_cost += products_cost
+        if item.quantity != 0:
+            for product in all_products().filter(article=item.product):
+                products_cost = product.price * item.quantity
+                total_cost += products_cost
 
-            product_data = {
-                'cart_id': item.id,
-                'product_quantity': product_quantity,
-                'products_cost': products_cost,
-                'product': product,
-                'item': item
-            }
+                product_data = {
+                    'form': form,
+                    'item': item,
+                    'products_cost': products_cost,
+                    'product': product,
+                }
 
-        products.append(product_data)
+            products.append(product_data)
 
     context = {
-        "cart_items": cart_items,
         "total_cost": total_cost,
         'products': products
     }
-
+    context.update(utilites.subheader(req))
     return render(req, "carts/carts.html", context)
 
 

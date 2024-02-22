@@ -6,8 +6,15 @@
     <p>price: {{product.product.price}}</p>
 
     <div>
-        <input class="form-input" type="number" value="{{product.item.quantity}}">
-        <a href="edit/{{product.item.id}}">edit</a>
+        <form action="{% url 'carts:edit_quantity' product.item.id%}" method='post'>
+            {% csrf_token %}
+            <div class="forms-input">
+                <label class="form-imput-label" for="{{product.form.quantity.id_for_label}}">quantity -
+                    {{product.item.quantity}}</label>
+                {{product.form.quantity}}
+                <input class="form-button" type="submit" value="Submit">
+            </div>
+        </form>
     </div>
 
     <p>sum: {{product.products_cost}}</p>

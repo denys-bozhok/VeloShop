@@ -9,6 +9,7 @@ from django.views.generic.base import TemplateView
 
 from typing import Any
 
+from app import utilites
 from common.views import TitleMixin
 from carts.models import Cart
 from users.models import User, EmailVerification
