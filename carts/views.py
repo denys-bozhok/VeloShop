@@ -51,7 +51,7 @@ def cart_detail(req):
         form = QuantityUpdateView(instance=item)
 
         if item.quantity != 0:
-            for product in all_products().filter(article=item.product):
+            for product in all_products(req).filter(article=item.product):
                 products_cost = product.price * item.quantity
                 total_cost += products_cost
 

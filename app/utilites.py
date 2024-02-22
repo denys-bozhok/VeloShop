@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from queryset_sequence import QuerySetSequence
 
-from products.filters import all_products, bicycles_filter, filters
+from products.filters import all_products, filters
 from carts.models import Cart
 from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
@@ -16,17 +16,20 @@ def pagination(req: object, products, per_page=2) -> classmethod:
 
 # * -----GET DICTIONARY FOR TEMPLATE-----
 def subheader(req: object) -> dict:
-    cart_items = Cart.objects.filter(user=req.user)
-    carts_quantity = 0
-
-    for item in cart_items:
-        carts_quantity += item.quantity
-
-    return {'abouts': CharterQuerySet.all_models(SiteNavigation),
+    context = {'abouts': CharterQuerySet.all_models(SiteNavigation),
             'social_networks': CharterQuerySet.all_models(SocialNetwork),
             'favorites_and_other': CharterQuerySet.all_models(FavoritesAndOther),
-            'languages': CharterQuerySet.all_models(Language),
-            'carts_quantity': carts_quantity, }
+            'languages': CharterQuerySet.all_models(Language)}
+    if req.user.is_authenticated:
+        cart_items = Cart.objects.filter(user=req.user)
+        carts_quantity = 0
+
+        for item in cart_items:
+            carts_quantity += item.quantity
+
+        context['carts_quantity'] = carts_quantity
+    
+    return context
 
 
 def for_categories(req: object, *args) -> dict:
@@ -39,12 +42,11 @@ def for_categories(req: object, *args) -> dict:
         for category in categories:
             products += all_products(req).filter(category=category)
 
-        products = QuerySetSequence(products)
-
         try:
+            products = QuerySetSequence(products)
             products = filters(req, model.name)
         except:
-            pass
+            products = QuerySetSequence(products)
 
         context['categories'] = categories
         context['chapter'] = model
@@ -54,12 +56,12 @@ def for_categories(req: object, *args) -> dict:
             slug = args[1]
             model = SubCategory.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(sub_category=model)
-            products = all_products(req).filter(category=model)
 
             try:
+                products = all_products(req).filter(category=model)
                 products = filters(req, model.category.chapter.name)
             except:
-                pass
+                products = all_products(req).filter(category=model)
 
             context['sub_category'] = model
 
@@ -67,12 +69,12 @@ def for_categories(req: object, *args) -> dict:
             slug = args[0]
             model = Category.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(category=model)
-            products = all_products(req).filter(category=model)
 
             try:
+                products = all_products(req).filter(category=model)
                 products = filters(req, model.chapter.name)
             except:
-                pass
+                products = all_products(req).filter(category=model)
 
         context['category'] = Category.objects.get(slug=args[0])
         context['sub_categories'] = sub_categories
