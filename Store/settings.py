@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'app',
     'products',
     'carts',
+    'orders',
 ]
 
 STATICFILES_FINDERS = [

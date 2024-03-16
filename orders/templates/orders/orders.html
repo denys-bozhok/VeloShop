@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+{% load sass_tags %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block style %}
+  <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+  <link href="{% sass_src 'orders/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block header %}
+  {% include 'includes/_header.html' %}
+{% endblock %}
+
+{% block main %}
+  <main class="main__wrapper">
+    <div class="main">
+      {% if title == 'Order' %}
+        {% include './includes/_order_info.html' %}
+      {% elif title == 'My Orders' %}
+        {% include './includes/_orders.html' %}
+      {% elif title == 'New Order' %}
+        {% include './includes/_order_create.html' %}
+      {% elif title == 'Success' %}
+        {% include './includes/_success.html' %}
+      {% endif %}
+    </div>
+  </main>
+{% endblock %}
+
+{% block footer %}
+  {% include 'includes/_footer.html' %}
+{% endblock %}
