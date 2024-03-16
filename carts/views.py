@@ -6,7 +6,7 @@ from django.contrib import messages
 from app import utilites
 from .models import Cart
 from .forms import QuantityUpdateView
-from products.filters import all_products
+from products.filters import filters
 
 
 @login_required
@@ -51,7 +51,7 @@ def cart_detail(req):
         form = QuantityUpdateView(instance=item)
 
         if item.quantity != 0:
-            for product in all_products(req).filter(article=item.product):
+            for product in filters(req).filter(article=item.product):
                 products_cost = product.price * item.quantity
                 total_cost += products_cost
 

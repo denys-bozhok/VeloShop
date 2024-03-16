@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from app import utilites
 
-from .filters import all_products
+from .filters import filters
 
 
 def card_of_product(req: object, slug: str) -> classmethod:
-    product = all_products(req).get(slug=slug)
+    product = filters(req).get(slug=slug)
     context = {
         'product': product,
         'title': product.label,
