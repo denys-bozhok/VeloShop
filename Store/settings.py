@@ -2,13 +2,9 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = 'django-insecure-44f^7q69rd8ri&0-hiwmak^@4h4xb3nz+*)vf16&%lu9c9wph&'
-
 DEBUG = True
-
 ALLOWED_HOSTS = []
-
 DOMAIN_NAME = 'http://localhost:8000/'
 
 INSTALLED_APPS = [
@@ -28,6 +24,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'compressor',
     'queryset_sequence',
+    'debug_toolbar',
 
     'users',
     'app',
@@ -57,7 +54,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
     'allauth.account.middleware.AccountMiddleware',
-]
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
 
 ROOT_URLCONF = 'Store.urls'
 
@@ -146,6 +144,11 @@ EMAIL_HOST_USER = 'denys.already@gmail.com'
 EMAIL_HOST_PASSWORD = 'soht vqyk chgm iutf'
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'denys.already@gmail.com'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
 
 # Client secrets 9a788911764d85e74bc786fad35d46c526886617 
 # Client ID e69f0699f8d292b44ce6

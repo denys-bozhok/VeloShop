@@ -11,4 +11,8 @@ urlpatterns = [
     path('users/', include('users.urls'), name='users'),
     path('carts/', include('carts.urls'), name='carts'),
     path('accounts/', include('allauth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
