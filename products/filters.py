@@ -3,7 +3,7 @@ from queryset_sequence import QuerySetSequence
 from .models import *
 
 
-def all_products(req):
+def all_products():
     bicycles = Bicycle.objects.all()
     accessories = Accessorie.objects.all()
     components = Component.objects.all()
@@ -14,7 +14,7 @@ def all_products(req):
 
 def bicycles_filter(req):
     bicycles = Bicycle.objects.all()
-    
+
     wheel = req.GET.get('wheel')
     size = req.GET.get('size')
 

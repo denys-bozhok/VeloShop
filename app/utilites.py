@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from queryset_sequence import QuerySetSequence
 
-from products.filters import all_products, filters
+from products.filters import filters
 from carts.models import Cart
 from .models import Chapter, SiteNavigation, SocialNetwork, FavoritesAndOther, Language, SubCategory, CharterQuerySet, Category
 
@@ -38,15 +38,19 @@ def for_categories(req: object, *args) -> dict:
         model = Chapter.objects.get(slug=args[0])
         categories = Category.objects.filter(chapter=model)
         products = filters(req, model.name)
+
         context['categories'] = categories
         context['chapter'] = model
+
     except:
         try:
             slug = args[1]
             model = SubCategory.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(sub_category=model)
             products = filters(req, model.category.chapter.name).filter(subcategory=model)
+
             context['sub_category'] = model
+            
         except:
             slug = args[0]
             model = Category.objects.get(slug=slug)
@@ -56,8 +60,7 @@ def for_categories(req: object, *args) -> dict:
         context['category'] = Category.objects.get(slug=args[0])
         context['sub_categories'] = sub_categories
 
-    products_paginator = pagination(req, list(products))
-    context['products'] = products_paginator
+    context['products'] = pagination(req, list(products))
     context['title'] = model.name
 
     return context
