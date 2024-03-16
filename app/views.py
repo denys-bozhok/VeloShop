@@ -21,6 +21,7 @@ def abouts(req: object, about_slug: str) -> classmethod:
 
 def chapters(req: object, chapter_slug: str) -> classmethod:
     context = for_categories(req, chapter_slug)
+    print(Chapter.objects.first().slug)
     context.update(subheader(req))
     return render(req, 'app/app.html', context)
 

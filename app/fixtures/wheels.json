@@ -1,0 +1,1 @@
+[{"model": "products.wheelsize", "pk": 1, "fields": {"size": "29.0"}}, {"model": "products.wheelsize", "pk": 2, "fields": {"size": "28.0"}}, {"model": "products.wheelsize", "pk": 3, "fields": {"size": "27.0"}}]

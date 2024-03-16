@@ -128,7 +128,7 @@ class Product(models.Model):
     rating = models.FloatField(default=0, validators=[
                                MinValueValidator(0), MaxValueValidator(5)])
     value = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    slug = models.CharField(max_length=30, editable=False, auto_created=True)
+    slug = models.CharField(max_length=50, editable=False, auto_created=True)
     image = models.FileField(upload_to=products_filename_wrapper, blank=True)
 
     def save(self):

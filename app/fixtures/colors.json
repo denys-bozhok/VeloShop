@@ -1,0 +1,1 @@
+[{"model": "products.color", "pk": 1, "fields": {"color": "gray", "rgb": "(128,128,128)"}}, {"model": "products.color", "pk": 2, "fields": {"color": "black", "rgb": "(0,0,0)"}}, {"model": "products.color", "pk": 3, "fields": {"color": "Blue", "rgb": "555555"}}, {"model": "products.color", "pk": 4, "fields": {"color": "King blue", "rgb": "(65,105,225)"}}]

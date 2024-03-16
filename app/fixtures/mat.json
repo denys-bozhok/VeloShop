@@ -1,0 +1,1 @@
+[{"model": "products.material", "pk": 1, "fields": {"name": "carbon"}}, {"model": "products.material", "pk": 2, "fields": {"name": "alloy"}}, {"model": "products.material", "pk": 3, "fields": {"name": "Carbon"}}]

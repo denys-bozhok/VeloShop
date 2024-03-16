@@ -1,0 +1,1 @@
+[{"model": "products.weight", "pk": 1, "fields": {"weight": 15000.0}}, {"model": "products.weight", "pk": 2, "fields": {"weight": 12000.0}}, {"model": "products.weight", "pk": 3, "fields": {"weight": 13.0}}, {"model": "products.weight", "pk": 4, "fields": {"weight": 0.23}}]
