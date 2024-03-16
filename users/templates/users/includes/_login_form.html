@@ -1,3 +1,4 @@
+{% load socialaccount %}
 
 <form action="{% url 'login' %}" method='post'>
     {% csrf_token %}
@@ -13,3 +14,5 @@
 
     <input class = "form-button" type="submit" value="Submit">
     
+
+    <a href="{% provider_login_url "github"%}">GitHub</a>
