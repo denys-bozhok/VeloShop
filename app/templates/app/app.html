@@ -1,38 +1,40 @@
-{% extends '_base.html'%}
+{% extends '_base.html' %}
 {% load sass_tags %}
 
-{% block title %}{{title}}{% endblock title %}
+{% block title %}
+  {{ title }}
+{% endblock %}
 
 {% block style %}
-<link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
-<link href="{% sass_src 'products/scss/style.scss' %}" rel="stylesheet" type="text/css" />
-{% endblock style %}
+  <link href="{% sass_src 'app/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'products/scss/style.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block header %}
-{% include 'includes/_header.html' %}
-{% endblock header %}
+  {% include 'includes/_header.html' %}
+{% endblock %}
 
 {% block main %}
-<main class="main__wrapper">
+  <main class="main__wrapper">
     <div class="main">
-        {% if title == "VeloShop" %}
+      {% if title == 'VeloShop' %}
         {% include './includes/_chapters.html' %}
-        {% elif title == chapter.name%}
+      {% elif title == chapter.name %}
         {% include './includes/_chapter.html' %}
-        {% elif title == category.name%}
+      {% elif title == category.name %}
         {% include './includes/_category.html' %}
-        {% elif title == sub_category.name%}
+      {% elif title == sub_category.name %}
         {% include './includes/_subcategory.html' %}
-        {% elif title == about.name%}
+      {% elif title == about.name %}
         {% include './includes/_site_navigate.html' %}
-        {% endif%}
+      {% endif %}
 
-        {% include 'products/includes/_products.html' %}
-        {% include 'products/includes/_paginator.html' %}
+      {% include 'products/includes/_products.html' %}
+      {% include 'products/includes/_paginator.html' %}
     </div>
-</main>
-{% endblock main %}
+  </main>
+{% endblock %}
 
 {% block footer %}
-{% include 'includes/_footer.html' %}
-{% endblock footer %}
+  {% include 'includes/_footer.html' %}
+{% endblock %}

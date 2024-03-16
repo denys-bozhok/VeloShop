@@ -15,7 +15,7 @@ class CharterQuerySet(models.QuerySet):
     def model_by_id(self: object, id: int) -> object:
         model = self.objects.get(id=id)
         return model
-
+    
 
 # * -----TEMPLATE`S ELEMENTS-----
 class SiteNavigation (models.Model):
