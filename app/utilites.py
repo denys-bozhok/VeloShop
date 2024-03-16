@@ -36,45 +36,22 @@ def for_categories(req: object, *args) -> dict:
     context = {}
     try:
         model = Chapter.objects.get(slug=args[0])
-        products = []
         categories = Category.objects.filter(chapter=model)
-
-        for category in categories:
-            products += all_products(req).filter(category=category)
-
-        try:
-            products = QuerySetSequence(products)
-            products = filters(req, model.name)
-        except:
-            products = QuerySetSequence(products)
-
+        products = filters(req, model.name)
         context['categories'] = categories
         context['chapter'] = model
-
     except:
         try:
             slug = args[1]
             model = SubCategory.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(sub_category=model)
-
-            try:
-                products = all_products(req).filter(category=model)
-                products = filters(req, model.category.chapter.name)
-            except:
-                products = all_products(req).filter(category=model)
-
+            products = filters(req, model.category.chapter.name).filter(subcategory=model)
             context['sub_category'] = model
-
         except:
             slug = args[0]
             model = Category.objects.get(slug=slug)
             sub_categories = SubCategory.objects.filter(category=model)
-
-            try:
-                products = all_products(req).filter(category=model)
-                products = filters(req, model.chapter.name)
-            except:
-                products = all_products(req).filter(category=model)
+            products = filters(req, model.chapter.name).filter(category=model)
 
         context['category'] = Category.objects.get(slug=args[0])
         context['sub_categories'] = sub_categories

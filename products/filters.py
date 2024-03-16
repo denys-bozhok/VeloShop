@@ -14,7 +14,7 @@ def all_products(req):
 
 def bicycles_filter(req):
     bicycles = Bicycle.objects.all()
-
+    
     wheel = req.GET.get('wheel')
     size = req.GET.get('size')
 
