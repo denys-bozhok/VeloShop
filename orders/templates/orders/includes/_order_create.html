@@ -1,53 +1,45 @@
-<form action="{% url 'order_create'%}" method="post">
-    {% csrf_token %}
-    <div class='form__success'>
-        <div class='form-column'>
-            <label for='{{form.owner_name.id_for_label}}' class='form-label'>Name</label>
-            {{form.owner_name}}
-        </div>
-
-        <div class='form-column'>
-            <label for='{{form.owner_surname.id_for_label}}' class='form-label'>Surname</label>
-            {{form.owner_surname}}
-        </div>
-
-        <div class='form-column'>
-            <label for='{{form.email.id_for_label}}' class='form-label'>Email</label>
-            {{form.email}}
-        </div>
-
-        <div class='form-column'>
-            <label for='{{form.adress.id_for_label}}' class='form-label'>Adress</label>
-            {{form.adress}}
-        </div>
-
-        <div class='form-column'>
-            <label for='{{form.city.id_for_label}}' class='form-label'>City</label>
-            {{form.city}}
-        </div>
+<form action="{% url 'order_create' %}" method="post">
+  {% csrf_token %}
+  <div class="form__success">
+    <div class="form-column">
+      <label for="{{ form.owner_name.id_for_label }}" class="form-label">Name</label>
+      {{ form.owner_name }}
     </div>
 
-    <button class'form-button' type='submit'>Complite</button>
+    <div class="form-column">
+      <label for="{{ form.owner_surname.id_for_label }}" class="form-label">Surname</label>
+      {{ form.owner_surname }}
+    </div>
+
+    <div class="form-column">
+      <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+      {{ form.email }}
+    </div>
+
+    <div class="form-column">
+      <label for="{{ form.adress.id_for_label }}" class="form-label">Adress</label>
+      {{ form.adress }}
+    </div>
+
+    <div class="form-column">
+      <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
+      {{ form.city }}
+    </div>
+  </div>
+
+  <button type="submit" class="form-button">Complite</button>
 </form>
 
 <div class="cart-info__wrapper">
-    <div class="cart-info">
-        {% for cart in carts%}
-            <div class="cart-info-colum">
-                {{cart.product.label}}
-            </div>
+  <div class="cart-info">
+    {% for cart in carts %}
+      <div class="cart-info-colum">{{ cart.product.label }}</div>
 
-            <div class="cart-info-colum">
-                {{cart.product.price}}
-            </div>
+      <div class="cart-info-colum">{{ cart.product.price }}</div>
 
-            <div class="cart-info-colum">
-                {{cart.quantity}}
-            </div>
+      <div class="cart-info-colum">{{ cart.quantity }}</div>
 
-            <div class="cart-info-colum">
-                {{cart.product_sum}}
-            </div>
-        {% endfor%}
-    </div>
+      <div class="cart-info-colum">{{ cart.product_sum }}</div>
+    {% endfor %}
+  </div>
 </div>
