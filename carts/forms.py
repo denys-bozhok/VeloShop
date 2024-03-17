@@ -4,10 +4,7 @@ from django import forms
 from .models import Cart
 
 
-class QuantityUpdateView(forms.ModelForm):
-    quantity = forms.IntegerField(widget=forms.NumberInput(attrs={
-        'class': 'form-imput', }))
-
+class CartQuantityUpdateForm(forms.ModelForm):
     class Meta:
         model = Cart
         exclude = ['quantity',]

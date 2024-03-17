@@ -25,7 +25,7 @@ class Order(models.Model):
     status = models.SmallIntegerField(default=CREATED, choices=STATUSES)
     order_info = models.JSONField('OrderInfo', default=dict)
     created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(blank=True)
+    modified = models.DateTimeField(null=True, blank=True)
 
     def __str__(self: object):
         return f'{self.owner_name} {self.owner_surname} - {self.email} - {self.status}'

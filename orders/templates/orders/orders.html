@@ -22,7 +22,9 @@
       {% elif title == 'My Orders' %}
         {% include './includes/_orders.html' %}
       {% elif title == 'New Order' %}
-        {% include './includes/_order_create.html' %}
+        <div class="order-form__wrapper">
+          {% include './includes/_order_create.html' %}
+        </div>
       {% elif title == 'Success' %}
         {% include './includes/_success.html' %}
       {% endif %}

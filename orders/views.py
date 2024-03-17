@@ -2,17 +2,27 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 from .forms import OrderCreateForm
 from .models import Order
+from common.views import TitleMixin
+
 
 app_name = 'orders'
 
 
-class OrderCreateView(CreateView):
-    template_name = 'orders/includes/_order_create.html'
+class OrderCreateView(TitleMixin, CreateView):
+    template_name = 'orders/orders.html'
     form_class = OrderCreateForm
+    success_url = reverse_lazy('order_success')
+    title = 'New Order'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        
+        return super(OrderCreateView, self).form_valid(form)
+    
 
 class OrdersList(ListView):
     model = Order
