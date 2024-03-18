@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-44f^7q69rd8ri&0-hiwmak^@4h4xb3nz+*)vf16&%lu9c9wph&'
 DEBUG = True
 ALLOWED_HOSTS = []
-DOMAIN_NAME = 'http://localhost:8000/'
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -68,10 +68,10 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'carts.context_processors.get_all_carts'
+                'carts.context_processors.get_all_carts',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -128,7 +128,7 @@ LOGIN_URL = '/users/login/'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-]
+    ]
 
 
 LOGIN_REDIRECT_URL = 'index'
@@ -152,8 +152,10 @@ DEFAULT_FROM_EMAIL = 'denys.already@gmail.com'
 
 INTERNAL_IPS = [
     '127.0.0.1',
-    'localhost',
 ]
 
-# Client secrets 9a788911764d85e74bc786fad35d46c526886617 
-# Client ID e69f0699f8d292b44ce6
+
+# 89eeaf1fdfc805a77e02
+# d5d7e270dbe83a8c33318e8c6e9b523b53bceff5
+STRIPE_PUBLIC_KEY = 'pk_test_51OvVTFA382WBKVuqPEz5Haa5EDPmpqurO6IlCRHnLuvbCA00i18psYhKA1DKALCXQFcSLCUtITCricj4tQxpdRJp00RpdYZkgk'
+STRIPE_SECRET_KEY = 'sk_test_51OvVTFA382WBKVuqrCGkH6VQcDPlBiIYk2kBn7PLYMWVtUhLgb4LwVN0W8LBAP6scnwp2OCLZ5O4IaeQyEgLVjN300kLwjBJwB'

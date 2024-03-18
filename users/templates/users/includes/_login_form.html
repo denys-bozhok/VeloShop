@@ -1,18 +1,18 @@
 {% load socialaccount %}
 
-<form action="{% url 'login' %}" method='post'>
-    {% csrf_token %}
-    <div class="forms-element">
-        <label class="form-imput-label" for="{{ form.username.id_for_label}}">e-mail</label>
-        {{form.username}}
-    </div>
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  <div class="forms-element">
+    <label class="form-imput-label" for="{{ form.username.id_for_label }}">e-mail</label>
+    {{ form.username }}
+  </div>
 
-    <div class="forms-element"> 
-        <label class="form-imput-label" for="{{ form.password.id_for_label}}">Password</label>
-        {{form.password}}
-    </div>
+  <div class="forms-element">
+    <label class="form-imput-label" for="{{ form.password.id_for_label }}">Password</label>
+    {{ form.password }}
+  </div>
 
-    <input class = "form-button" type="submit" value="Submit">
-    
+  <input class="form-button" type="submit" value="Submit" />
 
-    <a href="{% provider_login_url "github"%}">GitHub</a>
+  <a href="{% provider_login_url 'github' %}">GitHub</a>
+</form>

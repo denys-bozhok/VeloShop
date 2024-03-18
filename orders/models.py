@@ -1,3 +1,4 @@
+from typing import Iterable
 from django.db import models
 
 from users.models import User
@@ -23,9 +24,10 @@ class Order(models.Model):
     city = models.CharField(max_length=32)
     adress = models.CharField(max_length=256)
     status = models.SmallIntegerField(default=CREATED, choices=STATUSES)
-    order_info = models.JSONField('OrderInfo', default=dict)
+    order_info = models.JSONField('OrderInfo', default=list)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(null=True, blank=True)
 
     def __str__(self: object):
         return f'{self.owner_name} {self.owner_surname} - {self.email} - {self.status}'
+    

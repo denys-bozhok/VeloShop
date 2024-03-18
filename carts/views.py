@@ -54,15 +54,24 @@ def cart_detail(req):
         carts = Cart.objects.filter(id=0)
 
     for cart in carts:
-        if cart.quantity != 0:
-            cart_sum += cart.quantity * cart.product['price']
-            products.append({
-                'form': CartQuantityUpdateForm(instance=cart),
-                'cart_id': cart.id,
-                'product_sum': cart.quantity * cart.product['price'],
-                'product_quantity': cart.quantity,
-                'product': filters(req).get(article=cart.product['article']),
-                })
+        if req.method == 'POST':
+            form = CartQuantityUpdateForm(instance=cart, data=req.POST)
+            cart.quantity = req.POST['quantity']
+            if cart.quantity == 0:
+                cart.delete()
+            else:
+                cart.save()
+                return HttpResponseRedirect(reverse('carts:cart_detail'))
+        else:
+            if cart.quantity != 0:
+                cart_sum += cart.quantity * cart.product['price']
+                products.append({
+                    'form': CartQuantityUpdateForm(instance=cart),
+                    'cart_id': cart.id,
+                    'product_sum': cart.quantity * cart.product['price'],
+                    'product_quantity': cart.quantity,
+                    'product': filters(req).get(article=cart.product['article']),
+                    })
 
     context = {'cart_sum': cart_sum, 'products': products}
 
@@ -70,19 +79,6 @@ def cart_detail(req):
 
     return render(req, "carts/carts.html", context)
 
-
-@login_required
-def edit_quantity(req: object, cart_id: int) -> classmethod:
-    cart = Cart.objects.get(id=cart_id).order_by('id')
-
-    if req.method == 'POST':
-        form = CartQuantityUpdateForm(instance=cart, data=req.POST)
-        cart.quantity = req.POST['quantity']
-        if cart.quantity == 0:
-            cart.delete()
-        else:
-            cart.save()
-            return HttpResponseRedirect(reverse('carts:cart_detail'))
 
 
 

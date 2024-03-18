@@ -4,30 +4,35 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>
-        {% block title %}{% endblock title %}
+      {% block title %}
+
+      {% endblock %}
     </title>
 
-    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}" type="image/x-icon" />
 
- 
     <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
-    {% block style %}{% endblock style %}
-        
+    {% block style %}
 
-        
-</head>
+    {% endblock %}
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        {% block header %}{% endblock header %}
-        {% block main %}{% endblock main %}
-        {% block footer %}{% endblock footer %}
+      {% block header %}
+
+      {% endblock %}
+      {% block main %}
+
+      {% endblock %}
+      {% block footer %}
+
+      {% endblock %}
     </div>
-</body>
+  </body>
 </html>
