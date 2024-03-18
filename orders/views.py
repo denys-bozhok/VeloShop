@@ -4,7 +4,8 @@ from django.views.generic.detail import DetailView
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import stripe
 from django.views.generic.base import TemplateView
 
@@ -76,3 +77,22 @@ def order_create_success_view(req):
 
     return render(req, 'orders/orders.html', context)
 
+
+
+@csrf_exempt
+def stripe_webhook_view(req):
+    payload = req.body
+    sig_header = req.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET)
+    except ValueError as e:
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        return HttpResponse(status=400)
+    
+    return HttpResponse(status=200)
+
+def filfill_order(session):
+    print('filfill_order')
