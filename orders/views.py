@@ -88,8 +88,11 @@ def stripe_webhook_view(req):
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET)
     except ValueError as e:
+
         return HttpResponse(status=400)
+    
     except stripe.error.SignatureVerificationError as e:
+
         return HttpResponse(status=400)
     
     return HttpResponse(status=200)
